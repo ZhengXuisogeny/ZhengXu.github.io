@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>同源密码讨论</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        /* 使用 flexbox 布局实现左右分栏 */
+       .main-content {
+            display: flex;
+            gap: 20px;
+        }
+       .left-column,
+       .right-column {
+            flex: 1;
+            /* 根据需要调整基础宽度，这里保持原来的比例 */
+            flex-basis: 30%; 
+        }
+       .right-column {
+            flex-basis: 70%;
+        }
+        .left-column img {
+            width: 980%;
+            height: auto;
+            display: block; /* 使图片成为块级元素，避免行内元素的一些默认样式影响 */
+        }
+
+       .right-column img {
+            width: 40%;
+            height: auto;
+            display: block; /* 使图片成为块级元素，避免行内元素的一些默认样式影响 */
+        }
+    </style> 
+</head>
+
+<body class="bg-yellow-200 p-6 rounded-md shadow-md mb-8">
+
+    <!-- 导航栏 -->
+    <nav class="bg-pink-100 shadow-md">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <h1 class="text-5xl font-bold">Isogeny Club</h1>
+        </div>
+    </nav>
+
+    <!-- 主内容区域使用 flexbox 布局 -->
+    <div class="main-content container mx-auto px-1 py-8">
+        <div class="left-column">
+            <img src="SIDH.png" alt="SIDH 图片">
+            <br>
+            <img width="100%"; height=auto; src="SQI.png" alt="SIDH 图片">
+            <br>
+            <img width="100%"; height=auto; src="abel.png" alt="SIDH 图片"> 
+            <br>
+            <img width="1000%"; height=auto; src="surface.png" alt="SIDH 图片"> 
+        </div> 
+        <div class="center-column">
+            <!-- 同源密码介绍 -->
+            <section class="bg-green-100 p-6 rounded-md shadow-md mb-8">
+                <h2 class="text-xl font-bold mb-4">同源密码简介</h2>
+                <p class="mb-4">同源密码学是后量子密码学的一个重要研究方向。它基于椭圆曲线或阿贝尔簇的同源结构，为密码系统提供了新的安全性基础。与传统的基于大整数分解和离散对数问题的密码体制不同，同源密码有望在量子计算机时代提供更高的安全性。</p>
+                <p>目前，同源密码在签名算法、密钥交换协议等方面都有了很多研究成果，并且吸引了越来越多研究者的关注。</p>
+            </section>
+
+            <!-- 相关论文 -->
+            <section class="bg-blue-100 p-6 rounded-md shadow-md mb-8">
+                <h2 class="text-xl font-bold mb-4">讨论论文</h2>
+                <ul class="list-disc list-inside">
+                    <p>第一次</p>
+                    <p>The module action for isogeny based cryptography </p>
+                    <p>主讲人:徐铮</p>
+                    <p><a href="Module Action.pdf" class="text-blue-600 hover:underline">Paper</a> <a href="Module Action.pdf" class="text-blue-600 hover:underline">Note</a></p>
+                    <br>
+                    <p>第二次</p>
+                    <p>\(KLPT^2\):Algebraic pathfinding in dimension two and applications </p>
+                    <p>主讲人:徐铮</p>
+                    <p><a href="KLPT.pdf" class="text-blue-600 hover:underline">Paper</a> <a href="KLPT.pdf" class="text-blue-600 hover:underline">Note</a></p>
+                </ul>
+            </section>
+        </div>
+        <div class="right-column">
+            <img src="ec.png" alt="SIDH 图片">
+            <br>
+            <img width="100%"; height=auto; src="graph.png" alt="SIDH 图片">
+            <br>
+            <img width=auto; height="1555"; src="module.png" alt="SIDH 图片"> 
+        </div>
+    </div>
+ 
+    <!-- 页脚 -->
+    <footer class="bg-blue-600 shadow-md">
+        <div class="container mx-auto px-4 py-3 text-center">
+            <p>&copy; 2025 Isogeny Club 保留所有权利.</p>
+        </div>
+    </footer>
+</body>
+
+</html>    

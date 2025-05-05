@@ -1,21 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF - 8">
-    <meta name="viewport" content="width=device-width, initial - scale = 1.0">
-    <title>My News Page</title>
-    <link rel="stylesheet" href="index/css/styles.css">
-</head>
-
-<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>个人页面</title>
+    <link rel="stylesheet" href="index/css/styles.css">
     <style>
         body {
             font-family: Arial, sans-serif;
             display: flex;
             gap: 20px;
+            background-color: #e0f2ff; /* 浅蓝色的十六进制颜色值 */
         }
 
         .left-column {
@@ -35,16 +30,18 @@
     </style>
 </head>
 
-<body>
+    <body class="bg-yellow-200 p-6 rounded-md shadow-md mb-8">
     <div class="left-column">
-        <img src="your_photo.jpg" alt="个人照片">
         <h2>徐铮</h2>
         <p>安徽</p>
         <p>xuzheng1@mail.ustc.edu.cn</p>
-        <a href="https://zhengxuisogeny.github.io/ZhengXu.github.io/">Github</a>
-        <a href="https://scholar.google.com/citations?user=7AQCyUgAAAAJ&hl=en">Google Scholar</a>
+        <p><a href="https://zhengxuisogeny.github.io/ZhengXu.github.io/">Github</a></p>
+        <p><a href="https://scholar.google.com/citations?user=7AQCyUgAAAAJ&hl=en">Google Scholar</a></p>
+                <p><a href="#papers">论文</a></p>
+                <p><a href="index/IsogenyClub.html">Isogeny Club</a></p>
+
     </div>
-    <div class="right-column">
+    <div class="right-column"> 
         <h2>工作经历</h2>
     <ul>
         <li>2024年10月 - 至今
@@ -75,31 +72,31 @@
     <h2>研究方向</h2>
     <ul>
         <li>计算数论</li>
-        <li>1. 同源图的结构, 计算同源和自同态环问题</li>
-        <li>2. 在有限域上的Abel簇的推广</li>
+        <p>1. 同源图的结构, 计算同源和自同态环问题</p>
+        <p>2. 在有限域上的Abel簇的推广</p>
         <li>密码学</li>
-        <li>1.基于同源的后量子签名:SQIsign系列签名的设计, 优化分析</li>
-        <li>2.基于同源的后量子密钥交换:模作用MIKE的设计, 优化分析</li>
+        <p>1.基于同源的后量子签名:SQIsign系列签名的设计, 优化分析</p>
+        <p>2.基于同源的后量子密钥交换:模作用MIKE的设计, 优化分析</p>
     </ul>
-
+ 
     <h2>论文</h2>
     <h3>已发表或接收的论文</h3>
     <ul>
-        <li>Kaizhan Lin, Weize Wang, Zheng Xu∗, Changan Zhao, <em>A faster software implementation of SQISign</em>, IEEE Transactions on Information Theory (2024)</li>
-        <li>Zheng Xu, Yi Ouyang∗, Zijian Zhou, <em>Neighborhood of two vertices in the isogeny graph of principally polarized superspecial abelian surfaces, Finite Fields and Their Applications 103, 102579 (2025)</li>
-        <li>Songsong Li, Yi Ouyang∗, Zheng Xu <em>Endomorphism rings of supersingular elliptic curves over Fp</em>, Finite Fields and Their Applications 58, 174 - 176 (2020)</li>
-        <li>Songsong Li, Yi Ouyang, Zheng Xu∗<em>Neighborhood of the supersingular elliptic curve isogeny graph at j= 0 and 1728</em>, Finite Fields and Their Applications 61, 101600 (2020)</li>
-        <li>Yi Ouyang, Zheng Xu∗<em>Loops of isogeny graphs of supersingular elliptic curves at j = 0</em>, c 174 - 176 (2019)</li>
+        <p>Zheng Xu, Yi Ouyang∗, Zijian Zhou, <a href= "https://www.sciencedirect.com/science/article/pii/S1071579725000097"><em>Neighborhood of two vertices in the isogeny graph of principally polarized superspecial abelian surfaces</em></a>, Finite Fields and Their Applications 103, 102579 (2025) </p>
+        <p>Kaizhan Lin, Weize Wang, Zheng Xu∗, Changan Zhao, <a href="https://ieeexplore.ieee.org/document/10586884"><em>A faster software implementation of SQISign</em></a>, IEEE Transactions on Information Theory (2024) (Corresponding Author)</p>
+        <p>Songsong Li, Yi Ouyang∗, Zheng Xu, <a href= "https://www.sciencedirect.com/science/article/pii/S1071579719301224"><em>Endomorphism rings of supersingular elliptic curves over Fp</em></a>, Finite Fields and Their Applications 58, 174 - 176 (2020)</p>
+        <p>Songsong Li, Yi Ouyang, Zheng Xu∗, <a href= "https://www.sciencedirect.com/science/article/pii/S1071579719301030"><em>Neighborhood of the supersingular elliptic curve isogeny graph at j= 0 and 1728</a></em>, Finite Fields and Their Applications 61, 101600 (2020) (Corresponding Author)</p>
+        <p>Yi Ouyang, Zheng Xu∗, <a href= "https://www.sciencedirect.com/science/article/pii/S1071579719300383"><em>Loops of isogeny graphs of supersingular elliptic curves at j = 0</em></a>, c 174 - 176 (2019) (Corresponding Author)</p>
     </ul>
     <h3>预印本</h3>
     <ul>
-    </ul>
-
+    </ul> 
+ 
     <h2>教学</h2>
     <ul>
         <li>2022年春
             <p>北京雁栖湖应用数学研究院, 清华大学丘成桐数学中心</p>
-            <p>Isogeny - based cryptography</p>
+            <p>Isogeny-based cryptography</p>
         </li>
         <li>2019年春、秋
             <p>中国科学技术大学</p>
@@ -123,3 +120,5 @@
 
 
 </html>
+
+  
