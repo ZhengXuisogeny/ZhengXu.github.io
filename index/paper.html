@@ -26,8 +26,9 @@
             <h2 class="text-3xl font-bold text-blue-600 mb-4">SIDH</h2>
             <ol class="list-decimal list-inside text-gray-700 leading-relaxed">
                 <li class="mb-2">
-                    <strong>起源（2011 年）</strong>：Luca.De.Feo和 David. Jao 首次提出了基于超奇异椭圆曲线同源的密钥交换SIDH. <p><a href="SIDH.pdf" class="text-blue-600 hover:underline">Towards quantum-resistant cryptosystems from
+                    <strong>起源（2011 年）</strong>：Luca.De.Feo and David. Jao 首次提出了基于超奇异椭圆曲线同源的密钥交换SIDH. SIDH的特点是泄露像点, 可能导致安全性问题. <p><a href="SIDH.pdf" class="text-blue-600 hover:underline">Towards quantum-resistant cryptosystems from
                         supersingular elliptic curve isogenies</a>
+
                 </li>
                 <li class="mb-2">
                     <strong>SIDH的主动攻击提出（2016年）</strong>：Steven D. Galbraith, Christophe Petit, Barak Shani, and Yan Bo Ti首次提出对SIDH的主动攻击. <p><a href="GPST.pdf" class="text-blue-600 hover:underline">On the Security of Supersingular Isogeny
@@ -35,7 +36,7 @@
                     
                 </li>
                 <li class="mb-2">
-                    <strong>SIDH的被动攻击提出（2016,2021 年）</strong>：Christophe Petit 提出了Torsion Point Attack, 之后Victoria de Quehen, Peter Kutas, Chris Leonardi, Chloe Martindale, Lorenz Panny, Christophe Petit, and Katherine E. Stange 进一步改进. 但要求交互双方所需参数差距过大.
+                    <strong>SIDH的被动攻击提出（2016,2021 年）</strong>：Christophe Petit 提出了Torsion Point Attack, 之后Victoria de Quehen, Peter Kutas, Chris Leonardi, Chloe Martindale, Lorenz Panny, Christophe Petit, and Katherine E. Stange 进一步改进. 但要求交互双方所需参数差距过大.(将计算同源问题转化为解四元数代数中的方程问题)
                     <p><a href="TorsionPointAttack.pdf" class="text-blue-600 hover:underline">Faster Algorithms for Isogeny Problems
                         Using Torsion Point Images
                         </a>
@@ -75,13 +76,13 @@
             <h2 class="text-3xl font-bold text-blue-600 mb-4">SIDH的修改方案</h2>
             <ol class="list-decimal list-inside text-gray-700 leading-relaxed">
                 <li class="mb-2">
-                    <strong>M-SIDH的提出</strong>：Tako Boris Fouotsa, Tomoki Moriya and Christophe Petit 提出了M-SIDH, 通过隐藏像点达到安全. 
+                    <strong>M-SIDH的提出(2023年)</strong>：Tako Boris Fouotsa, Tomoki Moriya and Christophe Petit 提出了M-SIDH, 通过隐藏像点达到安全. 
                     <p><a href="MSIDH.pdf" class="text-blue-600 hover:underline">M-SIDH and MD-SIDH: Countering
                         SIDH Attacks by Masking Information
                     </a>
                 </li>
                 <li class="mb-2">
-                    <strong>加密FESTA的提出</strong>：Andrea Basso, Luciano Maino and Giacomo Pope 通过隐藏像点提出了加密FESTA, Kohei Nakagawa and Hiroshi Onuki进一步提出了QFESTA.
+                    <strong>加密FESTA的提出(2023年)</strong>：Andrea Basso, Luciano Maino and Giacomo Pope 通过隐藏像点提出了加密FESTA, Kohei Nakagawa and Hiroshi Onuki进一步提出了QFESTA.
                     <p><a href="FESTA.pdf" class="text-blue-600 hover:underline">FESTA: Fast Encryption
                         from Supersingular Torsion Attacks</a>
                     <p><a href="QFESTA.pdf" class="text-blue-600 hover:underline">QFESTA: Eﬃcient Algorithms
@@ -89,7 +90,7 @@
                         Quaternion Algebras</a>     
                 </li>
                 <li class="mb-2">
-                    <strong>bin-SIDH的提出</strong>：Andrea Basso and Tako Boris Fouotsa提出新的bin-SIDH和ter-SIDH, 通过选择不同的子群达到安全性. 
+                    <strong>bin-SIDH的提出(2023年)</strong>：Andrea Basso and Tako Boris Fouotsa提出新的bin-SIDH和ter-SIDH, 通过选择不同的子群达到安全性. 
                     <p><a href="bin.pdf" class="text-blue-600 hover:underline">New SIDH Countermeasures for a More
                         Efficient Key Exchange</a>
                 </li>
@@ -100,14 +101,120 @@
     <section class="mb-8">
         <h2 class="text-3xl font-bold text-blue-600 mb-4">CSIDH</h2>
         <ol class="list-decimal list-inside text-gray-700 leading-relaxed">
+            <li class="mb-2">
+                <strong>起源（2018 年）</strong>：Wouter Castryck, Tanja Lange, Chloe Martindale, Lorenz Panny,
+                and Joost Renes 首次提出了基于\(\mathbb{F}_p\)上的超奇异椭圆曲线同源的密钥交换CSIDH. CSIDH的特点是有限域\(\mathbb{F}_p\)上的椭圆曲线,和带复乘的正常曲线类似,存在理想类群(\(\mathbb{Z}[\pi_p]\)或\(\mathbb{Z}[\frac{1+ \pi_p}{2}]\))的作用, 会受到量子攻击.<p><a href="CSIDH.pdf" class="text-blue-600 hover:underline">CSIDH: An Eﬃcient Post-Quantum
+                    Commutative Group Action</a> 
+            </li> 
+            <li class="mb-2">
+                <strong>签名CSI-Fish和Seasign的提出(2019年)</strong>：Ward Beullens, Thorsten Kleinjung and Frederik Vercauteren
+                提出基于CSIDH的签名CSI-Fish, Luca De Feo and Steven D. Galbraith提出了基于CSIDH的签名Seasign.  两者的区别是前者选取的理想类群是循环群. 
+                <p><a href="CSIFiSh.pdf" class="text-blue-600 hover:underline">CSI-FiSh: Efficient Isogeny Based
+                    Signatures Through Class Group
+                    Computations
+                    </a>
+                    <p><a href="SeaSign.pdf" class="text-blue-600 hover:underline">SeaSign: Compact Isogeny Signatures
+                        from Class Group Actions</a>   
+            </li>
+            <li class="mb-2">
+                <strong>加密SiGamal的提出（2020 年）</strong>：Tomoki Moriya, Hiroshi Onuki, and Tsuyoshi Takagi 提出了基于CSIDH的加密SiGamal. <p><a href="SiGamal.pdf" class="text-blue-600 hover:underline">SiGamal: A Supersingular Isogeny-Based
+                    PKE and Its Application to a PRF</a> 
+            </li> 
+            <li class="mb-2">
+                <strong>CSIDH的DDH问题被攻击（2020 年）</strong>：Wouter Castryck, Jana Sotakova, and Frederik Vercauteren
+                通过二次特征(genus 理论)的方法攻击了DDH问题. <p><a href="BreakingDDH.pdf" class="text-blue-600 hover:underline">
+                    Breaking the Decisional Diﬃe-Hellman Problem for Class Group Actions Using Genus Theory
+                </a> 
+            </li> 
+            <li class="mb-2">
+                <strong>利用SIDH攻击的方法攻击CSIDH（2023 年）</strong>：Wouter Castryck, Marc Houben, Simon-Philipp Merz,
+                Marzio Mula, Sam van Buuren and Frederik Vercauteren 利用计算Frobenius 映射的特征向量生成的群之间的对应, 再通过配对的方法得到像点, 再利用SIDH攻击的方法攻击CSIDH. 但因为Tate 配对的局限性, 并未产生有效攻击. <p><a href="Weak.pdf" class="text-blue-600 hover:underline">
+                Weak Instances of Class Group Action Based Cryptography via Self-pairings
+                </a> 
+            </li> 
+            <li class="mb-2">
+                <strong>OSIDH的提出（2020 年）</strong>：Leonardo Colò and David Kohel
+                提出了OSIDH, 与CSIDH不同的是其选取的自同态部分不再是\(\mathbb{Z}[\pi_p]\)或\(\mathbb{Z}[\frac{1+ \pi_p}{2}]\)而是某个虚二次域的order. <p><a href="OSIDH.pdf" class="text-blue-600 hover:underline">
+                    Orienting Supersingular Isogeny Graphs
+                </a> 
+            </li> 
+            <li class="mb-2">
+                <strong>OSIDH的DDH问题被攻击（2022 年）</strong>：Wouter Castryck, Marc Houben, Frederik Vercauteren and Benjamin Wesolowski
+                攻击了OSIDH的DDH问题. <p><a href="DDH.pdf" class="text-blue-600 hover:underline">
+                    On the Decisional Diffie–Hellman Problem for Class Group Actions on Oriented Elliptic Curves 
+                </a> 
+            </li> 
+            <li class="mb-2">CSIDH及OSIDH的方案的困难问题可以约化到Hidden Shift Problem, 在量子计算机下可被亚指数时间攻破. 故这些方案并不实用.</li>
+        </section>
+    </ol>
+   
+    <section class="mb-8">
+        <h2 class="text-3xl font-bold text-blue-600 mb-4">SQIsign</h2>
+        <ol class="list-decimal list-inside text-gray-700 leading-relaxed">
+            <li class="mb-2">
+                <strong>GPSsign的提出（2017年）</strong>：Steven D. Galbraith, Christophe Petit and Javier Silva 提出了基于四元数代数的GPS签名, 但需要进行多轮, 故签名长度较长. <p><a href="GPS.pdf" class="text-blue-600 hover:underline">
+                    Identiﬁcation Protocols and Signature Schemes Based on Supersingular Isogeny Problems 
+                </a> </li> 
+        <li class="mb-2">
+                    <strong>SQIsign的提出（2020年）</strong>：Luca De Feo, David Kohel, Antonin Leroux, Christophe Petit
+                    and Benjamin Wesolowski 提出了基于四元数代数的SQI签名, 公钥和签名尺寸是NIST征集的签名中最短的. 主要利用了Sigma协议和KLPT寻找等价理想的方法. <p><a href="SQISign.pdf" class="text-blue-600 hover:underline">
+                        SQISign: Compact Post-quantum
+                        Signatures from Quaternions
+                        and Isogenies   
+                    </a>  </li>     
+                    <li class="mb-2">作为入选NIST征集的后量子签名第二轮的SQIsign, 其拥有最小的公钥和签名长度, 且不会泄露像点, 因为其是四元数代数的运算也不会Kuperberg的量子攻击. 但SQIsign的效率较低, 成为其一个缺点.</li>          
         </section>
     </ol>
 
     <section class="mb-8">
-        <h2 class="text-3xl font-bold text-blue-600 mb-4">SQIsign</h2>
+        <h2 class="text-3xl font-bold text-blue-600 mb-4">SQIsign的优化</h2>
         <ol class="list-decimal list-inside text-gray-700 leading-relaxed">
-        </section>
-    </ol>
+            <li class="mb-2">
+        <strong>快速SQIsign（2023年）</strong>：Luca De Feo, Antonin Leroux, Patrick Longa and Benjamin Wesolowski 通过修改计算四元数代数中元素的方法使得SQIsign中输出第一步是均匀的. 同时优化了理想转化同源的过程. <p><a href="FastSQISign.pdf" class="text-blue-600 hover:underline">
+            New Algorithms for the Deuring Correspondence: Towards Practical and Secure SQISign Signatures   
+        </a> </li> 
+        <li class="mb-2">
+            <strong> 加速SQIsign（2024年）</strong>：Kaizhan Lin, Weize Wang, Zheng Xu and Changan Zhao 通过范数和迹的关系, 配对等方法进一步优化SQIsign的理想转化同源的过程. <p><a href="Xu.pdf" class="text-blue-600 hover:underline">
+                A Faster Software Implementation of SQIsign
+            </a> </li> 
+        <li class="mb-2">
+            <strong> 在扩张域上的SQIsign（2024年）</strong>：Maria Corte-Real Santos, Jonathan Komada Eriksen, Michael Meyer
+            and Krijn Reijnders 将SQIsign中有理点的基域扩大, 使得可用的有理点增多, 从而达到加速的目的. <p><a href="aps.pdf" class="text-blue-600 hover:underline">
+                ApresSQI: Extra Fast Verification
+                for SQIsign Using Extension-Field Signing     
+                </a> </li> 
+    </section>
+</ol>
+<section class="mb-8">
+    <h2 class="text-3xl font-bold text-blue-600 mb-4">SQIsign的变种</h2> 
+    <ol class="list-decimal list-inside text-gray-700 leading-relaxed">
+        <li class="mb-2">
+    <strong>SQIsignHD（2024年）</strong>：Pierrick Dartois, Antonin Leroux, Damien Robert and Benjamin Wesolowski 通过SIDH攻击的办法, 将输出同源次数光滑的条件取消, 只需要计算输出同源的像点, 再用SIDH攻击(四维)的办法在验证中恢复即可. 同时由于输出同源不要求光滑的, KLPT算法也可修改成随机选取等价理想. <p><a href="HD.pdf" class="text-blue-600 hover:underline">
+        SQIsignHD: New Dimensions in Cryptography  
+    </a> </li> 
+    <li class="mb-2">
+        <strong> SQIsign2D-West（2024年）</strong>：Andrea Basso, Pierrick Dartois, Luca De Feo,
+        Antonin Leroux, Luciano Maino, Giacomo Pope,
+        Damien Robert and Benjamin Wesolowski 通过二维同源的方法进行理想转同源, 构造辅助同源, 完成验证. 一维非光滑同源都是通过二维同源的计算得到. <p><a href="West.pdf" class="text-blue-600 hover:underline">
+            SQIsign2D–West: The Fast, the Small, and the Safer
+        </a> </li> 
+    <li class="mb-2">
+        <strong> SQIsign2D-East（2024年）</strong>：Kohei Nakagawa, Hiroshi Onuki, Wouter Castryck, Mingjie Chen,
+        Riccardo Invernizzi, Gioella Lorenzon and Frederik Vercauteren 与West不同的是, East并不是理想转同源, 而是利用Eichler order的性质直接在公钥曲线上寻辅助同源完成验证, 方法依然是利用二维同源得到. <p><a href="East.pdf" class="text-blue-600 hover:underline"> 
+            SQIsign2D-East: A New Signature Scheme Using 2-Dimensional Isogenies              
+            </a> </li> 
+            <li class="mb-2">通过这些优化和变种, SQIsign系列的效率得到了很大的提升, 使得其在后量子签名中具有竞争力.</li>
+</section>
+</o1>
+<section class="mb-8">
+    <h2 class="text-3xl font-bold text-blue-600 mb-4">MIKE</h2> 
+    <ol class="list-decimal list-inside text-gray-700 leading-relaxed">
+        <li class="mb-2">
+    <strong>MIKE（2025年）</strong>：Damien Robert 通过有限表出无挠模(秩2)在超奇异椭圆曲线上的作用(一般Abel簇上需要有限表出投射模的作用), 得到新的Abel簇, 这个作用无需传输像点, 且因为是模作用而不是理想作用可以抵抗Kuperberg的量子攻击. 由此构造基于模作用的密钥交换MIKE. <p><a href="ModuleAction.pdf" class="text-blue-600 hover:underline">
+        The Module Action For Isogeny Based Cryptography
+    </a> </li> 
+</section>
+</o1>
     </main>
     
     <footer class="bg-gray-200 text-center py-4">
