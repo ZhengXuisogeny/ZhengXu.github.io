@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <title>同源密码发展介绍</title>
+</head>
+
+<body class="bg-gray-100 font-sans">
+    <header class="bg-blue-600 text-white text-center py-8">
+        <h1 class="text-4xl font-bold">同源密码发展介绍</h1>
+    </header>
+    <main class="container mx-auto p-8">
+        <section class="mb-8">
+            <h2 class="text-3xl font-bold text-blue-600 mb-4">什么是同源密码</h2>
+            <p class="text-gray-700 leading-relaxed">
+                同源密码学（Isogeny-Based Cryptography）是一种基于椭圆曲线同源的密码技术，具有尺寸短的优势。 
+            </p>
+        </section>
+        <section class="mb-8">
+            <h2 class="text-3xl font-bold text-blue-600 mb-4">SIDH</h2>
+            <ol class="list-decimal list-inside text-gray-700 leading-relaxed">
+                <li class="mb-2">
+                    <strong>起源（2011 年）</strong>：Luca.De.Feo和 David. Jao 首次提出了基于超奇异椭圆曲线同源的密钥交换SIDH. <p><a href="SIDH.pdf" class="text-blue-600 hover:underline">Towards quantum-resistant cryptosystems from
+                        supersingular elliptic curve isogenies</a>
+                </li>
+                <li class="mb-2">
+                    <strong>SIDH的主动攻击提出（2016年）</strong>：Steven D. Galbraith, Christophe Petit, Barak Shani, and Yan Bo Ti首次提出对SIDH的主动攻击. <p><a href="GPST.pdf" class="text-blue-600 hover:underline">On the Security of Supersingular Isogeny
+                        Cryptosystems</a>
+                    
+                </li>
+                <li class="mb-2">
+                    <strong>SIDH的被动攻击提出（2016,2021 年）</strong>：Christophe Petit 提出了Torsion Point Attack, 之后Victoria de Quehen, Peter Kutas, Chris Leonardi, Chloe Martindale, Lorenz Panny, Christophe Petit, and Katherine E. Stange 进一步改进. 但要求交互双方所需参数差距过大.
+                    <p><a href="TorsionPointAttack.pdf" class="text-blue-600 hover:underline">Faster Algorithms for Isogeny Problems
+                        Using Torsion Point Images
+                        </a>
+                    <p><a href="ImprovedTorsionPointAttacks.pdf" class="text-blue-600 hover:underline">Improved Torsion-Point Attacks on SIDH
+                        Variants
+                        </a>
+                </li>
+                <li class="mb-2">
+                    <strong>另外一种攻击（2021年）</strong>: Peter Kutas, Simon-Philipp Merz, Christophe Petit and Charlotte Weitkamper 通过量子计算机可以求解Hidden Shift Problem的特性提出了新的攻击. 但未攻破. 
+                    <p><a href="OneWay.pdf" class="text-blue-600 hover:underline">One-Way Functions and Malleability
+                        Oracles: Hidden Shift Attacks
+                        on Isogeny-Based Protocols                        
+                        </a>
+                    
+                </li>
+                <li class="mb-2">
+                    <strong>初始曲线特殊下攻破SIDH（2023年）</strong>: Wouter Castryck and Thomas Decru 通过高维Abel簇上的Kani定理攻破了初始曲线特殊(j-不变量是1728)的SIDH. 
+                    <p><a href="BreakingII.pdf" class="text-blue-600 hover:underline">An Efficient Key Recovery Attack
+                        on SIDH                         
+                        </a>
+                    
+                </li>
+                <li class="mb-2">
+                    <strong>分析一般情形下的SIDH（2023年）</strong>: Luciano Maino, Chloe Martindale, Lorenz Panny, Giacomo Pope and Benjamin Wesolowski对一般情形下的SIDH进行分析, 得到了一些攻击但都不是多项式时间的. 
+                    <p><a href="BreakingI.pdf" class="text-blue-600 hover:underline">A Direct Key Recovery Attack on SIDH
+                        </a>
+                </li>
+                <li class="mb-2">
+                    <strong>完全攻破SIDH（2023年）</strong>: Damien Robert 通过八维Abel簇达到对SIDH的完全攻破. 
+                    <p><a href="BreakingIII.pdf" class="text-blue-600 hover:underline">Breaking SIDH in Polynomial Time
+                        </a>
+                </li>
+                <li class="mb-2">至此,入选NIST第四轮备选的SIDH彻底被攻破.</li>
+            </ol>
+        </section> 
+        <section class="mb-8">
+            <h2 class="text-3xl font-bold text-blue-600 mb-4">SIDH的修改方案</h2>
+            <ol class="list-decimal list-inside text-gray-700 leading-relaxed">
+                <li class="mb-2">
+                    <strong>M-SIDH的提出</strong>：Tako Boris Fouotsa, Tomoki Moriya and Christophe Petit 提出了M-SIDH, 通过隐藏像点达到安全. 
+                    <p><a href="MSIDH.pdf" class="text-blue-600 hover:underline">M-SIDH and MD-SIDH: Countering
+                        SIDH Attacks by Masking Information
+                    </a>
+                </li>
+                <li class="mb-2">
+                    <strong>加密FESTA的提出</strong>：Andrea Basso, Luciano Maino and Giacomo Pope 通过隐藏像点提出了加密FESTA, Kohei Nakagawa and Hiroshi Onuki进一步提出了QFESTA.
+                    <p><a href="FESTA.pdf" class="text-blue-600 hover:underline">FESTA: Fast Encryption
+                        from Supersingular Torsion Attacks</a>
+                    <p><a href="QFESTA.pdf" class="text-blue-600 hover:underline">QFESTA: Eﬃcient Algorithms
+                        and Parameters for FESTA Using
+                        Quaternion Algebras</a>     
+                </li>
+                <li class="mb-2">
+                    <strong>bin-SIDH的提出</strong>：Andrea Basso and Tako Boris Fouotsa提出新的bin-SIDH和ter-SIDH, 通过选择不同的子群达到安全性. 
+                    <p><a href="bin.pdf" class="text-blue-600 hover:underline">New SIDH Countermeasures for a More
+                        Efficient Key Exchange</a>
+                </li>
+            </ul> 
+            <li class="mb-2">这些方案为了抵抗SIDH的攻击, 保证安全性, 需要参数很大,并不实用.</li>
+        </section>
+    </ol>
+    <section class="mb-8">
+        <h2 class="text-3xl font-bold text-blue-600 mb-4">CSIDH</h2>
+        <ol class="list-decimal list-inside text-gray-700 leading-relaxed">
+        </section>
+    </ol>
+
+    <section class="mb-8">
+        <h2 class="text-3xl font-bold text-blue-600 mb-4">SQIsign</h2>
+        <ol class="list-decimal list-inside text-gray-700 leading-relaxed">
+        </section>
+    </ol>
+    </main>
+    
+    <footer class="bg-gray-200 text-center py-4">
+        <p class="text-gray-600">版权所有 &copy; 2025 同源密码发展介绍</p>
+    </footer>
+</body>
+
+</html>
+    
