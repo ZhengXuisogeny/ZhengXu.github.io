@@ -208,6 +208,16 @@
         Riccardo Invernizzi, Gioella Lorenzon and Frederik Vercauteren 与West不同的是, East并不是理想转同源, 而是利用Eichler order的性质直接在公钥曲线上寻辅助同源完成验证, 方法依然是利用二维同源得到. <p><a href="East.pdf" class="text-blue-600 hover:underline"> 
             SQIsign2D-East: A New Signature Scheme Using 2-Dimensional Isogenies              
             </a> </li> 
+     <li class="mb-2">
+        <strong> SQIsign2D\(^2\)（2025年）</strong>：Zheng Xu, Kaizhan Lin, Chang-An Zhao, and Yi Ouyang
+        相比于East, SQIsign2D\(^2\)是利用一维同源的方法取减少二维同源的计算. <p><a href="2d.pdf" class="text-blue-600 hover:underline"> 
+            SQIsign2D\(^2\): New SQIsign2D Variant by Leveraging Power Smooth Isogenies in Dimension One            
+            </a> </li> 
+      <li class="mb-2">
+        <strong> SQIsign2DPush（2025年）</strong>： Kohei Nakagawa and Hiroshi Onuki
+        相比于East, SQIsign2DPush是在初始曲线上寻找次数是d的同源,再拉下来形成辅助同源. <p><a href="push.pdf" class="text-blue-600 hover:underline"> 
+            SQIsign2DPush: Faster Signature Scheme Using 2-Dimensional Isogenies          
+            </a> </li>       
             <li class="mb-2">通过这些优化和变种, SQIsign系列的效率得到了很大的提升, 使得其在后量子签名中具有竞争力.</li>
 </section>
 </o1>
