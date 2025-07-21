@@ -8,129 +8,594 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <title>同源密码发展介绍(仍在更新)</title>
+    <title>Introduction to Isogeny Hard Problems (Updating)</title>
+    
+    <!-- Tailwind 配置 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                        secondary: '#36CFC9',
+                        accent: '#722ED1',
+                        dark: '#1D2129',
+                        light: '#F2F3F5'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-balance {
+                text-wrap: balance;
+            }
+            .transition-lang {
+                transition: opacity 0.3s ease, transform 0.3s ease;
+            }
+            .card-hover {
+                transition: all 0.3s ease;
+            }
+            .card-hover:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            }
+        }
+    </style>
 </head>
 
-<body class="bg-gray-100 font-sans">
-    <header class="bg-blue-600 text-white text-center py-8">
-        <h1 class="text-4xl font-bold">同源困难问题介绍(仍在更新)</h1>
+<body class="bg-light font-sans text-dark">
+    <!-- 语言切换按钮 -->
+    <button id="langButton" class="fixed top-6 right-6 bg-primary text-white px-4 py-2 rounded-lg shadow-lg hover:bg-primary/90 transition-all z-50 flex items-center">
+        <i class="fa fa-language mr-2"></i>
+        <span id="langText">中文</span>
+    </button>
+
+    <header class="bg-gradient-to-r from-primary to-accent text-white text-center py-12 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-20">
+            <div class="absolute top-0 left-0 w-full h-full bg-[url('https://picsum.photos/id/180/1200/400')] bg-cover bg-center"></div>
+        </div>
+        <div class="container mx-auto relative z-10">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 transition-lang" data-lang="title">Introduction to Isogeny Hard Problems (Updating)</h1>
+            
+        </div>
     </header>
-    <main class="container mx-auto p-8">
-        <section class="mb-8">
-            <h2 class="text-3xl font-bold text-blue-600 mb-4">同源困难问题</h2>
-            <p class="text-gray-700 leading-relaxed">
-                超奇异椭圆曲线计算困难问题有两个, 一个是给定随机超奇异椭圆曲线计算其之间同源的问; 另一个是给定随机超奇异椭圆曲线计算其自同态环问题. 另外超奇异椭圆曲线同源图的结构也决定了同源游走的随机性,影响困难问题和密码安全. 
+    
+    <main class="container mx-auto p-6 md:p-10">
+        <!-- 概述部分 -->
+        <section class="mb-12 bg-white rounded-xl shadow-lg p-8 card-hover">
+            <h2 class="text-3xl font-bold text-primary mb-6 transition-lang" data-lang="intro-title">Isogeny Hard Problems</h2>
+            <p class="text-gray-700 leading-relaxed text-balance transition-lang" data-lang="intro-content">
+                There are two hard problems related to supersingular elliptic curves: one is computing an isogeny between randomly given supersingular elliptic curves; the other is computing the endomorphism ring of a randomly given supersingular elliptic curve. Additionally, the structure of the supersingular isogeny graph determines the randomness of isogeny walks, which affects the security of cryptographic schemes based on these hard problems.
             </p> 
         </section>
-        <section class="mb-8">
-            <h2 class="text-3xl font-bold text-blue-600 mb-4">计算同源问题</h2>
-            <ol class="list-decimal list-inside text-gray-700 leading-relaxed">
-                <li class="mb-2"> 
-                    <strong>经典攻击: 中间相遇攻击（2016 年）</strong>：Christina Delfs and Steven D. Galbraith 提出之间相遇攻击, 用来恢复同源, 时间复杂度是\(\tilde{O}(\sqrt{p})\). <p><a href="cfp.pdf" class="text-blue-600 hover:underline">
-                        Computing Isogenies Between Supersingular Elliptic Curves Over \(\mathbb{F}_p\)
-                    </a>
-
-                </li>
-                <li class="mb-2">
-                    <strong>量子攻击: Grover+ Kuperberg（2014年）</strong>： Jean-Francois Biasse, David Jao and Anirudh Sankar 提出通过Grover算法计算同源到\(\mathbb{F}_p\)上然后利用Kuperberg解决Hidden Shift Problem的特性, 在亚指数时间内找到\(\mathbb{F}_p\)上的同源, 总的时间复杂度是\(\tilde{O}(p^{1/4})\). <p><a href="Quantum.pdf" class="text-blue-600 hover:underline">
-                        A Quantum Algorithm for Computing Isogenies Between Supersingular Elliptic Curves
-                    </a>
-                    
-                </li> 
-                <li class="mb-2">
-                    <strong>量子攻击:Claw Finding（2009 年）</strong>：Seiichiro Tani 提出了Claw Finding的方法可以用于同源上, 计算次数是A的同源所需时间复杂度是\(\tilde{O}(A^{1/3})\).
-                    <p><a href="claw.pdf" class="text-blue-600 hover:underline"> Claw Finding Algorithms Using Quantum Walk 
+        
+        <!-- 计算同源问题部分 -->
+        <section class="mb-12 bg-white rounded-xl shadow-lg p-8 card-hover">
+            <h2 class="text-3xl font-bold text-primary mb-6 transition-lang" data-lang="comp-isogeny-title">Computing Isogenies Problem</h2>
+            <ol class="list-decimal list-inside text-gray-700 leading-relaxed space-y-6">
+                <li class="mb-2 transition-lang" data-lang="isogeny-attack1-item"> 
+                    <strong class="text-xl text-accent">Classical Attack: Meet-in-the-Middle (2016)</strong>
+                    <p>Christina Delfs and Steven D. Galbraith proposed a meet-in-the-middle attack to recover isogenies with a time complexity of \(\tilde{O}(\sqrt{p})\).</p>
+                    <p class="mt-2">
+                        <a href="cfp.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                            Computing Isogenies Between Supersingular Elliptic Curves Over \(\mathbb{F}_p\)
                         </a>
+                    </p>
                 </li>
-
+                
+                <li class="mb-2 transition-lang" data-lang="isogeny-attack2-item">
+                    <strong class="text-xl text-accent">Quantum Attack: Grover + Kuperberg (2014)</strong>
+                    <p>Jean-Francois Biasse, David Jao and Anirudh Sankar proposed a method that uses Grover's algorithm to compute isogenies over \(\mathbb{F}_p\) and then leverages Kuperberg's algorithm for solving the Hidden Shift Problem, finding isogenies over \(\mathbb{F}_p\) in subexponential time with an overall time complexity of \(\tilde{O}(p^{1/4})\).</p>
+                    <p class="mt-2">
+                        <a href="Quantum.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                            A Quantum Algorithm for Computing Isogenies Between Supersingular Elliptic Curves
+                        </a>
+                    </p>
+                </li> 
+                
+                <li class="mb-2 transition-lang" data-lang="isogeny-attack3-item">
+                    <strong class="text-xl text-accent">Quantum Attack: Claw Finding (2009)</strong>
+                    <p>Seiichiro Tani proposed a claw-finding method applicable to isogenies, with a time complexity of \(\tilde{O}(A^{1/3})\) for computing an isogeny of degree \(A\).</p>
+                    <p class="mt-2">
+                        <a href="claw.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                            Claw Finding Algorithms Using Quantum Walk
+                        </a>
+                    </p>
+                </li>
             </ol> 
         </section>  
-        <section class="mb-8">
-            <h2 class="text-3xl font-bold text-blue-600 mb-4">计算自同态环问题</h2>
-            <ol class="list-decimal list-inside text-gray-700 leading-relaxed">
-                <li class="mb-2"> 
-                    <strong>经典攻击(2020年)</strong>：Kirsten Eisenträger, Sean Hallgren, Chris Leonardi, Travis Morrison and Jennifer Park 提出了通过超奇异椭圆曲线的两个自同态来生成自同态环, 时间复杂度是\(O(\sqrt{p}\log^2(p))\).
-                    <p><a href="Computingendomorphismrings.pdf" class="text-blue-600 hover:underline">
-                        Computing Endomorphism Rings of Supersingular Elliptic Curves
-                        and Connections to Path-finding in Isogeny Graphs                      
-                    </a>
+        
+        <!-- 计算自同态环问题部分 -->
+        <section class="mb-12 bg-white rounded-xl shadow-lg p-8 card-hover">
+            <h2 class="text-3xl font-bold text-primary mb-6 transition-lang" data-lang="endomorphism-title">Computing Endomorphism Rings Problem</h2>
+            <ol class="list-decimal list-inside text-gray-700 leading-relaxed space-y-6">
+                <li class="mb-2 transition-lang" data-lang="endomorphism-attack1-item"> 
+                    <strong class="text-xl text-accent">Classical Attack (2020)</strong>
+                    <p>Kirsten Eisenträger, Sean Hallgren, Chris Leonardi, Travis Morrison and Jennifer Park proposed a method to generate endomorphism rings using two endomorphisms of a supersingular elliptic curve, with a time complexity of \(O(\sqrt{p}\log^2(p))\).</p>
+                    <p class="mt-2">
+                        <a href="Computingendomorphismrings.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                            Computing Endomorphism Rings of Supersingular Elliptic Curves and Connections to Path-finding in Isogeny Graphs
+                        </a>
+                    </p>
                 </li> 
-            </ul> 
-            <li class="mb-2">至于量子攻击是和计算同源一样, 复杂度是\(\tilde{O}(p^{1/4})\).</li>
+                <li class="mb-2 transition-lang" data-lang="endomorphism-quantum-item">
+                    <strong class="text-xl text-accent">Quantum Attack (2020)</strong>
+                    <p>For quantum attacks, similar to computing isogenies, the complexity is \(\tilde{O}(p^{1/4})\).</p>
+                </li>
+            </ol> 
         </section>
-    </ol> 
-    <section class="mb-8">
-        <h2 class="text-3xl font-bold text-blue-600 mb-4">困难问题的等价</h2> 
-        <ol class="list-decimal list-inside text-gray-700 leading-relaxed">
-            <li class="mb-2">
-                <strong>KLPT算法（2014 年）</strong>：David Kohel, Kristin Lauter, Christophe Petit and Jean-Pierre Tignol 首次提出了KLPT算法, 算法是在给定理想的情形下找到等价的光滑范数理想. 所以在已知自同态环下, 通过对连接理想进行KLPT算法可得到光滑范数理想, 再将理想转化同源即可得到超奇异椭圆曲线的同源.
-                这也将计算同源问题规约到计算自同态问题上. 
-                <p><a href="KLPT1.pdf" class="text-blue-600 hover:underline">On the Quaternion \(\ell\)-Isogeny Path Problem
-                </a> 
-            </li> 
-            <li class="mb-2">
-                <strong>困难问题的约化（2018 年）</strong>：Kirsten Eisentrager, Sean Hallgren, Kristin Lauter, Travis Morrison
-                and Christophe Petit
-                 给出了计算同源问题和计算自同态环问题的等价. 
-                <p><a href="Reductions.pdf" class="text-blue-600 hover:underline">Supersingular Isogeny Graphs
-                    and Endomorphism Rings: Reductions and Solutions
-                    
-                </a> 
-            </li> 
-            <li class="mb-2">
-                <strong>计算自同态环和计算一个非平凡的自同态是等价的（2024 年）</strong>：Aurel Page and Benjamin Wesolowski 给出了计算超奇异椭圆曲线的自同态环和计算一个非平凡的自同态是等价的, 这也将SQIsign规约到了困难问题. 
-                <p><a href="One.pdf" class="text-blue-600 hover:underline">The Supersingular Endomorphism Ring
-                    and One Endomorphism Problems are Equivalent  
-                </a> 
-            </li> 
-            <li class="mb-2">
-                <strong>在已知全自同态环的情形下攻击CSIDH（2024 年）</strong>：Wouter Castryck, Lorenz Panny and Frederik Vercauteren 通过Twist给出了已知超奇异椭圆曲线在代数闭包上的自同态环下可多项式时间攻破CSIDH, 即也将CSIDH规约到计算自同态的问题上. 
-                <p><a href="Rational.pdf" class="text-blue-600 hover:underline"> Rational Isogenies
-                    from Irrational Endomorphisms
-                </a> 
-            </li> 
+        
+        <!-- 困难问题的等价部分 -->
+        <section class="mb-12 bg-white rounded-xl shadow-lg p-8 card-hover">
+            <h2 class="text-3xl font-bold text-primary mb-6 transition-lang" data-lang="equivalence-title">Equivalence of Hard Problems</h2> 
+            <ol class="list-decimal list-inside text-gray-700 leading-relaxed space-y-6">
+                <li class="mb-2 transition-lang" data-lang="equivalence-klpt-item">
+                    <strong class="text-xl text-accent">KLPT Algorithm (2014)</strong>
+                    <p>David Kohel, Kristin Lauter, Christophe Petit and Jean-Pierre Tignol first proposed the KLPT algorithm, which finds an equivalent smooth norm ideal given an ideal. Thus, with a known endomorphism ring, applying the KLPT algorithm to connecting ideals yields smooth norm ideals, which can then be converted to isogenies, reducing the isogeny computation problem to the endomorphism ring computation problem.</p>
+                    <p class="mt-2">
+                        <a href="KLPT1.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                            On the Quaternion \(\ell\)-Isogeny Path Problem
+                        </a> 
+                    </p>
+                </li>
+                
+                <li class="mb-2 transition-lang" data-lang="equivalence-reduction-item">
+                    <strong class="text-xl text-accent">Reduction of Hard Problems (2018)</strong>
+                    <p>Kirsten Eisentrager, Sean Hallgren, Kristin Lauter, Travis Morrison and Christophe Petit established the equivalence between the isogeny computation problem and the endomorphism ring computation problem.</p>
+                    <p class="mt-2">
+                        <a href="Reductions.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                            Supersingular Isogeny Graphs and Endomorphism Rings: Reductions and Solutions
+                        </a> 
+                    </p>
+                </li>
+                
+                <li class="mb-2 transition-lang" data-lang="equivalence-nontrivial-item">
+                    <strong class="text-xl text-accent">Equivalence of Computing Endomorphism Rings and Non-trivial Endomorphisms (2024)</strong>
+                    <p>Aurel Page and Benjamin Wesolowski showed that computing the endomorphism ring of a supersingular elliptic curve is equivalent to computing a non-trivial endomorphism, reducing SQIsign to this hard problem.</p>
+                    <p class="mt-2">
+                        <a href="One.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                            The Supersingular Endomorphism Ring and One Endomorphism Problems are Equivalent
+                        </a> 
+                    </p>
+                </li>
+                
+                <li class="mb-2 transition-lang" data-lang="equivalence-csidh-item">
+                    <strong class="text-xl text-accent">Attacking CSIDH with Known Full Endomorphism Rings (2024)</strong>
+                    <p>Wouter Castryck, Lorenz Panny and Frederik Vercauteren used twists to show that CSIDH can be broken in polynomial time with knowledge of the endomorphism ring of a supersingular elliptic curve over an algebraic closure, reducing CSIDH to the endomorphism computation problem.</p>
+                    <p class="mt-2">
+                        <a href="Rational.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                            Rational Isogenies from Irrational Endomorphisms
+                        </a> 
+                    </p>
+                </li>
+            </ol>
         </section>
-    </ol>
-   
-    <section class="mb-8">
-        <h2 class="text-3xl font-bold text-blue-600 mb-4">同源图</h2>
-        <ol class="list-decimal list-inside text-gray-700 leading-relaxed">
-            <li class="mb-2"> 
-                <strong> \(\mathbb{F}_p\)-同源图（2016年）</strong>：Christina Delfs and Steven D. Galbraith 给出了有限域\(\mathbb{F}_p\)上的超奇异椭圆曲线同源图的结构. <p><a href="cfp.pdf" class="text-blue-600 hover:underline">
-                    Computing Isogenies Between Supersingular Elliptic Curves Over \(\mathbb{F}_p\)
-                </a>
-
-            </li>
-            <li class="mb-2">
-                <strong>迹为 \(0, \pm p\)的曲线的同源图结构（2018年）</strong>：Gora Adj, Omran Ahmadi, Alfred Menezes 给出了迹为 \(0, \pm p\)的曲线的同源图结构，并对迹是 \( \pm 2p\) 曲线的
-                \(\ell\)-同源图给出了 \(j\)-不变量是 1728 的超奇异椭圆曲线的环路个数。 
-                <p><a href="graph1.pdf" class="text-blue-600 hover:underline"> On Isogeny Graphs of Supersingular Elliptic Curves 
-                    Over Fnite Fields
-                </a> 
-            </li>    
-            <li class="mb-2">
-                <strong>\(\mathbb{F}_p\)上的超奇异椭圆曲线在同源图中的结构（2019,2020年）</strong>：Songsong Li, Yi Ouyang, Zheng Xu 
-                给出了\(\ell\)-同源图中\(j\)-不变量在\(\mathbb{F}_p\)上的超奇异椭圆曲线的环路和邻域个数。 
-                <p><a href="graph2.pdf" class="text-blue-600 hover:underline"> Loops of Isogeny Graphs of Supersingular Elliptic 
-                    Curves at \(j = 0\)
-                </a> 
-                <p><a href="graph3.pdf" class="text-blue-600 hover:underline"> Neighborhood of the Supersingular Elliptic Curve 
-                    Isogeny Graph at \(j = 0\) and \(1728\)
-                </a>
-                <p><a href="graph4.pdf" class="text-blue-600 hover:underline"> Endomorphism Rings of Supersingular Elliptic Curves 
-                    Over \(\mathbb{F}_p\)
-                </a>
-            </li> 
+        
+        <!-- 同源图部分 -->
+        <section class="mb-12 bg-white rounded-xl shadow-lg p-8 card-hover">
+            <h2 class="text-3xl font-bold text-primary mb-6 transition-lang" data-lang="graph-title">Isogeny Graphs</h2>
+            <ol class="list-decimal list-inside text-gray-700 leading-relaxed space-y-6">
+                <li class="mb-2 transition-lang" data-lang="graph-fp-item"> 
+                    <strong class="text-xl text-accent"> \(\mathbb{F}_p\)-Isogeny Graphs (2016)</strong>
+                    <p>Christina Delfs and Steven D. Galbraith described the structure of isogeny graphs of supersingular elliptic curves over finite fields \(\mathbb{F}_p\).</p>
+                    <p class="mt-2">
+                        <a href="cfp.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                            Computing Isogenies Between Supersingular Elliptic Curves Over \(\mathbb{F}_p\)
+                        </a>
+                    </p>
+                </li>
+                
+                <li class="mb-2 transition-lang" data-lang="graph-trace-item">
+                    <strong class="text-xl text-accent">Graph Structure of Curves with Trace \(0, \pm p\) (2018)</strong>
+                    <p>Gora Adj, Omran Ahmadi, Alfred Menezes described the isogeny graph structure of curves with trace \(0, \pm p\) and determined the number of cycles in the \(\ell\)-isogeny graph of curves with trace \(\pm 2p\) for supersingular elliptic curves with \(j\)-invariant 1728.</p>
+                    <p class="mt-2">
+                        <a href="graph1.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                            On Isogeny Graphs of Supersingular Elliptic Curves Over Fnite Fields
+                        </a> 
+                    </p>
+                </li>    
+                
+                <li class="mb-2 transition-lang" data-lang="graph-structure-item">
+                    <strong class="text-xl text-accent">\(\mathbb{F}_p\)上的超奇异椭圆曲线在同源图中的结构（2019,2020年）</strong>
+                    <p>Songsong Li, Yi Ouyang, Zheng Xu 给出了\(\ell\)-同源图中\(j\)-不变量在\(\mathbb{F}_p\)上的超奇异椭圆曲线的环路和邻域个数。</p>
+                    <p class="mt-2">
+                        <a href="graph2.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                            Loops of Isogeny Graphs of Supersingular Elliptic Curves at \(j = 0\)
+                        </a> 
+                    </p>
+                    <p class="mt-2">
+                        <a href="graph3.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                            Neighborhood of the Supersingular Elliptic Curve Isogeny Graph at \(j = 0\) and \(1728\)
+                        </a>
+                    </p>
+                    <p class="mt-2">
+                        <a href="graph4.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                            Endomorphism Rings of Supersingular Elliptic Curves Over \(\mathbb{F}_p\)
+                        </a>
+                    </p>
+                </li> 
+            </ol>
         </section>
-    </ol>
-
-    
     </main>
     
-    <footer class="bg-gray-200 text-center py-4">
-        <p class="text-gray-600">版权所有 &copy; 2025 困难问题发展介绍</p>
+    <footer class="bg-dark text-white py-12">
+        <div class="container mx-auto px-6 md:px-10">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <h3 class="text-xl font-bold mb-4 transition-lang" data-lang="footer-title">Introduction to Isogeny Hard Problems</h3>
+                    <p class="text-gray-400 max-w-md transition-lang" data-lang="footer-desc">
+                        This page introduces the core hard problems, attack methods, and research progress in supersingular elliptic curve isogeny cryptography, aiming to provide references for researchers in related fields.
+                    </p>
+                </div>
+                
+                
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500 transition-lang" data-lang="copyright">
+                Copyright &copy; 2025 Introduction to Hard Problems Development
+            </div>
+        </div>
     </footer>
+
+    <script>
+        // 翻译数据（中英文对照）
+        const translations = {
+            'zh-CN': {
+                'title': '同源困难问题介绍(仍在更新)',
+                
+                'intro-title': '同源困难问题',
+                'intro-content': '超奇异椭圆曲线计算困难问题有两个, 一个是给定随机超奇异椭圆曲线计算其之间同源的问; 另一个是给定随机超奇异椭圆曲线计算其自同态环问题. 另外超奇异椭圆曲线同源图的结构也决定了同源游走的随机性,影响困难问题和密码安全.',
+                'comp-isogeny-title': '计算同源问题',
+                'isogeny-attack1-item': `
+                    <strong class="text-xl text-accent">经典攻击: 中间相遇攻击（2016 年）</strong>
+                    <p>Christina Delfs and Steven D. Galbraith 提出之间相遇攻击, 用来恢复同源, 时间复杂度是\\(\\tilde{O}(\\sqrt{p})\\).</p>
+                    <p class="mt-2">
+                        <a href="cfp.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                            Computing Isogenies Between Supersingular Elliptic Curves Over &nbsp \\(\\mathbb{F}_p\\)
+                        </a>
+                    </p>
+                `,
+                'isogeny-attack2-item': `
+                    <strong class="text-xl text-accent">量子攻击: Grover+ Kuperberg（2014年）</strong>
+                    <p>Jean-Francois Biasse, David Jao and Anirudh Sankar 提出通过Grover算法计算同源到\\(\\mathbb{F}_p\\)上然后利用Kuperberg解决Hidden Shift Problem的特性, 在亚指数时间内找到\\(\\mathbb{F}_p\\)上的同源, 总的时间复杂度是\\(\\tilde{O}(p^{1/4})\\).</p>
+                    <p class="mt-2">
+                        <a href="Quantum.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                            A Quantum Algorithm for Computing Isogenies Between Supersingular Elliptic Curves
+                        </a>
+                    </p>
+                `,
+                'isogeny-attack3-item': `
+                    <strong class="text-xl text-accent">量子攻击:Claw Finding（2009 年）</strong>
+                    <p>Seiichiro Tani 提出了Claw Finding的方法可以用于同源上, 计算次数是A的同源所需时间复杂度是\\(\\tilde{O}(A^{1/3})\\).</p>
+                    <p class="mt-2">
+                        <a href="claw.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                            Claw Finding Algorithms Using Quantum Walk
+                        </a>
+                    </p>
+                `,
+                'endomorphism-title': '计算自同态环问题',
+                'endomorphism-attack1-item': `
+                    <strong class="text-xl text-accent">经典攻击(2020年)</strong>
+                    <p>Kirsten Eisenträger, Sean Hallgren, Chris Leonardi, Travis Morrison and Jennifer Park 提出了通过超奇异椭圆曲线的两个自同态来生成自同态环, 时间复杂度是\\(O(\\sqrt{p}\\log^2(p))\\).</p>
+                    <p class="mt-2">
+                        <a href="Computingendomorphismrings.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                            Computing Endomorphism Rings of Supersingular Elliptic Curves and Connections to Path-finding in Isogeny Graphs
+                        </a>
+                    </p>
+                `,
+                'endomorphism-quantum-item': `
+                <strong class="text-xl text-accent">量子攻击</strong>
+                    <p>至于量子攻击是和计算同源一样, 复杂度是\\(\\tilde{O}(p^{1/4})\\).</p>
+                `,
+                'equivalence-title': '困难问题的等价',
+                'equivalence-klpt-item': `
+                    <strong class="text-xl text-accent">KLPT算法（2014 年）</strong>
+                    <p>David Kohel, Kristin Lauter, Christophe Petit and Jean-Pierre Tignol 首次提出了KLPT算法, 算法是在给定理想的情形下找到等价的光滑范数理想. 所以在已知自同态环下, 通过对连接理想进行KLPT算法可得到光滑范数理想, 再将理想转化同源即可得到超奇异椭圆曲线的同源. 这也将计算同源问题规约到计算自同态问题上.</p>
+                    <p class="mt-2">
+                        <a href="KLPT1.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                            On the Quaternion &nbsp \\(\\ell\\)-Isogeny Path Problem
+                        </a> 
+                    </p>
+                `,
+                'equivalence-reduction-item': `
+                    <strong class="text-xl text-accent">困难问题的约化（2018 年）</strong>
+                    <p>Kirsten Eisentrager, Sean Hallgren, Kristin Lauter, Travis Morrison and Christophe Petit 给出了计算同源问题和计算自同态环问题的等价.</p>
+                    <p class="mt-2">
+                        <a href="Reductions.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                            Supersingular Isogeny Graphs and Endomorphism Rings: Reductions and Solutions
+                        </a> 
+                    </p>
+                `,
+                'equivalence-nontrivial-item': `
+                    <strong class="text-xl text-accent">计算自同态环和计算一个非平凡的自同态是等价的（2024 年）</strong>
+                    <p>Aurel Page and Benjamin Wesolowski 给出了计算超奇异椭圆曲线的自同态环和计算一个非平凡的自同态是等价的, 这也将SQIsign规约到了困难问题.</p>
+                    <p class="mt-2">
+                        <a href="One.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                            The Supersingular Endomorphism Ring and One Endomorphism Problems are Equivalent
+                        </a> 
+                    </p>
+                `,
+                'equivalence-csidh-item': `
+                    <strong class="text-xl text-accent">在已知全自同态环的情形下攻击CSIDH（2024 年）</strong>
+                    <p>Wouter Castryck, Lorenz Panny and Frederik Vercauteren 通过Twist给出了已知超奇异椭圆曲线在代数闭包上的自同态环下可多项式时间攻破CSIDH, 即也将CSIDH规约到计算自同态的问题上.</p>
+                    <p class="mt-2">
+                        <a href="Rational.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                            Rational Isogenies from Irrational Endomorphisms
+                        </a> 
+                    </p>
+                `,
+                'graph-title': '同源图',
+                'graph-fp-item': `
+                    <strong class="text-xl text-accent"> \\(\\mathbb{F}_p\\)-同源图（2016年）</strong>
+                    <p>Christina Delfs and Steven D. Galbraith 给出了有限域\\(\\mathbb{F}_p\\)上的超奇异椭圆曲线同源图的结构.</p>
+                    <p class="mt-2">
+                        <a href="cfp.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                            Computing Isogenies Between Supersingular Elliptic Curves Over &nbsp \\(\\mathbb{F}_p\\)
+                        </a>
+                    </p>
+                `,
+                'graph-trace-item': `
+                    <strong class="text-xl text-accent">迹为 \\(0, \\pm p\\)的曲线的同源图结构（2018年）</strong>
+                    <p>Gora Adj, Omran Ahmadi, Alfred Menezes 给出了迹为 \\(0, \\pm p\\)的曲线的同源图结构，并对迹是 \\( \\pm 2p\\) 曲线的 \\(\\ell\\)-同源图给出了 \\(j\\)-不变量是 1728 的超奇异椭圆曲线的环路个数。</p>
+                    <p class="mt-2">
+                        <a href="graph1.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                            On Isogeny Graphs of Supersingular Elliptic Curves Over Fnite Fields
+                        </a> 
+                    </p>
+                `,
+                'graph-structure-item': `
+                    <strong class="text-xl text-accent">\\(\\mathbb{F}_p\\)上的超奇异椭圆曲线在同源图中的结构（2019,2020年）</strong>
+                    <p>Songsong Li, Yi Ouyang, Zheng Xu 给出了\\(\\ell\\)-同源图中\\(j\\)-不变量在\\(\\mathbb{F}_p\\)上的超奇异椭圆曲线的环路和邻域个数。</p>
+                    <p class="mt-2">
+                        <a href="graph2.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                            Loops of Isogeny Graphs of Supersingular Elliptic Curves at &nbsp \\(j = 0\\)
+                        </a> 
+                    </p>
+                    <p class="mt-2">
+                        <a href="graph3.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                            Neighborhood of the Supersingular Elliptic Curve Isogeny Graph at &nbsp \\(j = 0\\) &nbsp and &nbsp \\(1728\\)
+                        </a>
+                    </p>
+                    <p class="mt-2">
+                        <a href="graph4.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                            Endomorphism Rings of Supersingular Elliptic Curves Over &nbsp \\(\\mathbb{F}_p\\)
+                        </a>
+                    </p>
+                `,
+                'footer-title': '同源困难问题发展介绍',
+                'footer-desc': '本页面介绍了超奇异椭圆曲线同源密码学中的核心困难问题、攻击方法及其研究进展，旨在为相关领域的研究人员提供参考。',
+                'copyright': '版权所有 &copy; 2025 困难问题发展介绍'
+            },
+            'en': {
+                'title': 'Introduction to Isogeny Hard Problems (Updating)',
+                
+                'intro-title': 'Isogeny Hard Problems',
+                'intro-content': '<div class="mb-6"> There are two hard problems related to supersingular elliptic curves: one is computing an isogeny between randomly given supersingular elliptic curves; the other is computing the endomorphism ring of a randomly given supersingular elliptic curve. </div> <div class="mb-6">  Additionally, the structure of the supersingular isogeny graph determines the randomness of isogeny walks, which affects the security of cryptographic schemes based on these hard problems.</div>', 
+                'comp-isogeny-title': 'Computing Isogenies Problem',
+                'isogeny-attack1-item': `
+                    <strong class="text-xl text-accent">Classical Attack: Meet-in-the-Middle (2016)</strong>
+                    <p>Christina Delfs and Steven D. Galbraith proposed a meet-in-the-middle attack to recover isogenies with a time complexity of  \\(\\tilde{O}(\\sqrt{p})\\).</p>
+                    <p class="mt-2">
+                        <a href="cfp.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                            Computing Isogenies Between Supersingular Elliptic Curves Over &nbsp; \\(\\mathbb{F}_p\\)
+                        </a>
+                    </p>
+                `,
+                'isogeny-attack2-item': `
+                    <strong class="text-xl text-accent">Quantum Attack: Grover + Kuperberg (2014)</strong>
+                    <p>Jean-Francois Biasse, David Jao and Anirudh Sankar proposed a method that uses Grover's algorithm to compute isogenies over \\(\\mathbb{F}_p\\) and then leverages Kuperberg's algorithm for solving the Hidden Shift Problem, finding isogenies over \\(\\mathbb{F}_p\\) in subexponential time with an overall time complexity of \\(\\tilde{O}(p^{1/4})\\).</p>
+                    <p class="mt-2">
+                        <a href="Quantum.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                            A Quantum Algorithm for Computing Isogenies Between Supersingular Elliptic Curves
+                        </a>
+                    </p>
+                `,
+                'isogeny-attack3-item': `
+                    <strong class="text-xl text-accent">Quantum Attack: Claw Finding (2009)</strong>
+                    <p>Seiichiro Tani proposed a claw-finding method applicable to isogenies, with a time complexity of \\(\\tilde{O}(A^{1/3})\\) for computing an isogeny of degree \\(A\\).</p>
+                    <p class="mt-2">
+                        <a href="claw.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                            Claw Finding Algorithms Using Quantum Walk
+                        </a>
+                    </p>
+                `,
+                'endomorphism-title': 'Computing Endomorphism Rings Problem',
+                'endomorphism-attack1-item': `
+                    <strong class="text-xl text-accent">Classical Attack (2020)</strong>
+                    <p>Kirsten Eisenträger, Sean Hallgren, Chris Leonardi, Travis Morrison and Jennifer Park proposed a method to generate endomorphism rings using two endomorphisms of a supersingular elliptic curve, with a time complexity of \\(O(\\sqrt{p}\\log^2(p))\\).</p>
+                    <p class="mt-2">
+                        <a href="Computingendomorphismrings.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                            Computing Endomorphism Rings of Supersingular Elliptic Curves and Connections to Path-finding in Isogeny Graphs
+                        </a>
+                    </p>
+                `,
+                'endomorphism-quantum-item': `
+                <strong class="text-xl text-accent">Quantum Attack</strong>
+                    <p>For quantum attacks, similar to computing isogenies, the complexity is \\(\\tilde{O}(p^{1/4})\\).</p>
+                `,
+                'equivalence-title': 'Equivalence of Hard Problems',
+                'equivalence-klpt-item': `
+                    <strong class="text-xl text-accent">KLPT Algorithm (2014)</strong>
+                    <p>David Kohel, Kristin Lauter, Christophe Petit and Jean-Pierre Tignol first proposed the KLPT algorithm, which finds an equivalent smooth norm ideal given an ideal. Thus, with a known endomorphism ring, applying the KLPT algorithm to connecting ideals yields smooth norm ideals, which can then be translated to isogenies, reducing the isogeny computation problem to the endomorphism ring computation problem.</p>
+                    <p class="mt-2">
+                        <a href="KLPT1.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                            On the Quaternion &nbsp \\(\\ell\\)-Isogeny Path Problem
+                        </a> 
+                    </p>
+                `,
+                'equivalence-reduction-item': `
+                    <strong class="text-xl text-accent">Reduction of Hard Problems (2018)</strong>
+                    <p>Kirsten Eisentrager, Sean Hallgren, Kristin Lauter, Travis Morrison and Christophe Petit established the equivalence between the isogeny computation problem and the endomorphism ring computation problem.</p>
+                    <p class="mt-2">
+                        <a href="Reductions.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                            Supersingular Isogeny Graphs and Endomorphism Rings: Reductions and Solutions
+                        </a> 
+                    </p>
+                `,
+                'equivalence-nontrivial-item': `
+                    <strong class="text-xl text-accent">Equivalence of Computing Endomorphism Rings and Non-trivial Endomorphisms (2024)</strong>
+                    <p>Aurel Page and Benjamin Wesolowski showed that computing the endomorphism ring of a supersingular elliptic curve is equivalent to computing a non-trivial endomorphism, reducing SQIsign to this hard problem.</p>
+                    <p class="mt-2">
+                        <a href="One.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                            The Supersingular Endomorphism Ring and One Endomorphism Problems are Equivalent
+                        </a> 
+                    </p>
+                `,
+                'equivalence-csidh-item': `
+                    <strong class="text-xl text-accent">Attacking CSIDH with Known Full Endomorphism Rings (2024)</strong>
+                    <p>Wouter Castryck, Lorenz Panny and Frederik Vercauteren used twists to show that CSIDH can be broken in polynomial time with knowledge of the endomorphism ring of a supersingular elliptic curve over an algebraic closure, reducing CSIDH to the endomorphism computation problem.</p>
+                    <p class="mt-2">
+                        <a href="Rational.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                            Rational Isogenies from Irrational Endomorphisms
+                        </a> 
+                    </p>
+                `,
+                'graph-title': 'Isogeny Graphs',
+                'graph-fp-item': `
+                    <strong class="text-xl text-accent"> \\(\\mathbb{F}_p\\)-Isogeny Graphs (2016)</strong>
+                    <p>Christina Delfs and Steven D. Galbraith described the structure of isogeny graphs of supersingular elliptic curves over finite fields \\(\\mathbb{F}_p\\).</p>
+                    <p class="mt-2">
+                        <a href="cfp.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                            Computing Isogenies Between Supersingular Elliptic Curves Over &nbsp \\(\\mathbb{F}_p\\)
+                        </a>
+                    </p>
+                `,
+                'graph-trace-item': `
+                    <strong class="text-xl text-accent">Graph Structure of Curves with Trace \\(0, \\pm p\\) (2018)</strong>
+                    <p>Gora Adj, Omran Ahmadi, Alfred Menezes described the isogeny graph structure of curves with trace \\(0, \\pm p\\) and determined the number of cycles in the \\(\\ell\\)-isogeny graph of curves with trace \\(\\pm 2p\\) for supersingular elliptic curves with \\(j\\)-invariant 1728.</p>
+                    <p class="mt-2">
+                        <a href="graph1.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                            On Isogeny Graphs of Supersingular Elliptic Curves Over Fnite Fields
+                        </a> 
+                    </p>
+                `,
+                'graph-structure-item': `
+                    <strong class="text-xl text-accent">Structure of Supersingular Elliptic Curves in Isogeny Graphs over &nbsp \\(\\mathbb{F}_p\\) (2019, 2020)</strong>
+                    <p>Songsong Li, Yi Ouyang, Zheng Xu determined the number of loops and neighborhoods of supersingular elliptic curves with \\(j\\)-invariants in \\(\\mathbb{F}_p\\) in \\(\\ell\\)-isogeny graphs.</p>
+                    <p class="mt-2">
+                        <a href="graph2.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                            Loops of Isogeny Graphs of Supersingular Elliptic Curves at &nbsp \\(j = 0\\)
+                        </a> 
+                    </p>
+                    <p class="mt-2">
+                        <a href="graph3.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                            Neighborhood of the Supersingular Elliptic Curve Isogeny Graph at &nbsp \\(j = 0\\) &nbsp and &nbsp \\(1728\\)
+                        </a>
+                    </p>
+                    <p class="mt-2">
+                        <a href="graph4.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                            Endomorphism Rings of Supersingular Elliptic Curves Over &nbsp \\(\\mathbb{F}_p\\)
+                        </a>
+                    </p>
+                `,
+                'footer-title': 'Introduction to Isogeny Hard Problems',
+                'footer-desc': 'This page introduces the core hard problems, attack methods, and research progress in supersingular elliptic curve isogeny cryptography, aiming to provide references for researchers in related fields.',
+                'copyright': 'Copyright &copy; 2025 Introduction to Hard Problems Development'
+            }
+        };
+
+        // 语言切换逻辑
+        document.addEventListener('DOMContentLoaded', function() {
+            const langButton = document.getElementById('langButton');
+            const langText = document.getElementById('langText');
+            let currentLang = 'en'; // 默认显示英文
+            
+            // 初始应用英文翻译
+            applyTranslation('en');
+            
+            langButton.addEventListener('click', function() {
+                // 切换语言
+                currentLang = currentLang === 'en' ? 'zh-CN' : 'en';
+                
+                // 更新按钮文本
+                langText.textContent = currentLang === 'en' ? '中文' : 'English';
+                
+                // 应用翻译
+                applyTranslation(currentLang);
+                
+                // 更新HTML语言属性
+                document.documentElement.lang = currentLang;
+            });
+            
+            function applyTranslation(lang) {
+                // 获取所有需要翻译的元素
+                const elements = document.querySelectorAll('[data-lang]');
+                
+                // 应用淡入淡出效果
+                elements.forEach(element => {
+                    element.style.opacity = '0';
+                    element.style.transform = 'translateY(10px)';
+                });
+                
+                // 延迟应用翻译，等待动画效果
+                setTimeout(() => {
+                    elements.forEach(element => {
+                        const key = element.getAttribute('data-lang');
+                        if (translations[lang] && translations[lang][key]) {
+                            // 处理HTML内容
+                            element.innerHTML = translations[lang][key];
+                        }
+                        // 重新渲染MathJax公式
+                        MathJax.typesetPromise([element]).catch(err => console.error('MathJax error:', err));
+                    });
+                    
+                    // 恢复元素可见性
+                    elements.forEach(element => {
+                        element.style.opacity = '1';
+                        element.style.transform = 'translateY(0)';
+                    });
+                }, 300);
+            }
+        });
+    </script>
 </body>
 
 </html>
-    

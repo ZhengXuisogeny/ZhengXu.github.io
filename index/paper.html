@@ -8,225 +8,1286 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <title>同源密码发展介绍</title>
+    <title>Introduction to Isogeny-Based Cryptography</title>
+    
+    <!-- Tailwind 配置 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                        secondary: '#36CFC9',
+                        accent: '#722ED1',
+                        dark: '#1D2129',
+                        light: '#F2F3F5'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-balance {
+                text-wrap: balance;
+            }
+            .transition-lang {
+                transition: opacity 0.3s ease, transform 0.3s ease;
+            }
+            .card-hover {
+                transition: all 0.3s ease;
+            }
+            .card-hover:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            }
+        }
+    </style>
 </head>
 
-<body class="bg-gray-100 font-sans">
-    <header class="bg-blue-600 text-white text-center py-8">
-        <h1 class="text-4xl font-bold">同源密码发展介绍</h1>
+<body class="bg-light font-sans text-dark">
+    <!-- 语言切换按钮 -->
+    <button id="langButton" class="fixed top-6 right-6 bg-primary text-white px-4 py-2 rounded-lg shadow-lg hover:bg-primary/90 transition-all z-50 flex items-center">
+        <i class="fa fa-language mr-2"></i>
+        <span id="langText">中文</span>
+    </button>
+
+    <header class="bg-gradient-to-r from-primary to-accent text-white text-center py-12 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-20">
+            <div class="absolute top-0 left-0 w-full h-full bg-[url('https://picsum.photos/id/180/1200/400')] bg-cover bg-center"></div>
+        </div>
+        <div class="container mx-auto relative z-10">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 transition-lang" data-lang="title">Introduction to Isogeny-Based Cryptography</h1>
+           
+        </div>
     </header>
-    <main class="container mx-auto p-8">
-        <section class="mb-8">
-            <h2 class="text-3xl font-bold text-blue-600 mb-4">什么是同源密码</h2>
-            <p class="text-gray-700 leading-relaxed">
-                同源密码学（Isogeny-Based Cryptography）是一种基于椭圆曲线同源的密码技术，具有尺寸短的优势。 
-            </p>
+    
+    <main class="container mx-auto p-6 md:p-10">
+        <!-- 概述部分 -->
+        <section class="mb-12 bg-white rounded-xl shadow-lg p-8 card-hover">
+            <h2 class="text-3xl font-bold text-primary mb-6 transition-lang" data-lang="intro-title">What is Isogeny-Based Cryptography</h2>
+            <p class="text-gray-700 leading-relaxed text-balance transition-lang" data-lang="intro-content">
+        Isogeny-based cryptography is a type of cryptographic technique that relies on elliptic curve isogenies and offers the advantage of short sizes.
+            </p> 
         </section>
-        <section class="mb-8">
-            <h2 class="text-3xl font-bold text-blue-600 mb-4">SIDH</h2>
-            <ol class="list-decimal list-inside text-gray-700 leading-relaxed">
-                <li class="mb-2">
-                    <strong>起源（2011 年）</strong>：Luca.De.Feo and David. Jao 首次提出了基于超奇异椭圆曲线同源的密钥交换SIDH. SIDH的特点是泄露像点, 可能导致安全性问题. <p><a href="SIDH.pdf" class="text-blue-600 hover:underline">Towards quantum-resistant cryptosystems from
-                        supersingular elliptic curve isogenies</a>
+        
+        <!-- SIDH问题部分 -->
+        <section class="mb-12 bg-white rounded-xl shadow-lg p-8 card-hover">
+            <h2 class="text-3xl font-bold text-primary mb-6 transition-lang" data-lang="comp-isogeny-title">SIDH</h2>
+            <ol class="list-decimal list-inside text-gray-700 leading-relaxed space-y-6">
+                <li class="mb-2 transition-lang" data-lang="isogeny-attack1-item"> 
+                    <strong class="text-xl text-accent">Origin (2011)</strong>
+                    <p>Luca De Feo and David Jao first proposed SIDH (Supersingular Isogeny Diffie-Hellman), a key exchange protocol based on supersingular elliptic curve isogenies. SIDH leaks image points, which may lead to security vulnerabilities.</p>
+                    <p class="mt-2">
+                        <a href="SIDH.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                           Towards quantum-resistant cryptosystems from supersingular elliptic curve isogenies
+                        </a>
+                    </p>
+                </li>
+                
+                <li class="mb-2 transition-lang" data-lang="isogeny-attack2-item">
+                    <strong class="text-xl text-accent">Active Attacks on SIDH (2016)</strong>
+                    <p>Steven D. Galbraith, Christophe Petit, Barak Shani, and Yan Bo Ti first proposed active attacks against SIDH.</p>
+                    <p class="mt-2">
+                        <a href="GPST.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                            On the Security of Supersingular Isogeny Cryptosystems
+                        </a>
+                    </p>
+                </li> 
+                
+                <li class="mb-2 transition-lang" data-lang="isogeny-attack3-item">
+                    <strong class="text-xl text-accent">Passive Attacks on SIDH (2016, 2021)</strong>
+                    <p>：Christophe Petit proposed the Torsion Point Attack, which was later improved by Victoria de Quehen, Peter Kutas, Chris Leonardi, Chloe Martindale, Lorenz Panny, Christophe Petit, and Katherine E. Stange. However, these attacks require a significant parameter asymmetry between the communicating parties. (These attacks transform the isogeny computation problem into solving equations in quaternion algebras.)
+</p>
+                    <p class="mt-2">
+                        <a href="TorsionPointAttack.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                            Faster Algorithms for Isogeny Problems Using Torsion Point Images
+                        </a>
+                        <a href="ImprovedTorsionPointAttacks.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                           Improved Torsion-Point Attacks on SIDH Variants
+                        </a>
+                    </p>
+                </li>
+                 <li class="mb-2 transition-lang" data-lang="isogeny-attack4-item">
+                    <strong class="text-xl text-accent">Another Attack (2021)</strong>
+                    <p>: Peter Kutas, Simon-Philipp Merz, Christophe Petit, and Charlotte Weitkamper proposed a new attack leveraging the ability of quantum computers to solve the Hidden Shift Problem. However, this attack did not break SIDH completely.
+</p>
+                    <p class="mt-2">
+                        <a href="OneWay.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                            One-Way Functions and Malleability Oracles: Hidden Shift Attacks on Isogeny-Based Protocols
+                        </a>
+                    </p>
+                </li> 
+                <li class="mb-2 transition-lang" data-lang="isogeny-attack5-item">
+                    <strong class="text-xl text-accent">Breaking SIDH with Special Initial Curves (2023)</strong>
+                    <p>:  Wouter Castryck and Thomas Decru broke SIDH instances with special initial curves (j-invariant 1728) using Kani's theorem for higher-dimensional abelian varieties.
 
+</p>
+                    <p class="mt-2">
+                        <a href="BreakingII.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                           An Efficient Key Recovery Attack on SIDH
+                        </a>
+                    </p>
+                </li> 
+                <li class="mb-2 transition-lang" data-lang="isogeny-attack6-item">
+                    <strong class="text-xl text-accent">Analysis of General SIDH (2023)</strong>
+                    <p>:  Luciano Maino, Chloe Martindale, Lorenz Panny, Giacomo Pope, and Benjamin Wesolowski analyzed general SIDH instances and developed some attacks, though none are polynomial-time.
+
+</p>
+                    <p class="mt-2">
+                        <a href="BreakingI.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                            A Direct Key Recovery Attack on SIDH
+                        </a>
+                    </p>
+                </li> 
+                <li class="mb-2 transition-lang" data-lang="isogeny-attack7-item">
+                    <strong class="text-xl text-accent">Complete Break of SIDH (2023)</strong>
+                    <p>: Damien Robert achieved a complete break of SIDH using 8-dimensional abelian varieties.
+
+</p>
+                    <p class="mt-2">
+                        <a href="BreakingIII.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                          
+                        </a>
+                    </p>
+                </li> 
+                <li class="mb-2 transition-lang" data-lang="isogeny-attack8-item">
+
+                    At this point, SIDH, which was a fourth-round candidate in NIST's post-quantum cryptography standardization process, has been completely broken.
+
+                </li> 
+            </ol> 
+        </section>  
+        
+        <!-- MSIDH问题部分 -->
+        <section class="mb-12 bg-white rounded-xl shadow-lg p-8 card-hover">
+            <h2 class="text-3xl font-bold text-primary mb-6 transition-lang" data-lang="endomorphism-title">Modified Versions of SIDH</h2>
+            <ol class="list-decimal list-inside text-gray-700 leading-relaxed space-y-6">
+                <li class="mb-2 transition-lang" data-lang="endomorphism-attack1-item"> 
+                    <strong class="text-xl text-accent">M-SIDH (2023)</strong>
+                    <p>：Tako Boris Fouotsa, Tomoki Moriya, and Christophe Petit proposed M-SIDH, which hides image points to achieve security.
+  </p>
+                    <p class="mt-2">
+                        <a href="MSIDH.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                           M-SIDH and MD-SIDH: Countering SIDH Attacks by Masking Information
+                        </a>
+                    </p>
+                </li> 
+                <li class="mb-2 transition-lang" data-lang="endomorphism-attack2-item"> 
+                    <strong class="text-xl text-accent">FESTA Encryption (2023)</strong>
+                    <p>：Andrea Basso, Luciano Maino, and Giacomo Pope proposed FESTA, an encryption scheme that hides image points. Kohei Nakagawa and Hiroshi Onuki later proposed QFESTA, an optimized version.
+
+
+
+  </p>
+                    <p class="mt-2">
+                        <a href="FESTA.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                          FESTA: Fast Encryption from Supersingular Torsion Attacks
+                        </a>
+                    </p>
+                    <p class="mt-2">
+                        <a href="QFESTA.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                          QFESTA: Efficient Algorithms and Parameters for FESTA Using Quaternion Algebras
+                        </a>
+                    </p>
+                </li> 
+                <li class="mb-2 transition-lang" data-lang="endomorphism-attack3-item"> 
+                    <strong class="text-xl text-accent">bin-SIDH (2023)</strong>
+                    <p> Andrea Basso and Tako Boris Fouotsa proposed bin-SIDH and ter-SIDH, which achieve security by selecting different subgroups.
+
+  </p>
+                    <p class="mt-2">
+                        <a href="bin.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                          New SIDH Countermeasures for a More Efficient Key Exchange
+                        </a>
+                    </p>
+                </li> 
+                <li class="mb-2 transition-lang" data-lang="endomorphism-quantum-item">
+                    <strong class="text-xl text-accent"></strong>
+                    <p>These modified schemes require very large parameters to resist attacks on SIDH, making them impractical.</p>
                 </li>
-                <li class="mb-2">
-                    <strong>SIDH的主动攻击提出（2016年）</strong>：Steven D. Galbraith, Christophe Petit, Barak Shani, and Yan Bo Ti首次提出对SIDH的主动攻击. <p><a href="GPST.pdf" class="text-blue-600 hover:underline">On the Security of Supersingular Isogeny
-                        Cryptosystems</a>
+            </ol> 
+        </section>
+        
+        <!-- CSIDH问题的等价部分 -->
+        <section class="mb-12 bg-white rounded-xl shadow-lg p-8 card-hover">
+            <h2 class="text-3xl font-bold text-primary mb-6 transition-lang" data-lang="csidh-title">CSIDH</h2> 
+            <ol class="list-decimal list-inside text-gray-700 leading-relaxed space-y-6">
+                <li class="mb-2 transition-lang" data-lang="csidh1">
+                    <strong class="text-xl text-accent">Origin (2018)</strong>
+                    <p>Wouter Castryck, Tanja Lange, Chloe Martindale, Lorenz Panny, and Joost Renes first proposed CSIDH (Commutative SIDH), a key exchange protocol based on supersingular elliptic curve isogenies over \\(\\mathbb{F}_p\\). CSIDH uses elliptic curves over finite fields \\(\\mathbb{F}_p\\), similar to ordinary curves with complex multiplication, and involves the action of ideal class groups (\\(\\mathbb{Z}[\\pi_p]\\) or \\(\\mathbb{Z}[\\frac{1+ \\pi_p}{2}]\\)), which are vulnerable to quantum attacks.</p>
+                    <p class="mt-2">
+                        <a href="CSIDH.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                            CSIDH: An Efficient Post-Quantum Commutative Group Action
+                        </a> 
+                    </p>
+                </li>
+                
+                <li class="mb-2 transition-lang" data-lang="csidh2">
+                    <strong class="text-xl text-accent">Signature Schemes CSI-FiSh and SeaSign (2019)</strong>
+                    <p>Ward Beullens, Thorsten Kleinjung, and Frederik Vercauteren proposed CSI-FiSh, a signature scheme based on CSIDH. Luca De Feo and Steven D. Galbraith proposed SeaSign. The main difference is that CSI-FiSh uses a cyclic ideal class group.</p>
+                    <p class="mt-2">
+                        <a href="CSIFish.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                            CSI-FiSh: Efficient Isogeny Based Signatures Through Class Group Computations
+                        </a> 
+                    </p>
+                    <p class="mt-2">
+                        <a href="SeaSign.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                           SeaSign: Compact Isogeny Signatures from Class Group Actions
+                        </a> 
+                    </p>
+                </li>
+                
+                <li class="mb-2 transition-lang" data-lang="csidh3">
+                    <strong class="text-xl text-accent">SiGamal Encryption (2020)</strong>
+                    <p>Ward Beullens, Thorsten Kleinjung, and Frederik Vercauteren proposed CSI-FiSh, a signature scheme based on CSIDH. Luca De Feo and Steven D. Galbraith proposed SeaSign. The main difference is that CSI-FiSh uses a cyclic ideal class group.</p>
+                    <p class="mt-2">
+                        <a href="SiGamal.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                            SiGamal: A Supersingular Isogeny-Based PKE and Its Application to a PRF
+                        </a> 
+                    </p>
+                </li>
+                
+                <li class="mb-2 transition-lang" data-lang="csidh4">
+                    <strong class="text-xl text-accent">Attack on the DDH Problem in CSIDH (2020)</strong>
+                    <p>Wouter Castryck, Jana Sotakova, and Frederik Vercauteren attacked the DDH problem in CSIDH using quadratic characters (genus theory).</p>
+                    <p class="mt-2">
+                        <a href="BreakingDDH.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                            Breaking the Decisional Diﬃe-Hellman Problem for Class Group Actions Using Genus Theory 
+                        </a> 
+                    </p>
+                </li>
+
+                <li class="mb-2 transition-lang" data-lang="csidh5">
+                    <strong class="text-xl text-accent">Attacking CSIDH Using SIDH Techniques (2023)</strong>
+                    <p>Wouter Castryck, Marc Houben, Simon-Philipp Merz, Marzio Mula, Sam van Buuren, and Frederik Vercauteren used correspondences between groups generated by eigenvectors of the Frobenius endomorphism, computed torsion points by pairing, to attack CSIDH using SIDH techniques. However, due to limitations of the Tate pairing, this attack is not effective.</p>
+                    <p class="mt-2">
+                        <a href="Weak.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                           Weak Instances of Class Group Action Based Cryptography via Self-pairings
+                        </a> 
+                    </p>
+                </li>
+                
+                <li class="mb-2 transition-lang" data-lang="csidh6">
+                    <strong class="text-xl text-accent">OSIDH (2020)</strong>
+                    <p>Leonardo Colò and David Kohel proposed OSIDH, which differs from CSIDH in that it uses an order of an imaginary quadratic field instead of \\(\\mathbb{Z}[\\pi_p]\\) or \\(\\mathbb{Z}[\\frac{1+ \\pi_p}{2}]\\) for its endomorphism ring.</p>
+                    <p class="mt-2">
+                        <a href="OSIDH.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                          Orienting Supersingular Isogeny Graphs
+                        </a> 
+                    </p>
+                </li>
+
+                <li class="mb-2 transition-lang" data-lang="csidh7">
+                    <strong class="text-xl text-accent">Attack on the DDH Problem in OSIDH (2022)</strong>
+                    <p>Wouter Castryck, Marc Houben, Frederik Vercauteren, and Benjamin Wesolowski attacked the DDH problem in OSIDH.</p>
+                    <p class="mt-2">
+                        <a href="DDH.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                          On the Decisional Diffie–Hellman Problem for Class Group Actions on Oriented Elliptic Curves
+                        </a> 
+                    </p>
+                </li>
+                <li class="mb-2 transition-lang" data-lang="csidh8">
+                   
+                   The hardness problems in CSIDH and OSIDH reduce to the Hidden Shift Problem, which can be solved in subexponential time on quantum computers. Therefore, these schemes are not practical.
                     
                 </li>
-                <li class="mb-2">
-                    <strong>SIDH的被动攻击提出（2016,2021 年）</strong>：Christophe Petit 提出了Torsion Point Attack, 之后Victoria de Quehen, Peter Kutas, Chris Leonardi, Chloe Martindale, Lorenz Panny, Christophe Petit, and Katherine E. Stange 进一步改进. 但要求交互双方所需参数差距过大.(将计算同源问题转化为解四元数代数中的方程问题)
-                    <p><a href="TorsionPointAttack.pdf" class="text-blue-600 hover:underline">Faster Algorithms for Isogeny Problems
-                        Using Torsion Point Images
-                        </a>
-                    <p><a href="ImprovedTorsionPointAttacks.pdf" class="text-blue-600 hover:underline">Improved Torsion-Point Attacks on SIDH
-                        Variants
-                        </a>
-                </li>
-                <li class="mb-2">
-                    <strong>另外一种攻击（2021年）</strong>: Peter Kutas, Simon-Philipp Merz, Christophe Petit and Charlotte Weitkamper 通过量子计算机可以求解Hidden Shift Problem的特性提出了新的攻击. 但未攻破. 
-                    <p><a href="OneWay.pdf" class="text-blue-600 hover:underline">One-Way Functions and Malleability
-                        Oracles: Hidden Shift Attacks
-                        on Isogeny-Based Protocols                        
-                        </a>
+                 <li class="mb-2 transition-lang" data-lang="csidh9">
+                    <strong class="text-xl text-accent">Paper on Attacking CSIDH-like Problems</strong>
                     
+                    <p class="mt-2">
+                        <a href="subexponential.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                         Constructing Elliptic Curve Isogenies in Quantum Subexponential Time
+                        </a> 
+                    </p>
                 </li>
-                <li class="mb-2">
-                    <strong>初始曲线特殊下攻破SIDH（2023年）</strong>: Wouter Castryck and Thomas Decru 通过高维Abel簇上的Kani定理攻破了初始曲线特殊(j-不变量是1728)的SIDH. 
-                    <p><a href="BreakingII.pdf" class="text-blue-600 hover:underline">An Efficient Key Recovery Attack
-                        on SIDH                         
-                        </a>
-                    
-                </li>
-                <li class="mb-2">
-                    <strong>分析一般情形下的SIDH（2023年）</strong>: Luciano Maino, Chloe Martindale, Lorenz Panny, Giacomo Pope and Benjamin Wesolowski对一般情形下的SIDH进行分析, 得到了一些攻击但都不是多项式时间的. 
-                    <p><a href="BreakingI.pdf" class="text-blue-600 hover:underline">A Direct Key Recovery Attack on SIDH
-                        </a>
-                </li>
-                <li class="mb-2">
-                    <strong>完全攻破SIDH（2023年）</strong>: Damien Robert 通过八维Abel簇达到对SIDH的完全攻破. 
-                    <p><a href="BreakingIII.pdf" class="text-blue-600 hover:underline">Breaking SIDH in Polynomial Time
-                        </a>
-                </li>
-                <li class="mb-2">至此,入选NIST第四轮备选的SIDH彻底被攻破.</li>
             </ol>
-        </section> 
-        <section class="mb-8">
-            <h2 class="text-3xl font-bold text-blue-600 mb-4">SIDH的修改方案</h2>
-            <ol class="list-decimal list-inside text-gray-700 leading-relaxed">
-                <li class="mb-2">
-                    <strong>M-SIDH的提出(2023年)</strong>：Tako Boris Fouotsa, Tomoki Moriya and Christophe Petit 提出了M-SIDH, 通过隐藏像点达到安全. 
-                    <p><a href="MSIDH.pdf" class="text-blue-600 hover:underline">M-SIDH and MD-SIDH: Countering
-                        SIDH Attacks by Masking Information
-                    </a>
-                </li>
-                <li class="mb-2">
-                    <strong>加密FESTA的提出(2023年)</strong>：Andrea Basso, Luciano Maino and Giacomo Pope 通过隐藏像点提出了加密FESTA, Kohei Nakagawa and Hiroshi Onuki进一步提出了QFESTA.
-                    <p><a href="FESTA.pdf" class="text-blue-600 hover:underline">FESTA: Fast Encryption
-                        from Supersingular Torsion Attacks</a>
-                    <p><a href="QFESTA.pdf" class="text-blue-600 hover:underline">QFESTA: Eﬃcient Algorithms
-                        and Parameters for FESTA Using
-                        Quaternion Algebras</a>     
-                </li>
-                <li class="mb-2">
-                    <strong>bin-SIDH的提出(2023年)</strong>：Andrea Basso and Tako Boris Fouotsa提出新的bin-SIDH和ter-SIDH, 通过选择不同的子群达到安全性. 
-                    <p><a href="bin.pdf" class="text-blue-600 hover:underline">New SIDH Countermeasures for a More
-                        Efficient Key Exchange</a>
-                </li>
-            </ul> 
-            <li class="mb-2">这些方案为了抵抗SIDH的攻击, 保证安全性, 需要参数很大,并不实用.</li>
         </section>
-    </ol>
-    <section class="mb-8">
-        <h2 class="text-3xl font-bold text-blue-600 mb-4">CSIDH</h2>
-        <ol class="list-decimal list-inside text-gray-700 leading-relaxed">
-            <li class="mb-2">
-                <strong>起源（2018 年）</strong>：Wouter Castryck, Tanja Lange, Chloe Martindale, Lorenz Panny,
-                and Joost Renes 首次提出了基于\(\mathbb{F}_p\)上的超奇异椭圆曲线同源的密钥交换CSIDH. CSIDH的特点是有限域\(\mathbb{F}_p\)上的椭圆曲线,和带复乘的正常曲线类似,存在理想类群(\(\mathbb{Z}[\pi_p]\)或\(\mathbb{Z}[\frac{1+ \pi_p}{2}]\))的作用, 会受到量子攻击.<p><a href="CSIDH.pdf" class="text-blue-600 hover:underline">CSIDH: An Eﬃcient Post-Quantum
-                    Commutative Group Action</a> 
-            </li> 
-            <li class="mb-2">
-                <strong>签名CSI-Fish和Seasign的提出(2019年)</strong>：Ward Beullens, Thorsten Kleinjung and Frederik Vercauteren
-                提出基于CSIDH的签名CSI-Fish, Luca De Feo and Steven D. Galbraith提出了基于CSIDH的签名Seasign.  两者的区别是前者选取的理想类群是循环群. 
-                <p><a href="CSIFiSh.pdf" class="text-blue-600 hover:underline">CSI-FiSh: Efficient Isogeny Based
-                    Signatures Through Class Group
-                    Computations
-                    </a>
-                    <p><a href="SeaSign.pdf" class="text-blue-600 hover:underline">SeaSign: Compact Isogeny Signatures
-                        from Class Group Actions</a>   
-            </li>
-            <li class="mb-2">
-                <strong>加密SiGamal的提出（2020 年）</strong>：Tomoki Moriya, Hiroshi Onuki, and Tsuyoshi Takagi 提出了基于CSIDH的加密SiGamal. <p><a href="SiGamal.pdf" class="text-blue-600 hover:underline">SiGamal: A Supersingular Isogeny-Based
-                    PKE and Its Application to a PRF</a> 
-            </li> 
-            <li class="mb-2">
-                <strong>CSIDH的DDH问题被攻击（2020 年）</strong>：Wouter Castryck, Jana Sotakova, and Frederik Vercauteren
-                通过二次特征(genus 理论)的方法攻击了DDH问题. <p><a href="BreakingDDH.pdf" class="text-blue-600 hover:underline">
-                    Breaking the Decisional Diﬃe-Hellman Problem for Class Group Actions Using Genus Theory
-                </a> 
-            </li> 
-            <li class="mb-2">
-                <strong>利用SIDH攻击的方法攻击CSIDH（2023 年）</strong>：Wouter Castryck, Marc Houben, Simon-Philipp Merz,
-                Marzio Mula, Sam van Buuren and Frederik Vercauteren 利用计算Frobenius 映射的特征向量生成的群之间的对应, 再通过配对的方法得到像点, 再利用SIDH攻击的方法攻击CSIDH. 但因为Tate 配对的局限性, 并未产生有效攻击. <p><a href="Weak.pdf" class="text-blue-600 hover:underline">
-                Weak Instances of Class Group Action Based Cryptography via Self-pairings
-                </a> 
-            </li> 
-            <li class="mb-2">
-                <strong>OSIDH的提出（2020 年）</strong>：Leonardo Colò and David Kohel
-                提出了OSIDH, 与CSIDH不同的是其选取的自同态部分不再是\(\mathbb{Z}[\pi_p]\)或\(\mathbb{Z}[\frac{1+ \pi_p}{2}]\)而是某个虚二次域的order. <p><a href="OSIDH.pdf" class="text-blue-600 hover:underline">
-                    Orienting Supersingular Isogeny Graphs
-                </a> 
-            </li> 
-            <li class="mb-2">
-                <strong>OSIDH的DDH问题被攻击（2022 年）</strong>：Wouter Castryck, Marc Houben, Frederik Vercauteren and Benjamin Wesolowski
-                攻击了OSIDH的DDH问题. <p><a href="DDH.pdf" class="text-blue-600 hover:underline">
-                    On the Decisional Diffie–Hellman Problem for Class Group Actions on Oriented Elliptic Curves 
-                </a> 
-            </li> 
-            <li class="mb-2">CSIDH及OSIDH的方案的困难问题可以约化到Hidden Shift Problem, 在量子计算机下可被亚指数时间攻破. 故这些方案并不实用.</li>
-            <li class="mb-2">
-                <strong>攻击CSIDH类问题的论文</strong><p><a href="subexponential.pdf" class="text-blue-600 hover:underline">
-                    Constructing Elliptic Curve Isogenies in Quantum Subexponential Time
-                </a> 
-            </li> 
+        
+        <!-- SQI部分 -->
+        <section class="mb-12 bg-white rounded-xl shadow-lg p-8 card-hover">
+            <h2 class="text-3xl font-bold text-primary mb-6 transition-lang" data-lang="sqi-title">SQIsign</h2>
+            <ol class="list-decimal list-inside text-gray-700 leading-relaxed space-y-6">
+                <li class="mb-2 transition-lang" data-lang="sqi1"> 
+                    <strong class="text-xl text-accent"> GPSsign (2017) </strong>
+                    <p>Steven D. Galbraith, Christophe Petit, and Javier Silva proposed GPSsign, a signature scheme based on quaternion algebras. However, it requires multiple rounds, resulting in relatively long signatures.</p>
+                    <p class="mt-2">
+                        <a href="GPS.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                            Identiﬁcation Protocols and Signature Schemes Based on Supersingular Isogeny Problems
+                        </a>
+                    </p>
+                </li>
+                
+                <li class="mb-2 transition-lang" data-lang="sqi2">
+                    <strong class="text-xl text-accent">SQIsign (2020)</strong>
+                    <p>Luca De Feo, David Kohel, Antonin Leroux, Christophe Petit, and Benjamin Wesolowski proposed SQIsign, a signature scheme based on quaternion algebras. It has the shortest public key and signature sizes among NIST's post-quantum signature candidates. It primarily uses the Sigma protocol and the KLPT algorithm for finding equivalent ideals.</p>
+                    <p class="mt-2">
+                        <a href="SQISign.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                           SQISign: Compact Post-quantum Signatures from Quaternions and Isogenies
+                        </a> 
+                    </p>
+                </li>    
+                
+                <li class="mb-2 transition-lang" data-lang="sqi3">
+                    <strong class="text-xl text-accent">Summary</strong>
+                    <p>As a second-round candidate in NIST's post-quantum signature competition, SQIsign has the smallest public key and signature sizes. It does not leak image points and is not vulnerable to Kuperberg's quantum attack due to its quaternion algebra operations. However, its low efficiency is a drawback.</p>
+                </li> 
+            </ol>
         </section>
-    </ol>
-   
-    <section class="mb-8">
-        <h2 class="text-3xl font-bold text-blue-600 mb-4">SQIsign</h2>
-        <ol class="list-decimal list-inside text-gray-700 leading-relaxed">
-            <li class="mb-2">
-                <strong>GPSsign的提出（2017年）</strong>：Steven D. Galbraith, Christophe Petit and Javier Silva 提出了基于四元数代数的GPS签名, 但需要进行多轮, 故签名长度较长. <p><a href="GPS.pdf" class="text-blue-600 hover:underline">
-                    Identiﬁcation Protocols and Signature Schemes Based on Supersingular Isogeny Problems 
-                </a> </li> 
-        <li class="mb-2">
-                    <strong>SQIsign的提出（2020年）</strong>：Luca De Feo, David Kohel, Antonin Leroux, Christophe Petit
-                    and Benjamin Wesolowski 提出了基于四元数代数的SQI签名, 公钥和签名尺寸是NIST征集的签名中最短的. 主要利用了Sigma协议和KLPT寻找等价理想的方法. <p><a href="SQISign.pdf" class="text-blue-600 hover:underline">
-                        SQISign: Compact Post-quantum
-                        Signatures from Quaternions
-                        and Isogenies   
-                    </a>  </li>     
-                    <li class="mb-2">作为入选NIST征集的后量子签名第二轮的SQIsign, 其拥有最小的公钥和签名长度, 且不会泄露像点, 因为其是四元数代数的运算也不会Kuperberg的量子攻击. 但SQIsign的效率较低, 成为其一个缺点.</li>          
+          
+         <!-- SQIHD部分 -->
+        <section class="mb-12 bg-white rounded-xl shadow-lg p-8 card-hover">
+            <h2 class="text-3xl font-bold text-primary mb-6 transition-lang" data-lang="sqihd-title">Optimizations of SQIsign</h2>
+            <ol class="list-decimal list-inside text-gray-700 leading-relaxed space-y-6">
+                <li class="mb-2 transition-lang" data-lang="sqihd1"> 
+                    <strong class="text-xl text-accent"> Fast SQIsign (2023) </strong>
+                    <p>Luca De Feo, Antonin Leroux, Patrick Longa, and Benjamin Wesolowski modified the method for computing elements in quaternion algebras to ensure uniform output in the first step of SQIsign. They also optimized the ideal-to-isogeny translation process.</p>
+                    <p class="mt-2">
+                        <a href="FastSQISign.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                            New Algorithms for the Deuring Correspondence: Towards Practical and Secure SQISign Signatures
+                        </a>
+                    </p>
+                </li>
+                
+                <li class="mb-2 transition-lang" data-lang="sqihd2">
+                    <strong class="text-xl text-accent">Accelerating SQIsign (2024)</strong>
+                    <p>Kaizhan Lin, Weize Wang, Zheng Xu, and Changan Zhao further optimized the ideal-to-isogeny translation process in SQIsign using norm-trace relations and pairings.</p>
+                    <p class="mt-2">
+                        <a href="Xu.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                           A Faster Software Implementation of SQIsign
+                        </a> 
+                    </p>
+                </li>    
+                
+                <li class="mb-2 transition-lang" data-lang="sqihd3">
+                    <strong class="text-xl text-accent">SQIsign over Extension Fields (2024)</strong>
+                    <p>Maria Corte-Real Santos, Jonathan Komada Eriksen, Michael Meyer, and Krijn Reijnders extended the base field of rational points in SQIsign to increase the number of available points, thereby accelerating the protocol.</p>
+                    <p class="mt-2">
+                        <a href="aps.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                          ApresSQI: Extra Fast Verification for SQIsign Using Extension-Field Signing
+                        </a> 
+                    </p>
+                </li>  
+            </ol>
         </section>
-    </ol>
-
-    <section class="mb-8">
-        <h2 class="text-3xl font-bold text-blue-600 mb-4">SQIsign的优化</h2>
-        <ol class="list-decimal list-inside text-gray-700 leading-relaxed">
-            <li class="mb-2">
-        <strong>快速SQIsign（2023年）</strong>：Luca De Feo, Antonin Leroux, Patrick Longa and Benjamin Wesolowski 通过修改计算四元数代数中元素的方法使得SQIsign中输出第一步是均匀的. 同时优化了理想转化同源的过程. <p><a href="FastSQISign.pdf" class="text-blue-600 hover:underline">
-            New Algorithms for the Deuring Correspondence: Towards Practical and Secure SQISign Signatures   
-        </a> </li> 
-        <li class="mb-2">
-            <strong> 加速SQIsign（2024年）</strong>：Kaizhan Lin, Weize Wang, Zheng Xu and Changan Zhao 通过范数和迹的关系, 配对等方法进一步优化SQIsign的理想转化同源的过程. <p><a href="Xu.pdf" class="text-blue-600 hover:underline">
-                A Faster Software Implementation of SQIsign
-            </a> </li> 
-        <li class="mb-2">
-            <strong> 在扩张域上的SQIsign（2024年）</strong>：Maria Corte-Real Santos, Jonathan Komada Eriksen, Michael Meyer
-            and Krijn Reijnders 将SQIsign中有理点的基域扩大, 使得可用的有理点增多, 从而达到加速的目的. <p><a href="aps.pdf" class="text-blue-600 hover:underline">
-                ApresSQI: Extra Fast Verification
-                for SQIsign Using Extension-Field Signing     
-                </a> </li> 
-    </section>
-</ol>
-<section class="mb-8">
-    <h2 class="text-3xl font-bold text-blue-600 mb-4">SQIsign的变种</h2> 
-    <ol class="list-decimal list-inside text-gray-700 leading-relaxed">
-        <li class="mb-2">
-    <strong>SQIsignHD（2024年）</strong>：Pierrick Dartois, Antonin Leroux, Damien Robert and Benjamin Wesolowski 通过SIDH攻击的办法, 将输出同源次数光滑的条件取消, 只需要计算输出同源的像点, 再用SIDH攻击(四维)的办法在验证中恢复即可. 同时由于输出同源不要求光滑的, KLPT算法也可修改成随机选取等价理想. <p><a href="HD.pdf" class="text-blue-600 hover:underline">
-        SQIsignHD: New Dimensions in Cryptography  
-    </a> </li> 
-    <li class="mb-2">
-        <strong> SQIsign2D-West（2024年）</strong>：Andrea Basso, Pierrick Dartois, Luca De Feo,
-        Antonin Leroux, Luciano Maino, Giacomo Pope,
-        Damien Robert and Benjamin Wesolowski 通过二维同源的方法进行理想转同源, 构造辅助同源, 完成验证. 一维非光滑同源都是通过二维同源的计算得到. <p><a href="West.pdf" class="text-blue-600 hover:underline">
-            SQIsign2D–West: The Fast, the Small, and the Safer
-        </a> </li> 
-    <li class="mb-2">
-        <strong> SQIsign2D-East（2024年）</strong>：Kohei Nakagawa, Hiroshi Onuki, Wouter Castryck, Mingjie Chen,
-        Riccardo Invernizzi, Gioella Lorenzon and Frederik Vercauteren 与West不同的是, East并不是理想转同源, 而是利用Eichler order的性质直接在公钥曲线上寻辅助同源完成验证, 方法依然是利用二维同源得到. <p><a href="East.pdf" class="text-blue-600 hover:underline"> 
-            SQIsign2D-East: A New Signature Scheme Using 2-Dimensional Isogenies              
-            </a> </li> 
-     <li class="mb-2">
-        <strong> SQIsign2D\(^2\)（2025年）</strong>：Zheng Xu, Kaizhan Lin, Chang-An Zhao, and Yi Ouyang
-        相比于East, SQIsign2D\(^2\)是利用一维同源的方法取减少二维同源的计算. <p><a href="2d.pdf" class="text-blue-600 hover:underline"> 
-            SQIsign2D\(^2\): New SQIsign2D Variant by Leveraging Power Smooth Isogenies in Dimension One            
-            </a> </li> 
-      <li class="mb-2">
-        <strong> SQIsign2DPush（2025年）</strong>： Kohei Nakagawa and Hiroshi Onuki
-        相比于East, SQIsign2DPush是在初始曲线上寻找次数是d的同源,再拉下来形成辅助同源. <p><a href="push.pdf" class="text-blue-600 hover:underline"> 
-            SQIsign2DPush: Faster Signature Scheme Using 2-Dimensional Isogenies          
-            </a> </li>       
-            <li class="mb-2">通过这些优化和变种, SQIsign系列的效率得到了很大的提升, 使得其在后量子签名中具有竞争力.</li>
-</section>
-</o1>
+         <!-- SQIHDD部分 -->
+        <section class="mb-12 bg-white rounded-xl shadow-lg p-8 card-hover">
+            <h2 class="text-3xl font-bold text-primary mb-6 transition-lang" data-lang="sqihdd-title">Variants of SQIsign</h2>
+            <ol class="list-decimal list-inside text-gray-700 leading-relaxed space-y-6">
+                <li class="mb-2 transition-lang" data-lang="sqihdd1"> 
+                    <strong class="text-xl text-accent"> SQIsignHD (2024) </strong>
+                    <p>Pierrick Dartois, Antonin Leroux, Damien Robert, and Benjamin Wesolowski removed the requirement for smooth isogeny degrees using SIDH attack techniques. Instead, they compute image points of the output isogeny and recover them during verification using a 4-dimensional SIDH attack. The KLPT algorithm is modified to randomly select equivalent ideals since smoothness is no longer required.</p>
+                    <p class="mt-2">
+                        <a href="HD.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                            SQIsignHD: New Dimensions in Cryptography
+                        </a>
+                    </p>
+                </li>
+                
+                <li class="mb-2 transition-lang" data-lang="sqihdd2">
+                    <strong class="text-xl text-accent">SQIsign2D-West (2024)</strong>
+                    <p>Andrea Basso, Pierrick Dartois, Luca De Feo, Antonin Leroux, Luciano Maino, Giacomo Pope, Damien Robert, and Benjamin Wesolowski use 2-dimensional isogenies to translate ideals to isogenies, construct auxiliary isogenies, and complete verification. Non-smooth 1-dimensional isogenies are computed using 2-dimensional techniques.</p>
+                    <p class="mt-2">
+                        <a href="West.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                           SQIsign2D–West: The Fast, the Small, and the Safer
+                        </a> 
+                    </p>
+                </li>    
+                
+                <li class="mb-2 transition-lang" data-lang="sqihdd3">
+                    <strong class="text-xl text-accent">SQIsign2D-East (2024)</strong>
+                    <p>Kohei Nakagawa, Hiroshi Onuki, Wouter Castryck, Mingjie Chen, Riccardo Invernizzi, Gioella Lorenzon, and Frederik Vercauteren differ from West in that East does not translate ideals to isogenies. Instead, it uses properties of Eichler orders to directly find auxiliary isogenies on the public-key curve, still using 2-dimensional isogeny techniques.</p>
+                    <p class="mt-2">
+                        <a href="East.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                          SQIsign2D-East: A New Signature Scheme Using 2-Dimensional Isogenies
+                        </a> 
+                    </p>
+                </li>  
+                <li class="mb-2 transition-lang" data-lang="sqihdd4">
+                    <strong class="text-xl text-accent">SQIsign2D\\(^2\\)(2025)</strong>
+                    <p>Zheng Xu, Kaizhan Lin, Chang-An Zhao, and Yi Ouyang reduce 2-dimensional isogeny computations by leveraging 1-dimensional isogenies compared to East.</p>
+                    <p class="mt-2">
+                        <a href="2d.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                          SQIsign2D\\(^2\\): New SQIsign2D Variant by Leveraging Power Smooth Isogenies in Dimension One
+                        </a> 
+                    </p>
+                </li>  
+                 <li class="mb-2 transition-lang" data-lang="sqihdd5">
+                    <strong class="text-xl text-accent">SQIsign2DPush (2025)</strong>
+                    <p>Kohei Nakagawa and Hiroshi Onuki differ from East in that SQIsign2DPush finds an isogeny of degree d on the initial curve and pulls it back to form the auxiliary isogeny.</p>
+                    <p class="mt-2">
+                        <a href="push.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                         SQIsign2DPush: Faster Signature Scheme Using 2-Dimensional Isogenies
+                        </a> 
+                    </p>
+                </li> 
+                 <li class="mb-2 transition-lang" data-lang="sqihdd6">
+                    <strong class="text-xl text-accent">Summary</strong>
+                    <p>Through these optimizations and variants, the efficiency of the SQIsign family has been significantly improved, making it competitive in post-quantum signatures.</p>
+                </li> 
+            </ol>
+        </section>
     </main>
     
-    <footer class="bg-gray-200 text-center py-4">
-        <p class="text-gray-600">版权所有 &copy; 2025 同源密码发展介绍</p>
+    <footer class="bg-dark text-white py-12">
+        <div class="container mx-auto px-6 md:px-10">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <h3 class="text-xl font-bold mb-4 transition-lang" data-lang="footer-title">Introduction to Isogeny Hard Problems</h3>
+                    <p class="text-gray-400 max-w-md transition-lang" data-lang="footer-desc">
+                        This page introduces the core hard problems, attack methods, and research progress in supersingular elliptic curve isogeny cryptography, aiming to provide references for researchers in related fields.
+                    </p>
+                </div>
+                
+               
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500 transition-lang" data-lang="copyright">
+                Copyright &copy; 2025 Introduction to Hard Problems Development
+            </div>
+        </div>
     </footer>
+
+    <script>
+        // 翻译数据（中英文对照）
+        const translations = {
+            'zh-CN': {
+                'title': '同源密码发展介绍',
+                
+                'intro-title': '什么是同源密码',
+                'intro-content': '同源密码学（Isogeny-Based Cryptography）是一种基于椭圆曲线同源的密码技术，具有尺寸短的优势。',
+                'comp-isogeny-title': 'SIDH',
+                'isogeny-attack1-item': `
+                    <strong class="text-xl text-accent">起源（2011 年）</strong>
+                    <p> Luca.De.Feo and David. Jao 首次提出了基于超奇异椭圆曲线同源的密钥交换SIDH. SIDH的特点是泄露像点, 可能导致安全性问题.
+</p>
+                    <p class="mt-2">
+                        <a href="SIDH.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                            Towards quantum-resistant cryptosystems from supersingular elliptic curve isogenies
+                        </a>
+                    </p>
+                `,
+                'isogeny-attack2-item': `
+                    <strong class="text-xl text-accent">SIDH的主动攻击提出（2016年）</strong>
+                    <p>Steven D. Galbraith, Christophe Petit, Barak Shani, and Yan Bo Ti首次提出对SIDH的主动攻击.
+</p>
+                    <p class="mt-2">
+                        <a href="GPST.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                           On the Security of Supersingular Isogeny Cryptosystems
+                        </a>
+                    </p>
+                `,
+                'isogeny-attack3-item': `
+                    <strong class="text-xl text-accent">SIDH的被动攻击提出（2016,2021 年）</strong>
+                    <p>Christophe Petit 提出了Torsion Point Attack, 之后Victoria de Quehen, Peter Kutas, Chris Leonardi, Chloe Martindale, Lorenz Panny, Christophe Petit, and Katherine E. Stange 进一步改进. 但要求交互双方所需参数差距过大.(将计算同源问题转化为解四元数代数中的方程问题)
+</p>
+                    <p class="mt-2">
+                        <a href="TorsionPointAttack.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                           Faster Algorithms for Isogeny Problems Using Torsion Point Images
+                           </a>
+                           </p>
+                <p class="mt-2">
+                        <a href="TorsionPointAttack.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                           Faster Algorithms for Isogeny Problems Using Torsion Point Images
+Improved Torsion-Point Attacks on SIDH Variants
+                        </a>
+                    </p>
+                `,
+                 'isogeny-attack4-item': `
+                    <strong class="text-xl text-accent">另外一种攻击（2021年） </strong>
+                    <p>Peter Kutas, Simon-Philipp Merz, Christophe Petit and Charlotte Weitkamper 通过量子计算机可以求解Hidden Shift Problem的特性提出了新的攻击. 但未攻破.
+
+</p>
+                    <p class="mt-2">
+                        <a href="OneWay.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                          One-Way Functions and Malleability Oracles: Hidden Shift Attacks on Isogeny-Based Protocols
+                        </a>
+                    </p>
+                `,
+                'isogeny-attack5-item': `
+                    <strong class="text-xl text-accent">初始曲线特殊下攻破SIDH（2023年）</strong>
+                    <p>Wouter Castryck and Thomas Decru 通过高维Abel簇上的Kani定理攻破了初始曲线特殊(j-不变量是1728)的SIDH.
+
+</p>
+                    <p class="mt-2">
+                        <a href="BreakingII.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                          An Efficient Key Recovery Attack on SIDH 
+                        </a>
+                    </p>
+                `,
+                'isogeny-attack6-item': `
+                    <strong class="text-xl text-accent">分析一般情形下的SIDH（2023年）</strong>
+                    <p> Luciano Maino, Chloe Martindale, Lorenz Panny, Giacomo Pope and Benjamin Wesolowski对一般情形下的SIDH进行分析, 得到了一些攻击但都不是多项式时间的.
+
+
+</p>
+                    <p class="mt-2">
+                        <a href="BreakingI.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                         A Direct Key Recovery Attack on SIDH
+                        </a>
+                    </p>
+                `,
+                'isogeny-attack7-item': `
+                    <strong class="text-xl text-accent">完全攻破SIDH（2023年）</strong>
+                    <p> Damien Robert 通过八维Abel簇达到对SIDH的完全攻破.
+
+</p>
+                    <p class="mt-2">
+                        <a href="BreakingIII.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                         Breaking SIDH in Polynomial Time
+                        </a>
+                    </p>
+                `,
+                'isogeny-attack8-item': `
+                <strong class="text-xl text-accent">总结</strong>
+                <p> 至此,入选NIST第四轮备选的SIDH彻底被攻破.</p> 
+                `,
+                'endomorphism-title': 'SIDH的修改方案',
+                'endomorphism-attack1-item': `
+                    <strong class="text-xl text-accent">M-SIDH的提出(2023年)</strong>
+                    <p>Tako Boris Fouotsa, Tomoki Moriya and Christophe Petit 提出了M-SIDH, 通过隐藏像点达到安全.
+</p>
+                    <p class="mt-2">
+                        <a href="MSIDH.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                            M-SIDH and MD-SIDH: Countering SIDH Attacks by Masking Information
+                        </a>
+                    </p>
+                `,
+                'endomorphism-attack2-item': `
+                    <strong class="text-xl text-accent">加密FESTA的提出(2023年)</strong>
+                    <p>Andrea Basso, Luciano Maino and Giacomo Pope 通过隐藏像点提出了加密FESTA, Kohei Nakagawa and Hiroshi Onuki进一步提出了QFESTA.
+</p>
+                    <p class="mt-2">
+                        <a href="FESTA.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                            FESTA: Fast Encryption from Supersingular Torsion Attacks
+                            </a>
+                            </p>
+                    <p class="mt-2">
+                        <a href="QFESTA.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                    QFESTA: Efficient Algorithms and Parameters for FESTA Using Quaternion Algebras
+                        </a>
+                    </p>
+                `,
+                'endomorphism-attack3-item': `
+                    <strong class="text-xl text-accent">bin-SIDH的提出(2023年)</strong>
+                    <p> Andrea Basso and Tako Boris Fouotsa提出新的bin-SIDH和ter-SIDH, 通过选择不同的子群达到安全性.
+
+</p> 
+                    <p class="mt-2">
+                        <a href="bin.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                            New SIDH Countermeasures for a More Efficient Key Exchange
+                        </a>
+                    </p>
+                `,
+                'endomorphism-quantum-item': `
+                <strong class="text-xl text-accent">总结</strong>
+                <p>这些方案为了抵抗SIDH的攻击, 保证安全性, 需要参数很大,并不实用.</p>
+                `,
+                'csidh-title': 'CSIDH',
+
+  'csidh1': `
+    <strong class="text-xl text-accent">起源（2018 年）</strong>
+    <p>Wouter Castryck、Tanja Lange、Chloe Martindale、Lorenz Panny 和 Joost Renes 首次提出了基于 \\(\\mathbb{F}_p\\) 上的超奇异椭圆曲线同源的密钥交换协议 CSIDH。其特点是定义在 \\(\\mathbb{F}_p\\) 上的椭圆曲线，类似于具有复乘的普通曲线，涉及理想类群（\\(\\mathbb{Z}[\\pi_p]\\) 或 \\(\\mathbb{Z}[\\frac{1+ \\pi_p}{2}]\\)）的作用，易受到量子攻击。</p>
+    <p class="mt-2">
+      <a href="CSIDH.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        CSIDH: An Efficient Post-Quantum Commutative Group Action
+      </a>
+    </p>
+  `,
+
+  'csidh2': `
+    <strong class="text-xl text-accent">签名 CSI-FiSh 和 SeaSign 的提出（2019 年）</strong>
+    <p>Ward Beullens、Thorsten Kleinjung 和 Frederik Vercauteren 提出了基于 CSIDH 的签名方案 CSI-FiSh，Luca De Feo 和 Steven D. Galbraith 提出了 SeaSign。二者的主要区别在于 CSI-FiSh 采用循环理想类群。</p>
+    <p class="mt-2">
+      <a href="CSIFiSh.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        CSI-FiSh: Efficient Isogeny Based Signatures Through Class Group Computations
+      </a>
+    </p>
+    <p class="mt-2">
+      <a href="SeaSign.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        SeaSign: Compact Isogeny Signatures from Class Group Actions
+      </a>
+    </p>
+  `,
+
+  'csidh3': `
+    <strong class="text-xl text-accent">加密 SiGamal 的提出（2020 年）</strong>
+    <p>Tomoki Moriya、Hiroshi Onuki 和 Tsuyoshi Takagi 提出了基于 CSIDH 的加密方案 SiGamal。</p>
+    <p class="mt-2">
+      <a href="SiGamal.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        SiGamal: A Supersingular Isogeny-Based PKE and Its Application to a PRF
+      </a>
+    </p>
+  `,
+
+  'csidh4': `
+    <strong class="text-xl text-accent">CSIDH 的 DDH 问题被攻击（2020 年）</strong>
+    <p>Wouter Castryck、Jana Sotakova 和 Frederik Vercauteren 利用二次特征（genus 理论）攻击了 CSIDH 中的 Decisional Diffie–Hellman（DDH）问题。</p>
+    <p class="mt-2">
+      <a href="BreakingDDH.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        Breaking the Decisional Diffie–Hellman Problem for Class Group Actions Using Genus Theory
+      </a>
+    </p>
+  `,
+
+  'csidh5': `
+    <strong class="text-xl text-accent">利用 SIDH 方法攻击 CSIDH（2023 年）</strong>
+    <p>Wouter Castryck、Marc Houben、Simon-Philipp Merz、Marzio Mula、Sam van Buuren 和 Frederik Vercauteren 通过 Frobenius 自同态的特征向量所生成群之间的对应关系，再借助配对方法计算出像点，使用类似 SIDH 的方法攻击 CSIDH，但由于 Tate 配对的局限性，此方法并未取得实质突破。</p>
+    <p class="mt-2">
+      <a href="Weak.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        Weak Instances of Class Group Action Based Cryptography via Self-pairings
+      </a>
+    </p>
+  `,
+
+  'csidh6': `
+    <strong class="text-xl text-accent">OSIDH 的提出（2020 年）</strong>
+    <p>Leonardo Colò 和 David Kohel 提出了 OSIDH。与 CSIDH 不同，OSIDH 所采用的自同态环不再是 \\(\\mathbb{Z}[\\pi_p]\\) 或 \\(\\mathbb{Z}[\\frac{1+ \\pi_p}{2}]\\)，而是虚二次域的某个 order。</p>
+    <p class="mt-2">
+      <a href="OSIDH.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        Orienting Supersingular Isogeny Graphs
+      </a>
+    </p>
+  `,
+
+  'csidh7': `
+    <strong class="text-xl text-accent">OSIDH 的 DDH 问题被攻击（2022 年）</strong>
+    <p>Wouter Castryck、Marc Houben、Frederik Vercauteren 和 Benjamin Wesolowski 攻击了 OSIDH 中的 DDH 问题。</p>
+    <p class="mt-2">
+      <a href="DDH.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        On the Decisional Diffie–Hellman Problem for Class Group Actions on Oriented Elliptic Curves
+      </a>
+    </p>
+  `,
+
+  'csidh8': `
+  <strong class="text-xl text-accent">总结</strong>
+    <p>CSIDH 与 OSIDH 所依赖的困难问题可以约化为 Hidden Shift Problem，该问题在量子计算机上可在亚指数时间内解决，因此这些方案在实际中并不安全。</p>
+  `,
+
+  'csidh9': `
+    <strong class="text-xl text-accent">攻击 CSIDH 类问题的论文</strong>
+    <p class="mt-2">
+      <a href="subexponential.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        Constructing Elliptic Curve Isogenies in Quantum Subexponential Time
+      </a>
+    </p>
+  `,
+
+
+                'sqi-title': 'SQIsign',
+  'sqi1': `
+    <strong class="text-xl text-accent">GPSsign的提出（2017年）</strong>
+    <p>Steven D. Galbraith、Christophe Petit 和 Javier Silva 提出了基于四元数代数的 GPS 签名方案，但该方案需要进行多轮交互，因此签名长度较长。</p>
+    <p class="mt-2">
+      <a href="GPS.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        Identification Protocols and Signature Schemes Based on Supersingular Isogeny Problems
+      </a>
+    </p>
+  `,
+
+  'sqi2': `
+    <strong class="text-xl text-accent">SQIsign的提出（2020年）</strong>
+    <p>Luca De Feo、David Kohel、Antonin Leroux、Christophe Petit 和 Benjamin Wesolowski 提出了基于四元数代数的 SQIsign 签名方案。其公钥和签名尺寸是 NIST 征集的所有候选签名中最短的，主要基于 Sigma 协议与 KLPT 算法来寻找等价理想。</p>
+    <p class="mt-2">
+      <a href="SQISign.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        SQISign: Compact Post-quantum Signatures from Quaternions and Isogenies
+      </a>
+    </p>
+  `,
+
+  'sqi3': `
+    <strong class="text-xl text-accent">总结</strong>
+    <p>作为入选 NIST 征集的后量子签名第二轮候选方案，SQIsign 拥有最小的公钥与签名长度，且不会泄露像点。由于其基于四元数代数运算，因此不易受到 Kuperberg 的量子攻击。然而，SQIsign 的计算效率较低，是其主要缺点之一。</p>
+  `,
+   'sqihd-title':'SQIsign的优化',
+  'sqihd1': `
+    <strong class="text-xl text-accent">快速 SQIsign（2023 年）</strong>
+    <p>Luca De Feo、Antonin Leroux、Patrick Longa 和 Benjamin Wesolowski 通过修改计算四元数代数中元素的方法，使得 SQIsign 中第一步的输出更加均匀。同时优化了理想到同源的转化过程。</p>
+    <p class="mt-2">
+      <a href="FastSQISign.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        New Algorithms for the Deuring Correspondence: Towards Practical and Secure SQISign Signatures
+      </a>
+    </p>
+  `,
+
+  'sqihd2': `
+    <strong class="text-xl text-accent">加速 SQIsign（2024 年）</strong>
+    <p>Kaizhan Lin、Weize Wang、Zheng Xu 和 Changan Zhao 基于范数与迹的关系及配对运算，进一步优化了 SQIsign 中的理想转化为同源的计算过程。</p>
+    <p class="mt-2">
+      <a href="Xu.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        A Faster Software Implementation of SQIsign
+      </a>
+    </p>
+  `,
+
+  'sqihd3': `
+    <strong class="text-xl text-accent">在扩张域上的 SQIsign（2024 年）</strong>
+    <p>Maria Corte-Real Santos、Jonathan Komada Eriksen、Michael Meyer 和 Krijn Reijnders 扩大了 SQIsign 中有理点的定义域，从而增加了可用点的数量，实现加速验证过程的目的。</p>
+    <p class="mt-2">
+      <a href="aps.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        ApresSQI: Extra Fast Verification for SQIsign Using Extension-Field Signing
+      </a>
+    </p>
+  `,
+
+   'sqihdd-title':'SQIsign的变种',
+  'sqihdd1': `
+    <strong class="text-xl text-accent">SQIsignHD（2024年）</strong>
+    <p>Pierrick Dartois、Antonin Leroux、Damien Robert 和 Benjamin Wesolowski 通过 SIDH 攻击的方法，取消了输出同源次数需要光滑的条件。只需计算输出同源的像点，并在验证中利用四维 SIDH 攻击进行恢复。由于不再要求光滑性，KLPT 算法也被修改为随机选取等价理想。</p>
+    <p class="mt-2">
+      <a href="HD.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        SQIsignHD: New Dimensions in Cryptography
+      </a>
+    </p>
+  `,
+
+  'sqihdd2': `
+    <strong class="text-xl text-accent">SQIsign2D-West（2024年）</strong>
+    <p>Andrea Basso、Pierrick Dartois、Luca De Feo、Antonin Leroux、Luciano Maino、Giacomo Pope、Damien Robert 和 Benjamin Wesolowski 采用二维同源方法完成理想到同源的转化，构造辅助同源并完成验证。所有一维非光滑同源均通过二维同源进行计算。</p>
+    <p class="mt-2">
+      <a href="West.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        SQIsign2D–West: The Fast, the Small, and the Safer
+      </a>
+    </p>
+  `,
+
+  'sqihdd3': `
+    <strong class="text-xl text-accent">SQIsign2D-East（2024年）</strong>
+    <p>Kohei Nakagawa、Hiroshi Onuki、Wouter Castryck、Mingjie Chen、Riccardo Invernizzi、Gioella Lorenzon 和 Frederik Vercauteren 提出的 SQIsign2D-East 与 West 不同，它不采用理想转同源，而是利用 Eichler order 的性质，直接在公钥曲线上寻找辅助同源来完成验证。方法依然基于二维同源技术。</p>
+    <p class="mt-2">
+      <a href="East.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        SQIsign2D-East: A New Signature Scheme Using 2-Dimensional Isogenies
+      </a>
+    </p>
+  `,
+
+  'sqihdd4': `
+    <strong class="text-xl text-accent">SQIsign2D\\(^2\\)（2025年）</strong>
+    <p>Zheng Xu、Kaizhan Lin、Chang-An Zhao 和 Yi Ouyang 相较于 East，提出利用一维同源技术来减少二维同源的计算，从而优化 SQIsign。</p>
+    <p class="mt-2">
+      <a href="2d.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        SQIsign2D\\(^2\\): New SQIsign2D Variant by Leveraging Power Smooth Isogenies in Dimension One
+      </a>
+    </p>
+  `,
+
+  'sqihdd5': `
+    <strong class="text-xl text-accent">SQIsign2DPush（2025年）</strong>
+    <p>Kohei Nakagawa 和 Hiroshi Onuki 相比 East 的方法，在初始曲线上寻找次数为 \\(d\\) 的同源，再将其“拉回”以形成辅助同源，从而完成验证。</p>
+    <p class="mt-2">
+      <a href="push.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        SQIsign2DPush: Faster Signature Scheme Using 2-Dimensional Isogenies
+      </a>
+    </p>
+  `,
+
+  'sqihdd6': `
+    <strong class="text-xl text-accent">总结</strong>
+    <p>通过这些优化和变种，SQIsign 系列的效率得到了显著提升，使其在后量子签名领域更具竞争力。</p>
+  `,
+
+
+
+
+                'footer-title': '同源密码发展介绍',
+                'footer-desc': '本页面介绍了超奇异椭圆曲线同源在密码学中设计，如密钥交换，签名，加密等，旨在为相关领域的研究人员提供参考。',
+                'copyright': '版权所有 &copy; 2025 困难密码发展介绍'
+            },
+            'en': {
+                'title': 'Introduction to Isogeny-Based Cryptography',
+                
+                'intro-title': 'What is Isogeny-Based Cryptography',
+                'intro-content': '<div class="mb-6"> Isogeny-based cryptography is a type of cryptographic technique that relies on elliptic curve isogenies and offers the advantage of short sizes.</div>', 
+                'comp-isogeny-title': 'SIDH',
+  'isogeny-attack1-item': `
+    <strong class="text-xl text-accent">Origin (2011)</strong>
+    <p>Luca De Feo and David Jao first proposed SIDH (Supersingular Isogeny Diffie-Hellman), a key exchange protocol based on supersingular elliptic curve isogenies. SIDH leaks image points, which may lead to security vulnerabilities.</p>
+    <p class="mt-2">
+      <a href="SIDH.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        Towards quantum-resistant cryptosystems from supersingular elliptic curve isogenies
+      </a>
+    </p>
+  `,
+
+  'isogeny-attack2-item': `
+    <strong class="text-xl text-accent">Active Attacks on SIDH (2016)</strong>
+    <p>Steven D. Galbraith, Christophe Petit, Barak Shani, and Yan Bo Ti first proposed active attacks against SIDH.</p>
+    <p class="mt-2">
+      <a href="GPST.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        On the Security of Supersingular Isogeny Cryptosystems
+      </a>
+    </p>
+  `,
+
+  'isogeny-attack3-item': `
+    <strong class="text-xl text-accent">Passive Attacks on SIDH (2016, 2021)</strong>
+    <p>Christophe Petit proposed the Torsion Point Attack, which was later improved by Victoria de Quehen, Peter Kutas, Chris Leonardi, Chloe Martindale, Lorenz Panny, Christophe Petit, and Katherine E. Stange. However, these attacks require a significant parameter asymmetry between the communicating parties. These attacks transform the isogeny computation problem into solving equations in quaternion algebras.</p>
+    <p class="mt-2">
+      <a href="TorsionPointAttack.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        Faster Algorithms for Isogeny Problems Using Torsion Point Images
+      </a>
+      <a href="ImprovedTorsionPointAttacks.pdf" class="text-primary hover:underline inline-flex items-center ml-4">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        Improved Torsion-Point Attacks on SIDH Variants
+      </a>
+    </p>
+  `,
+
+  'isogeny-attack4-item': `
+    <strong class="text-xl text-accent">Another Attack (2021)</strong>
+    <p>Peter Kutas, Simon-Philipp Merz, Christophe Petit, and Charlotte Weitkamper proposed a new attack leveraging the ability of quantum computers to solve the Hidden Shift Problem. However, this attack did not break SIDH completely.</p>
+    <p class="mt-2">
+      <a href="OneWay.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        One-Way Functions and Malleability Oracles: Hidden Shift Attacks on Isogeny-Based Protocols
+      </a>
+    </p>
+  `,
+
+  'isogeny-attack5-item': `
+    <strong class="text-xl text-accent">Breaking SIDH with Special Initial Curves (2023)</strong>
+    <p>Wouter Castryck and Thomas Decru broke SIDH instances with special initial curves (j-invariant 1728) using Kani's theorem for higher-dimensional abelian varieties.</p>
+    <p class="mt-2">
+      <a href="BreakingII.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        An Efficient Key Recovery Attack on SIDH
+      </a>
+    </p>
+  `,
+
+  'isogeny-attack6-item': `
+    <strong class="text-xl text-accent">Analysis of General SIDH (2023)</strong>
+    <p>Luciano Maino, Chloe Martindale, Lorenz Panny, Giacomo Pope, and Benjamin Wesolowski analyzed general SIDH instances and developed some attacks, though none are polynomial-time.</p>
+    <p class="mt-2">
+      <a href="BreakingI.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        A Direct Key Recovery Attack on SIDH
+      </a>
+    </p>
+  `,
+
+  'isogeny-attack7-item': `
+    <strong class="text-xl text-accent">Complete Break of SIDH (2023)</strong>
+    <p>Damien Robert achieved a complete break of SIDH using 8-dimensional abelian varieties.</p>
+    <p class="mt-2">
+      <a href="BreakingIII.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        Complete Break of SIDH via 8-Dimensional Abelian Varieties
+      </a>
+    </p>
+  `,
+
+  'isogeny-attack8-item': `
+   <strong class="text-xl text-accent">Summary</strong>
+    <p> At this point, SIDH, which was a fourth-round candidate in NIST's post-quantum cryptography standardization process, has been completely broken. </p>
+  `,
+
+                'endomorphism-title': 'Modified Versions of SIDH',
+
+  'endomorphism-attack1-item': `
+    <strong class="text-xl text-accent">M-SIDH (2023)</strong>
+    <p>Tako Boris Fouotsa, Tomoki Moriya, and Christophe Petit proposed M-SIDH, which hides image points to achieve security.</p>
+    <p class="mt-2">
+      <a href="MSIDH.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        M-SIDH and MD-SIDH: Countering SIDH Attacks by Masking Information
+      </a>
+    </p>
+  `,
+
+  'endomorphism-attack2-item': `
+    <strong class="text-xl text-accent">FESTA Encryption (2023)</strong>
+    <p>Andrea Basso, Luciano Maino, and Giacomo Pope proposed FESTA, an encryption scheme that hides image points. Kohei Nakagawa and Hiroshi Onuki later proposed QFESTA, an optimized version.</p>
+    <p class="mt-2">
+      <a href="FESTA.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        FESTA: Fast Encryption from Supersingular Torsion Attacks
+      </a>
+    </p>
+    <p class="mt-2">
+      <a href="QFESTA.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        QFESTA: Efficient Algorithms and Parameters for FESTA Using Quaternion Algebras
+      </a>
+    </p>
+  `,
+
+  'endomorphism-attack3-item': `
+    <strong class="text-xl text-accent">bin-SIDH / ter-SIDH (2023)</strong>
+    <p>Andrea Basso and Tako Boris Fouotsa proposed bin-SIDH and ter-SIDH, which achieve security by selecting different subgroups.</p>
+    <p class="mt-2">
+      <a href="bin.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        New SIDH Countermeasures for a More Efficient Key Exchange
+      </a>
+    </p>
+  `,
+
+  'endomorphism-quantum-item': `
+  <strong class="text-xl text-accent">Summary</strong>
+    <p> These modified schemes require very large parameters to resist attacks on SIDH, making them impractical. </p>
+  `,
+
+
+'csidh-title': 'CSIDH',
+  'csidh1': `
+    <strong class="text-xl text-accent">Origin (2018)</strong>
+    <p>Wouter Castryck, Tanja Lange, Chloe Martindale, Lorenz Panny, and Joost Renes first proposed CSIDH (Commutative SIDH), a key exchange protocol based on supersingular elliptic curve isogenies over \\(\\mathbb{F}_p\\). CSIDH uses elliptic curves over finite fields \\(\\mathbb{F}_p\\), similar to ordinary curves with complex multiplication, and involves the action of ideal class groups (\\(\\mathbb{Z}[\\pi_p]\\) or \\(\\mathbb{Z}[\\frac{1+ \\pi_p}{2}]\\)), which are vulnerable to quantum attacks.</p>
+    <p class="mt-2">
+      <a href="CSIDH.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        CSIDH: An Efficient Post-Quantum Commutative Group Action
+      </a>
+    </p>
+  `,
+
+  'csidh2': `
+    <strong class="text-xl text-accent">Signature Schemes CSI-FiSh and SeaSign (2019)</strong>
+    <p>Ward Beullens, Thorsten Kleinjung, and Frederik Vercauteren proposed CSI-FiSh, a signature scheme based on CSIDH. Luca De Feo and Steven D. Galbraith proposed SeaSign. The main difference is that CSI-FiSh uses a cyclic ideal class group.</p>
+    <p class="mt-2">
+      <a href="CSIFish.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        CSI-FiSh: Efficient Isogeny Based Signatures Through Class Group Computations
+      </a>
+    </p>
+    <p class="mt-2">
+      <a href="SeaSign.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        SeaSign: Compact Isogeny Signatures from Class Group Actions
+      </a>
+    </p>
+  `,
+
+  'csidh3': `
+    <strong class="text-xl text-accent">SiGamal Encryption (2020)</strong>
+    <p>Ward Beullens, Thorsten Kleinjung, and Frederik Vercauteren proposed SiGamal, a public-key encryption scheme based on CSIDH. It also enables a pseudorandom function construction based on supersingular isogenies.</p>
+    <p class="mt-2">
+      <a href="SiGamal.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        SiGamal: A Supersingular Isogeny-Based PKE and Its Application to a PRF
+      </a>
+    </p>
+  `,
+
+  'csidh4': `
+    <strong class="text-xl text-accent">Attack on the DDH Problem in CSIDH (2020)</strong>
+    <p>Wouter Castryck, Jana Sotakova, and Frederik Vercauteren attacked the DDH problem in CSIDH using quadratic characters (genus theory).</p>
+    <p class="mt-2">
+      <a href="BreakingDDH.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        Breaking the Decisional Diffie-Hellman Problem for Class Group Actions Using Genus Theory
+      </a>
+    </p>
+  `,
+
+  'csidh5': `
+    <strong class="text-xl text-accent">Attacking CSIDH Using SIDH Techniques (2023)</strong>
+    <p>Wouter Castryck, Marc Houben, Simon-Philipp Merz, Marzio Mula, Sam van Buuren, and Frederik Vercauteren used correspondences between groups generated by eigenvectors of the Frobenius endomorphism, computed torsion points by pairing, to attack CSIDH using SIDH techniques. However, due to limitations of the Tate pairing, this attack is not effective.</p>
+    <p class="mt-2">
+      <a href="Weak.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        Weak Instances of Class Group Action Based Cryptography via Self-pairings
+      </a>
+    </p>
+  `,
+
+  'csidh6': `
+    <strong class="text-xl text-accent">OSIDH (2020)</strong>
+    <p>Leonardo Colò and David Kohel proposed OSIDH, which differs from CSIDH in that it uses an order of an imaginary quadratic field instead of \\(\\mathbb{Z}[\\pi_p]\\) or \\(\\mathbb{Z}[\\frac{1+ \\pi_p}{2}]\\) for its endomorphism ring.</p>
+    <p class="mt-2">
+      <a href="OSIDH.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        Orienting Supersingular Isogeny Graphs
+      </a>
+    </p>
+  `,
+
+  'csidh7': `
+    <strong class="text-xl text-accent">Attack on the DDH Problem in OSIDH (2022)</strong>
+    <p>Wouter Castryck, Marc Houben, Frederik Vercauteren, and Benjamin Wesolowski attacked the DDH problem in OSIDH.</p>
+    <p class="mt-2">
+      <a href="DDH.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        On the Decisional Diffie–Hellman Problem for Class Group Actions on Oriented Elliptic Curves
+      </a>
+    </p>
+  `,
+
+  'csidh8': `
+  <strong class="text-xl text-accent">Summary</strong>
+    <p>The hardness problems in CSIDH and OSIDH reduce to the Hidden Shift Problem, which can be solved in subexponential time on quantum computers. Therefore, these schemes are not practical.</p>
+  `,
+
+  'csidh9': `
+    <strong class="text-xl text-accent">Paper on Attacking CSIDH-like Problems</strong>
+    <p class="mt-2">
+      <a href="subexponential.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        Constructing Elliptic Curve Isogenies in Quantum Subexponential Time
+      </a>
+    </p>
+  `,
+
+
+                'sqi-title': 'SQIsign',
+
+  'sqi1': `
+    <strong class="text-xl text-accent">GPSsign (2017)</strong>
+    <p>Steven D. Galbraith, Christophe Petit, and Javier Silva proposed GPSsign, a signature scheme based on quaternion algebras. However, it requires multiple rounds, resulting in relatively long signatures.</p>
+    <p class="mt-2">
+      <a href="GPS.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        Identification Protocols and Signature Schemes Based on Supersingular Isogeny Problems
+      </a>
+    </p>
+  `,
+
+  'sqi2': `
+    <strong class="text-xl text-accent">SQIsign (2020)</strong>
+    <p>Luca De Feo, David Kohel, Antonin Leroux, Christophe Petit, and Benjamin Wesolowski proposed SQIsign, a signature scheme based on quaternion algebras. It has the shortest public key and signature sizes among NIST's post-quantum signature candidates. It primarily uses the Sigma protocol and the KLPT algorithm for finding equivalent ideals.</p>
+    <p class="mt-2">
+      <a href="SQISign.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        SQISign: Compact Post-quantum Signatures from Quaternions and Isogenies
+      </a>
+    </p>
+  `,
+
+  'sqi3': `
+    <strong class="text-xl text-accent">Summary</strong>
+    <p>As a second-round candidate in NIST's post-quantum signature competition, SQIsign has the smallest public key and signature sizes. It does not leak image points and is not vulnerable to Kuperberg's quantum attack due to its quaternion algebra operations. However, its low efficiency is a drawback.</p>
+  `,
+   
+   'sqihd-title':'Optimizations of SQIsign',
+  'sqihd1': `
+    <strong class="text-xl text-accent">Fast SQIsign (2023)</strong>
+    <p>Luca De Feo, Antonin Leroux, Patrick Longa, and Benjamin Wesolowski modified the method for computing elements in quaternion algebras to ensure uniform output in the first step of SQIsign. They also optimized the ideal-to-isogeny translation process.</p>
+    <p class="mt-2">
+      <a href="FastSQISign.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        New Algorithms for the Deuring Correspondence: Towards Practical and Secure SQISign Signatures
+      </a>
+    </p>
+  `,
+
+  'sqihd2': `
+    <strong class="text-xl text-accent">Accelerating SQIsign (2024)</strong>
+    <p>Kaizhan Lin, Weize Wang, Zheng Xu, and Changan Zhao further optimized the ideal-to-isogeny translation process in SQIsign using norm-trace relations and pairings.</p>
+    <p class="mt-2">
+      <a href="Xu.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        A Faster Software Implementation of SQIsign
+      </a>
+    </p>
+  `,
+
+  'sqihd3': `
+    <strong class="text-xl text-accent">SQIsign over Extension Fields (2024)</strong>
+    <p>Maria Corte-Real Santos, Jonathan Komada Eriksen, Michael Meyer, and Krijn Reijnders extended the base field of rational points in SQIsign to increase the number of available points, thereby accelerating the protocol.</p>
+    <p class="mt-2">
+      <a href="aps.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        ApresSQI: Extra Fast Verification for SQIsign Using Extension-Field Signing
+      </a>
+    </p>
+  `,
+
+'sqihdd-title':'Variants of SQIsign',
+  'sqihdd1': `
+    <strong class="text-xl text-accent">SQIsignHD (2024)</strong>
+    <p>Pierrick Dartois, Antonin Leroux, Damien Robert, and Benjamin Wesolowski removed the requirement for smooth isogeny degrees using SIDH attack techniques. Instead, they compute image points of the output isogeny and recover them during verification using a 4-dimensional SIDH attack. The KLPT algorithm is modified to randomly select equivalent ideals since smoothness is no longer required.</p>
+    <p class="mt-2">
+      <a href="HD.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        SQIsignHD: New Dimensions in Cryptography
+      </a>
+    </p>
+  `,
+
+  'sqihdd2': `
+    <strong class="text-xl text-accent">SQIsign2D-West (2024)</strong>
+    <p>Andrea Basso, Pierrick Dartois, Luca De Feo, Antonin Leroux, Luciano Maino, Giacomo Pope, Damien Robert, and Benjamin Wesolowski use 2-dimensional isogenies to translate ideals to isogenies, construct auxiliary isogenies, and complete verification. Non-smooth 1-dimensional isogenies are computed using 2-dimensional techniques.</p>
+    <p class="mt-2">
+      <a href="West.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        SQIsign2D–West: The Fast, the Small, and the Safer
+      </a>
+    </p>
+  `,
+
+  'sqihdd3': `
+    <strong class="text-xl text-accent">SQIsign2D-East (2024)</strong>
+    <p>Kohei Nakagawa, Hiroshi Onuki, Wouter Castryck, Mingjie Chen, Riccardo Invernizzi, Gioella Lorenzon, and Frederik Vercauteren differ from West in that East does not translate ideals to isogenies. Instead, it uses properties of Eichler orders to directly find auxiliary isogenies on the public-key curve, still using 2-dimensional isogeny techniques.</p>
+    <p class="mt-2">
+      <a href="East.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        SQIsign2D-East: A New Signature Scheme Using 2-Dimensional Isogenies
+      </a>
+    </p>
+  `,
+
+  'sqihdd4': `
+    <strong class="text-xl text-accent">SQIsign2D\\(^2\\) (2025)</strong>
+    <p>Zheng Xu, Kaizhan Lin, Chang-An Zhao, and Yi Ouyang reduce 2-dimensional isogeny computations by leveraging 1-dimensional isogenies compared to East.</p>
+    <p class="mt-2">
+      <a href="2d.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        SQIsign2D\\(^2\\): New SQIsign2D Variant by Leveraging Power Smooth Isogenies in Dimension One
+      </a>
+    </p>
+  `,
+
+  'sqihdd5': `
+    <strong class="text-xl text-accent">SQIsign2DPush (2025)</strong>
+    <p>Kohei Nakagawa and Hiroshi Onuki differ from East in that SQIsign2DPush finds an isogeny of degree d on the initial curve and pulls it back to form the auxiliary isogeny.</p>
+    <p class="mt-2">
+      <a href="push.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        SQIsign2DPush: Faster Signature Scheme Using 2-Dimensional Isogenies
+      </a>
+    </p>
+  `,
+
+  'sqihdd6': `
+    <strong class="text-xl text-accent">Summary</strong>
+    <p>Through these optimizations and variants, the efficiency of the SQIsign family has been significantly improved, making it competitive in post-quantum signatures.</p>
+  `,
+
+
+
+                'footer-title': 'Introduction to Isogeny-Based Cryptography',
+                'footer-desc': 'This page introduces the application of supersingular elliptic curve isogenies in cryptography, such as key exchange, digital signatures, encryption, etc., aiming to provide references for researchers in related fields.',
+                'copyright': 'Copyright &copy; 2025 Introduction to Isogeny-Based Cryptography'
+            }
+        };
+
+        // 语言切换逻辑
+        document.addEventListener('DOMContentLoaded', function() {
+            const langButton = document.getElementById('langButton');
+            const langText = document.getElementById('langText');
+            let currentLang = 'en'; // 默认显示英文
+            
+            // 初始应用英文翻译
+            applyTranslation('en');
+            
+            langButton.addEventListener('click', function() {
+                // 切换语言
+                currentLang = currentLang === 'en' ? 'zh-CN' : 'en';
+                
+                // 更新按钮文本
+                langText.textContent = currentLang === 'en' ? '中文' : 'English';
+                
+                // 应用翻译
+                applyTranslation(currentLang);
+                
+                // 更新HTML语言属性
+                document.documentElement.lang = currentLang;
+            });
+            
+            function applyTranslation(lang) {
+                // 获取所有需要翻译的元素
+                const elements = document.querySelectorAll('[data-lang]');
+                
+                // 应用淡入淡出效果
+                elements.forEach(element => {
+                    element.style.opacity = '0';
+                    element.style.transform = 'translateY(10px)';
+                });
+                
+                // 延迟应用翻译，等待动画效果
+                setTimeout(() => {
+                    elements.forEach(element => {
+                        const key = element.getAttribute('data-lang');
+                        if (translations[lang] && translations[lang][key]) {
+                            // 处理HTML内容
+                            element.innerHTML = translations[lang][key];
+                        }
+                        // 重新渲染MathJax公式
+                        MathJax.typesetPromise([element]).catch(err => console.error('MathJax error:', err));
+                    });
+                    
+                    // 恢复元素可见性
+                    elements.forEach(element => {
+                        element.style.opacity = '1';
+                        element.style.transform = 'translateY(0)';
+                    });
+                }, 300);
+            }
+        });
+    </script>
 </body>
 
 </html>
-    
