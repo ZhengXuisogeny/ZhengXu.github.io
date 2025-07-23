@@ -8,7 +8,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <title>Introduction to Isogeny-Based Cryptography</title>
+    <title>Abelian Varieties</title>
     
     <!-- Tailwind 配置 -->
     <script>
@@ -104,7 +104,16 @@
                     </p>
                 </li> 
                 
-                <li class="mb-2 transition-lang" data-lang="high3-item">
+  <li class="mb-2 transition-lang" data-lang="high3-item">
+    <strong class="text-xl text-accent">POKE (Encryption)（2025, Eurocrypt）</strong>： Andrea Basso and Luciano Maino Proposed POKÉ (encryption) in higher dimensions.
+    <p class="mt-2">
+      <a href="poke.pdf" class="text-primary hover:underline inline-flex items-center">
+      POKÉ: A Compact and Efficient PKE from Higher-Dimensional Isogenies
+      </a>
+    </p>
+  </li>
+
+                <li class="mb-2 transition-lang" data-lang="high4-item">
                     <strong class="text-xl text-accent">MIKE（2025）</strong>
                     <p>Damien Robert derived new abelian varieties by leveraging the action of finitely presented torsion-free modules (rank 2) on supersingular elliptic curves (whereas actions of finitely presented projective modules are required for general abelian varieties). This action eliminates the need to transmit image points and, due to its module-based (rather than ideal-based) nature, resists Kuperberg's quantum attacks. Based on this, he constructed the module action-based key exchange protocol MIKE.
 </p>
@@ -211,7 +220,7 @@
         <div class="container mx-auto px-6 md:px-10">
             <div class="flex flex-col md:flex-row justify-between items-center">
                 <div class="mb-6 md:mb-0">
-                    <h3 class="text-xl font-bold mb-4 transition-lang" data-lang="footer-title">Introduction to Isogeny Hard Problems</h3>
+                    <h3 class="text-xl font-bold mb-4 transition-lang" data-lang="footer-title">Abelian Varieties</h3>
                     <p class="text-gray-400 max-w-md transition-lang" data-lang="footer-desc">
                         This page introduces the core hard problems, attack methods, and research progress in supersingular elliptic curve isogeny cryptography, aiming to provide references for researchers in related fields.
                     </p>
@@ -221,7 +230,7 @@
             </div>
             
             <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500 transition-lang" data-lang="copyright">
-                Copyright &copy; 2025 Introduction to Hard Problems Development
+                Copyright &copy; 2025 Abelian Varieties
             </div>
         </div>
     </footer>
@@ -235,7 +244,7 @@
                 'intro-content': '目前同源密码的研究大部分转移到Abel簇上, Abel簇上的技术成为了同源密码的热点问题.',
                 'high-title': '高维同源密码',
   'high1-item': `
-    <strong class="text-xl text-accent">CDS-Hash 函数（2020年）</strong>：  Wouter Castryck、Thomas Decru 和 Benjamin Smith 提出了利用二维Abel 簇构造新的Hash 函数.
+    <strong class="text-xl text-accent">CDS-Hash 函数（2020年, J. Math. Cryptol）</strong>：  Wouter Castryck、Thomas Decru 和 Benjamin Smith 提出了利用二维Abel 簇构造新的Hash 函数.
     <p class="mt-2">
       <a href="g2.pdf" class="text-primary hover:underline inline-flex items-center">
         Hash Functions From Superspecial Genus-2 &nbsp Curves Using Richelot Isogenies
@@ -244,7 +253,7 @@
   `,
 
   'high2-item': `
-    <strong class="text-xl text-accent">二维SIDH（2019年）</strong>： E.V.Flynn 和 YanBo Ti 提出了二维上的SIDH.
+    <strong class="text-xl text-accent">二维SIDH（2019年, PQC）</strong>： E.V.Flynn 和 YanBo Ti 提出了二维上的SIDH.
     <p class="mt-2">
       <a href="g1.pdf" class="text-primary hover:underline inline-flex items-center">
         Genus Two Isogeny Cryptography
@@ -252,11 +261,20 @@
     </p>
   `,
 
-  'high3-item': `
-    <strong class="text-xl text-accent">MIKE（2025年）</strong>：Damien Robert 通过有限表出无挠模(秩2)在超奇异椭圆曲线上的作用(一般Abel簇上需要有限表出投射模的作用), 得到新的Abel簇, 这个作用无需传输像点, 且因为是模作用而不是理想作用可以抵抗Kuperberg的量子攻击. 由此构造基于模作用的密钥交换MIKE.
+   'high3-item': `
+    <strong class="text-xl text-accent">POKE 加密（2025年, Eurocrypt）</strong>： Andrea Basso 和 Luciano Maino 提出了高维上的POKE加密.
+    <p class="mt-2">
+      <a href="poke.pdf" class="text-primary hover:underline inline-flex items-center">
+      POKÉ: A Compact and Efficient PKE from Higher-Dimensional Isogenies
+      </a>
+    </p>
+  `,
+
+  'high4-item': `
+    <strong class="text-xl text-accent">MIKE（2025年, Preprint）</strong>：Damien Robert 通过有限表出无挠模(秩2)在超奇异椭圆曲线上的作用(一般Abel簇上需要有限表出投射模的作用), 得到新的Abel簇, 这个作用无需传输像点, 且因为是模作用而不是理想作用可以抵抗Kuperberg的量子攻击. 由此构造基于模作用的密钥交换MIKE.
     <p class="mt-2">
       <a href="ModuleAction.pdf" class="text-primary hover:underline inline-flex items-center">
-        The Module Action For Isogeny Based Cryptography
+        The Module Action for Isogeny Based Cryptography
       </a>
     </p>
   `,
@@ -264,7 +282,7 @@
   'abel-title':'Abel簇上和密码相关的数学问题和算法',
 
   'abel1-item': `
-    <strong class="text-xl text-accent">判断高维同源像曲线是否是椭圆曲线的乘积（2024 年）</strong>： Maria Corte-Real Santos、Craig Costello 和 Sam Frengley 给出了判断高维同源像曲线是椭圆曲线乘积还是超椭圆曲线的Jacobian的算法
+    <strong class="text-xl text-accent">判断高维同源像曲线是否是椭圆曲线的乘积（2024 年, PKC）</strong>： Maria Corte-Real Santos、Craig Costello 和 Sam Frengley 给出了判断高维同源像曲线是椭圆曲线乘积还是超椭圆曲线的Jacobian的算法
     <p class="mt-2">
       <a href="detection.pdf" class="text-primary hover:underline inline-flex items-center">
         An Algorithm for Efficient Detection of (N,N)-Splittings and Its Application to the Isogeny Problem in Dimension 2
@@ -273,7 +291,8 @@
   `,
 
   'abel2-item': `
-    <strong class="text-xl text-accent">高维KLPT(2025年)</strong>： Wouter Castryck、Thomas Decru、Peter Kutas、Abel Laval、Christophe Petit 和 Yan Bo Ti 提出了二维的KLPT算法, 通过计算高维上的矩阵得到寻找等价理想的办法.
+    <strong class="text-xl text-accent">高维KLPT(2025年, Crypto)</strong>： 
+    Wouter Castryck、Thomas Decru、Peter Kutas、Abel Laval、Christophe Petit 和 Yan Bo Ti 提出了二维的KLPT算法, 通过计算高维上的矩阵得到寻找等价理想的办法.
     <p class="mt-2">
       <a href="KLPT.pdf" class="text-primary hover:underline inline-flex items-center">
         (KLPT\\^2\\):Algebraic Path-finding in Dimension Two and Applications
@@ -283,7 +302,7 @@
 
    'graph-title':'Abel簇同源图',
   'graph1': `
-    <strong class="text-xl text-accent">二维的Richelot 同源图(2020年)</strong>： Toshiyuki. Katsura 和 Katsuyuki. Takashima 给出了二维的Richelot 同源图, 通过约化自同构群是否含有长二阶元判断(2,2)-同源的像曲线是椭圆曲线的乘积还是超椭圆曲线的雅可比簇, 并给出了其相应的个数.
+    <strong class="text-xl text-accent">二维的Richelot 同源图(2020年, ANTS)</strong>： Toshiyuki. Katsura 和 Katsuyuki. Takashima 给出了二维的Richelot 同源图, 通过约化自同构群是否含有长二阶元判断(2,2)-同源的像曲线是椭圆曲线的乘积还是超椭圆曲线的雅可比簇, 并给出了其相应的个数.
     <p class="mt-2">
       <a href="Richelot.pdf" class="text-primary hover:underline inline-flex items-center">
         Counting Richelot Isogenies Between Superspecial Abelian Surfaces
@@ -292,7 +311,7 @@
   `,
 
   'graph2': `
-    <strong class="text-xl text-accent">高维同源图(2021年)</strong>： Bruce. W. Joran 和 Yevgeny Zaytman 给出了高维同源图的定义, 通过强逼近的方法证明高维同源图是连通的, 但并不一定是Ramanujan的.
+    <strong class="text-xl text-accent">高维同源图(2021年, Preprint)</strong>： Bruce. W. Joran 和 Yevgeny Zaytman 给出了高维同源图的定义, 通过强逼近的方法证明高维同源图是连通的, 但并不一定是Ramanujan的.
     <p class="mt-2">
       <a href="Richelot1.pdf" class="text-primary hover:underline inline-flex items-center">
         Isogeny Graphs of Superspecial Abelian Varieties and Brandt Matrices
@@ -301,7 +320,7 @@
   `,
 
   'graph3': `
-    <strong class="text-xl text-accent">Richelot 同源图的具体分类 （2021年）</strong>： Enric Florit 和 Benjamin Smith 提出了通过自同构群在(2, 2)-同源的核的作用划分不同的(2, 2)-同源得到的像曲线的类型
+    <strong class="text-xl text-accent">Richelot 同源图的具体分类 （2021年, AGC2T)</strong>： Enric Florit 和 Benjamin Smith 提出了通过自同构群在(2, 2)-同源的核的作用划分不同的(2, 2)-同源得到的像曲线的类型
     <p class="mt-2">
       <a href="FS1.pdf" class="text-primary hover:underline inline-flex items-center">
         Automorphisms and Isogeny Graphs of Abelian Varieties, with Applications to the Superspecial Richelot Isogeny Graph
@@ -315,7 +334,7 @@
   `,
 
   'graph4': `
-    <strong class="text-xl text-accent">高维同源图的刻画（2025年）</strong>：徐铮、欧阳毅 和 周子健 给出了高维同源图的刻画, 对有一个定义在\\(\\mathbb{F}_p\\)上的超奇异椭圆曲线乘积类型的Abel簇给出了环路和邻边的个数.
+    <strong class="text-xl text-accent">高维同源图的刻画（2025年, FFA）</strong>：徐铮、欧阳毅 和 周子健 给出了高维同源图的刻画, 对有一个定义在\\(\\mathbb{F}_p\\)上的超奇异椭圆曲线乘积类型的Abel簇给出了环路和邻边的个数.
     <p class="mt-2">
       <a href="Xu1.pdf" class="text-primary hover:underline inline-flex items-center">
         Neighborhood of Vertices in the Isogeny Graph of Principally Polarized Superspecial Abelian Surfaces
@@ -336,7 +355,7 @@
                 'intro-content': '<div class="mb-6">  Recently, the focus of research in isogeny-based cryptography has largely moved to abelian varieties, and techniques related to Abelian varieties have become a hot issue in isogeny-based cryptography.</div>', 
                 'high-title': 'High-dimensional Isogeny-based Cryptography',
 'high1-item': `
-    <strong class="text-xl text-accent">CDS-Hash Function (2020)</strong>: Wouter Castryck, Thomas Decru and Benjamin Smith proposed a new hash function constructed using two-dimensional Abelian varieties.
+    <strong class="text-xl text-accent">CDS-Hash Function (2020, J. Math. Cryptol)</strong>: Wouter Castryck, Thomas Decru and Benjamin Smith proposed a new hash function constructed using two-dimensional Abelian varieties.
     <p class="mt-2">
       <a href="g2.pdf" class="text-primary hover:underline inline-flex items-center">
         Hash Functions From Superspecial Genus-2 Curves Using Richelot Isogenies
@@ -345,7 +364,7 @@
   `,
 
   'high2-item': `
-    <strong class="text-xl text-accent">Two-dimensional SIDH (2019)</strong>: E. V. Flynn and Yan Bo Ti proposed two-dimensional SIDH.
+    <strong class="text-xl text-accent">Two-dimensional SIDH (2019, PQC)</strong>: E. V. Flynn and Yan Bo Ti proposed two-dimensional SIDH.
     <p class="mt-2">
       <a href="g1.pdf" class="text-primary hover:underline inline-flex items-center">
         Genus Two Isogeny Cryptography
@@ -353,18 +372,28 @@
     </p>
   `,
 
+
   'high3-item': `
-    <strong class="text-xl text-accent">MIKE (2025)</strong>: Damien Robert derived new abelian varieties by leveraging the action of finitely presented torsion-free modules (rank 2) on supersingular elliptic curves. This module action resists Kuperberg's quantum attacks and eliminates the need to transmit image points. Based on this, he constructed the MIKE key exchange protocol.
+    <strong class="text-xl text-accent">POKE (Encryption)（2025, Eurocrypt）</strong>： Andrea Basso and Luciano Maino Proposed POKÉ (encryption) in higher dimensions.
+    <p class="mt-2">
+      <a href="poke.pdf" class="text-primary hover:underline inline-flex items-center">
+      POKÉ: A Compact and Efficient PKE from Higher-Dimensional Isogenies
+      </a>
+    </p>
+  `,
+
+  'high4-item': `
+    <strong class="text-xl text-accent">MIKE (2025, Preprint)</strong>: Damien Robert derived new abelian varieties by leveraging the action of finitely presented torsion-free modules (rank 2) on supersingular elliptic curves. This module action resists Kuperberg's quantum attacks and eliminates the need to transmit image points. Based on this, he constructed the MIKE key exchange protocol.
     <p class="mt-2">
       <a href="ModuleAction.pdf" class="text-primary hover:underline inline-flex items-center">
-        The Module Action For Isogeny Based Cryptography
+        The Module Action for Isogeny Based Cryptography
       </a>
     </p>
   `,
 
    'abel-title':'Mathematical Problems and Algorithms Related to Cryptography on Abelian Varieties',
     'abel1-item': ` 
-   <strong class="text-xl text-accent">Determine Whether the Image Curve of a High-dimensional Isogeny is a Product of Elliptic Curves(2024)</strong>
+   <strong class="text-xl text-accent">Determine Whether the Image Curve of a High-dimensional Isogeny is a Product of Elliptic Curves(2024, PKC)</strong>
                     <p> Maria Corte-Real Santos, Craig Costello and Sam Frengley presented an algorithm for determining whether the image of high-dimensional isogeny is a product of elliptic curves.
   </p>
                     <p class="mt-2">
@@ -377,7 +406,7 @@
                     </p>
                     `,
           'abel2-item': `       
-                    <strong class="text-xl text-accent"> KLPT\\(^2\\) (2025)</strong>
+                    <strong class="text-xl text-accent"> KLPT\\(^2\\) (2025, Crypto)</strong>
                     <p> Wouter Castryck, Thomas Decru, Peter Kutas, Abel Laval, Christophe Petit and Yan Bo Ti proposed a two-dimensional KLPT algorithm, which obtains a method for finding equivalent ideals by computing matrices in high-dimension.
   </p>
                     
@@ -390,7 +419,7 @@
   `,
   'graph-title':'Isogeny Graph of Abelian Varieties',
   'graph1': `
-    <strong class="text-xl text-accent">Richelot Isogeny Graph (2020)</strong>: Toshiyuki Katsura and Katsuyuki Takashima determined the number of the images of (2,2)-isogenies were  products of elliptic curves and Jacobians by checking the reduced automorphism group.
+    <strong class="text-xl text-accent">Richelot Isogeny Graph (2020, ANTS)</strong>: Toshiyuki Katsura and Katsuyuki Takashima determined the number of the images of (2,2)-isogenies were  products of elliptic curves and Jacobians by checking the reduced automorphism group.
     <p class="mt-2">
       <a href="Richelot.pdf" class="text-primary hover:underline inline-flex items-center">
         Counting Richelot Isogenies Between Superspecial Abelian Surfaces
@@ -399,7 +428,7 @@
   `,
 
   'graph2': `
-    <strong class="text-xl text-accent">High-dimensional Isogeny Graph (2021)</strong>: Bruce W. Joran and Yevgeny Zaytman defined high-dimensional isogeny graphs and proved the graph is connected by strong approximation.
+    <strong class="text-xl text-accent">High-dimensional Isogeny Graph (2021, Preprint)</strong>: Bruce W. Joran and Yevgeny Zaytman defined high-dimensional isogeny graphs and proved the graph is connected by strong approximation.
     <p class="mt-2">
       <a href="Richelot1.pdf" class="text-primary hover:underline inline-flex items-center">
         Isogeny Graphs of Superspecial Abelian Varieties and Brandt Matrices
@@ -408,7 +437,7 @@
   `,
 
   'graph3': `
-    <strong class="text-xl text-accent">Classification of Richelot Isogeny Graphs (2021)</strong>: Enric Florit and Benjamin Smith classified image curves from (2,2)-isogenies via automorphism group actions.
+    <strong class="text-xl text-accent">Classification of Richelot Isogeny Graphs (2021, AGC2T)</strong>: Enric Florit and Benjamin Smith classified image curves from (2,2)-isogenies via automorphism group actions.
     <p class="mt-2">
       <a href="FS1.pdf" class="text-primary hover:underline inline-flex items-center">
         Automorphisms and Isogeny Graphs of Abelian Varieties
@@ -422,7 +451,7 @@
   `,
 
   'graph4': `
-  <strong class="text-xl text-accent">Lopps and Neighborhoods of High-Dimensional Isogeny Graphs (2025)</strong>
+  <strong class="text-xl text-accent">Lopps and Neighborhoods of High-Dimensional Isogeny Graphs (2025, FFA)</strong>
                     <p>Zheng Xu, Yi Ouyang and Zijian Zhou gave the number of loops and adjacent edges for abelian varieties of the product type of supersingular elliptic curves, one of which is defined over \\(\\mathbb{F}_p\\).</p>
                     <p class="mt-2">
                         <a href="Xu1.pdf" class="text-primary hover:underline inline-flex items-center">
