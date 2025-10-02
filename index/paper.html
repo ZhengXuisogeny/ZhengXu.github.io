@@ -334,7 +334,19 @@
                         </a> 
                     </p>
                 </li>
-                <li class="mb-2 transition-lang" data-lang="csidh9">
+
+<li class="mb-2 transition-lang" data-lang="csidh9">
+                    <strong class="text-xl text-accent">PEGASIS: Practical Effective Class Group Action using 4-Dimensional Isogenies (2025)</strong>
+                    <p>Pierrick Dartois, Jonathan Komada Eriksen, Tako Boris Fouotsa, Arthur Herlédan Le Merdy, Riccardo Invernizzi, Damien Robert, Ryan Rueger, Frederik Vercauteren, Benjamin Wesolowski attacked the DDH problem in OSIDH.</p>
+                    <p class="mt-2">
+                        <a href="pegasis.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                          PEGASIS: Practical Effective Class Group Action using 4-Dimensional Isogenies
+                        </a> 
+                    </p>
+                </li>
+
+                <li class="mb-2 transition-lang" data-lang="csidh10">
                    
                    The hardness problems in CSIDH and OSIDH reduce to the Hidden Shift Problem, which can be solved in subexponential time on quantum computers. Therefore, these schemes are not practical.
                     
@@ -427,7 +439,7 @@
         </section>
          <!-- SQIHDD部分 -->
         <section class="mb-12 bg-white rounded-xl shadow-lg p-8 card-hover">
-            <h2 class="text-3xl font-bold text-primary mb-6 transition-lang" data-lang="sqihdd-title">Variants of SQIsign</h2>
+            <h2 class="text-3xl font-bold text-primary mb-6 transition-lang" data-lang="sqihdd-title">Variants of SQIsign:SQIsignHD, SQIsignPrime</h2>
             <ol class="list-decimal list-inside text-gray-700 leading-relaxed space-y-6">
                 <li class="mb-2 transition-lang" data-lang="sqihdd1"> 
                     <strong class="text-xl text-accent"> SQIsignHD (2024) </strong>
@@ -441,27 +453,6 @@
                 </li>
                 
                 <li class="mb-2 transition-lang" data-lang="sqihdd2">
-                    <strong class="text-xl text-accent">SQIsign2D-West (2024)</strong>
-                    <p>Andrea Basso, Pierrick Dartois, Luca De Feo, Antonin Leroux, Luciano Maino, Giacomo Pope, Damien Robert, and Benjamin Wesolowski use 2-dimensional isogenies to translate ideals to isogenies, construct auxiliary isogenies, and complete verification. Non-smooth 1-dimensional isogenies are computed using 2-dimensional techniques.</p>
-                    <p class="mt-2">
-                        <a href="West.pdf" class="text-primary hover:underline inline-flex items-center">
-                            <i class="fa fa-file-pdf-o mr-2"></i>
-                           SQIsign2D–West: The Fast, the Small, and the Safer
-                        </a> 
-                    </p>
-                </li>    
-                
-                <li class="mb-2 transition-lang" data-lang="sqihdd3">
-                    <strong class="text-xl text-accent">SQIsign2D-East (2024)</strong>
-                    <p>Kohei Nakagawa, Hiroshi Onuki, Wouter Castryck, Mingjie Chen, Riccardo Invernizzi, Gioella Lorenzon, and Frederik Vercauteren differ from West in that East does not translate ideals to isogenies. Instead, it uses properties of Eichler orders to directly find auxiliary isogenies on the public-key curve, still using 2-dimensional isogeny techniques.</p>
-                    <p class="mt-2">
-                        <a href="East.pdf" class="text-primary hover:underline inline-flex items-center">
-                            <i class="fa fa-file-pdf-o mr-2"></i>
-                          SQIsign2D-East: A New Signature Scheme Using 2-Dimensional Isogenies
-                        </a> 
-                    </p>
-                </li>  
-<li class="mb-2 transition-lang" data-lang="sqihdd4">
     <strong class="text-xl text-accent">SQIPrime（2024年, Asiacrypt）</strong>
     <p> Max Duparc and Tako Boris Fouotsa adjusted the degree of the challenge isogeny to make it non-smooth.</p>
     <p class="mt-2">
@@ -471,9 +462,53 @@
       </a>
     </p>
   </li>
+            </ol>
+        </section>
+           <!-- SQIW部分 -->
+  <section class="mb-12 bg-white rounded-xl shadow-lg p-8 card-hover">
+            <h2 class="text-3xl font-bold text-primary mb-6 transition-lang" data-lang="sqiw-title">Variants of SQIsign:SQIsign2DWest</h2>
+            <ol class="list-decimal list-inside text-gray-700 leading-relaxed space-y-6">
+                <li class="mb-2 transition-lang" data-lang="sqiw1">
+                    <strong class="text-xl text-accent">SQIsign2D-West (2024)</strong>
+                    <p>Andrea Basso, Pierrick Dartois, Luca De Feo, Antonin Leroux, Luciano Maino, Giacomo Pope, Damien Robert, and Benjamin Wesolowski use 2-dimensional isogenies to translate ideals to isogenies, construct auxiliary isogenies, and complete verification. Non-smooth 1-dimensional isogenies are computed using 2-dimensional techniques.</p>
+                    <p class="mt-2">
+                        <a href="West.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                           SQIsign2D–West: The Fast, the Small, and the Safer
+                        </a> 
+                    </p> 
+                </li>   
+                <li class="mb-2 transition-lang" data-lang="sqiw2">
+                    <strong class="text-xl text-accent">Qlapoti (2024)</strong>
+                    <p>Giacomo Borin, Maria Corte-Real Santos, Jonathan Komada Eriksen, Riccardo Invernizzi, Marzio Mula, Sina Schaeffler, Frederik Vercauteren use 2-dimensional isogenies to translate ideals to isogenies, construct auxiliary isogenies, and complete verification. Non-smooth 1-dimensional isogenies are computed using 2-dimensional techniques.</p>
+                    <p class="mt-2">
+                        <a href="Qlapoti.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                           Qlapoti: Simple and Efficient Translation of Quaternion Ideals to Isogenies
+                        </a> 
+                    </p>
+                </li>  
+                            </ol>
+        </section> 
+
+           <!-- SQIE部分 -->
+                <section class="mb-12 bg-white rounded-xl shadow-lg p-8 card-hover">
+            <h2 class="text-3xl font-bold text-primary mb-6 transition-lang" data-lang="sqie-title">Variants of SQIsign:SQIsign2DEast</h2>
+            <ol class="list-decimal list-inside text-gray-700 leading-relaxed space-y-6">
+                <li class="mb-2 transition-lang" data-lang="sqie1">
+                    <strong class="text-xl text-accent">SQIsign2D-East (2024)</strong>
+                    <p>Kohei Nakagawa, Hiroshi Onuki, Wouter Castryck, Mingjie Chen, Riccardo Invernizzi, Gioella Lorenzon, and Frederik Vercauteren differ from West in that East does not translate ideals to isogenies. Instead, it uses properties of Eichler orders to directly find auxiliary isogenies on the public-key curve, still using 2-dimensional isogeny techniques.</p>
+                    <p class="mt-2">
+                        <a href="East.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                          SQIsign2D-East: A New Signature Scheme Using 2-Dimensional Isogenies
+                        </a> 
+                    </p>
+                </li>  
 
 
-                <li class="mb-2 transition-lang" data-lang="sqihdd5">
+
+                <li class="mb-2 transition-lang" data-lang="sqie2">
                     <strong class="text-xl text-accent">SQIsign2D\\(^2\\)(2025)</strong>
                     <p>Zheng Xu, Kaizhan Lin, Chang-An Zhao, and Yi Ouyang reduce 2-dimensional isogeny computations by leveraging 1-dimensional isogenies compared to East.</p>
                     <p class="mt-2">
@@ -483,7 +518,7 @@
                         </a> 
                     </p>
                 </li>  
-                 <li class="mb-2 transition-lang" data-lang="sqihdd6">
+                 <li class="mb-2 transition-lang" data-lang="sqie3">
                     <strong class="text-xl text-accent">SQIsign2DPush (2025)</strong>
                     <p>Kohei Nakagawa and Hiroshi Onuki differ from East in that SQIsign2DPush finds an isogeny of degree d on the initial curve and pulls it back to form the auxiliary isogeny.</p>
                     <p class="mt-2">
@@ -493,7 +528,7 @@
                         </a> 
                     </p>
                 </li> 
-                 <li class="mb-2 transition-lang" data-lang="sqihdd7">
+                 <li class="mb-2 transition-lang" data-lang="sqie4">
                     <strong class="text-xl text-accent">Summary</strong>
                     <p>Through these optimizations and variants, the efficiency of the SQIsign family has been significantly improved, making it competitive in post-quantum signatures.</p>
                 </li> 
@@ -541,7 +576,7 @@
                     </p>
                 `,
                 'isogeny-attack2-item': `
-                    <strong class="text-xl text-accent">SIDH的主动攻击提出（2016年, Asiacrypt）</strong>
+                    <strong class="text-xl text-accent">SIDH的主动攻击提出（2016年, 亚密）</strong>
                     <p>Steven D. Galbraith、Christophe Petit、Barak Shani 和 Yan Bo Ti首次提出对SIDH的主动攻击.
 </p>
                     <p class="mt-2">
@@ -552,7 +587,7 @@
                     </p>
                 `,
                 'isogeny-attack3-item': `
-                    <strong class="text-xl text-accent">SIDH的被动攻击提出（2017年, Asiacrypt; 2021 年, Crypto）</strong>
+                    <strong class="text-xl text-accent">SIDH的被动攻击提出（2017年, 亚密; 2021 年, 美密）</strong>
                     <p>Christophe Petit 提出了Torsion Point Attack, 之后Victoria de Quehen、Peter Kutas、Chris Leonardi、Chloe Martindale、Lorenz Panny、Christophe Petit 和 Katherine E. Stange 进一步改进. 但要求交互双方所需参数差距过大.(将计算同源问题转化为解四元数代数中的 Diophantine 方程问题)
 </p>
                     <p class="mt-2">
@@ -568,7 +603,7 @@
                     </p>
                 `,
                  'isogeny-attack4-item': `
-                    <strong class="text-xl text-accent">通过解决HSP问题的被动攻击（2021年, Eurocrypt） </strong>
+                    <strong class="text-xl text-accent">通过解决HSP问题的被动攻击（2021年, 欧密） </strong>
                     <p>Peter Kutas、Simon-Philipp Merz、Christophe Petit 和 Charlotte Weitkamper 通过量子计算机可以求解Hidden Shift Problem的特性提出了新的攻击. 但未攻破.
 
 </p>
@@ -580,7 +615,7 @@
                     </p>
                 `,
                 'isogeny-attack5-item': `
-                    <strong class="text-xl text-accent">初始曲线特殊下攻破SIDH（2023年, Eurocrypt）</strong>
+                    <strong class="text-xl text-accent">初始曲线特殊下攻破SIDH（2023年, 欧密）</strong>
                     <p>Wouter Castryck 和 Thomas Decru 通过高维Abel簇上的Kani定理攻破了初始曲线特殊(j-不变量是1728)的SIDH.
 
 </p>
@@ -592,7 +627,7 @@
                     </p>
                 `,
                 'isogeny-attack6-item': `
-                    <strong class="text-xl text-accent">分析一般情形下的SIDH（2023年, Eurocrypt）</strong>
+                    <strong class="text-xl text-accent">分析一般情形下的SIDH（2023年, 欧密）</strong>
                     <p> Luciano Maino、Chloe Martindale、Lorenz Panny、Giacomo Pope 和 Benjamin Wesolowski对一般情形下的SIDH进行分析, 得到了一些攻击但都不是多项式时间的.
 
 
@@ -605,7 +640,7 @@
                     </p>
                 `,
                 'isogeny-attack7-item': `
-                    <strong class="text-xl text-accent">完全攻破SIDH（2023年, Eurocrypt）</strong>
+                    <strong class="text-xl text-accent">完全攻破SIDH（2023年, 欧密）</strong>
                     <p> Damien Robert 通过八维Abel簇达到对SIDH的完全攻破.
 
 </p>
@@ -622,7 +657,7 @@
                 `,
                 'endomorphism-title': 'SIDH的修改方案',
                 'endomorphism-attack1-item': `
-                    <strong class="text-xl text-accent">M-SIDH的提出(2023年, Eurocrypt)</strong>
+                    <strong class="text-xl text-accent">M-SIDH的提出(2023年, 欧密)</strong>
                     <p>Tako Boris Fouotsa、Tomoki Moriya 和 Christophe Petit 提出了M-SIDH, 通过隐藏像点达到安全.
 </p>
                     <p class="mt-2">
@@ -633,7 +668,7 @@
                     </p>
                 `,
                 'endomorphism-attack2-item': `
-                    <strong class="text-xl text-accent">加密FESTA的提出(2023年, Asiacrypt; 2024年, Crypto)</strong>
+                    <strong class="text-xl text-accent">加密FESTA的提出(2023年, 亚密; 2024年, 美密)</strong>
                     <p>Andrea Basso、Luciano Maino 和 Giacomo Pope 通过隐藏像点提出了加密FESTA, Kohei Nakagawa and Hiroshi Onuki进一步提出了QFESTA.
 </p>
                     <p class="mt-2">
@@ -650,7 +685,7 @@
                     </p>
                 `,
                 'endomorphism-attack3-item': `
-                    <strong class="text-xl text-accent">bin-SIDH的提出(2023年, Asiacrypt)</strong>
+                    <strong class="text-xl text-accent">bin-SIDH的提出(2023年, 亚密)</strong>
                     <p> Andrea Basso 和 Tako Boris Fouotsa提出新的bin-SIDH和ter-SIDH, 通过选择不同的子群达到安全性.
 
 </p> 
@@ -663,7 +698,7 @@
                 `,
 
                   'endomorphism-attack4-item': `
-    <strong class="text-xl text-accent">对MSIDH 和 FESTA的攻击 (2023, Asiacrypt)</strong>
+    <strong class="text-xl text-accent">对MSIDH 和 FESTA的攻击 (2023, 亚密)</strong>
     <p>Wouter Castryck 和 Frederik Vercauteren 提出了针对MSIDH 和 FESTA的攻击. 对定义在\\(\\mathbb{F}_p\\)上的初始曲线的MSIDH会产生攻击, 其他情形不会造成影响. 对几乎所有的FESTA都不会造成影响.</p>
     <p class="mt-2">
       <a href="breakmsidh.pdf" class="text-primary hover:underline inline-flex items-center">
@@ -682,7 +717,7 @@
                 'csidh-title': 'CSIDH',
 
   'csidh1': `
-    <strong class="text-xl text-accent">起源（2018 年, Asiacrypt）</strong>
+    <strong class="text-xl text-accent">起源（2018 年, 亚密）</strong>
     <p>Wouter Castryck、Tanja Lange、Chloe Martindale、Lorenz Panny 和 Joost Renes 首次提出了基于 \\(\\mathbb{F}_p\\) 上的超奇异椭圆曲线同源的密钥交换协议 CSIDH。其特点是定义在 \\(\\mathbb{F}_p\\) 上的椭圆曲线，类似于具有复乘的普通曲线，涉及理想类群（\\(\\mathbb{Z}[\\pi_p]\\) 或 \\(\\mathbb{Z}[\\frac{1+ \\pi_p}{2}]\\)）的作用，易受到量子攻击。</p>
     <p class="mt-2">
       <a href="CSIDH.pdf" class="text-primary hover:underline inline-flex items-center">
@@ -704,7 +739,7 @@
   `,
 
   'csidh3': `
-    <strong class="text-xl text-accent">签名 CSI-FiSh 和 SeaSign 的提出（2019年, Asiacrypt ; 2019 年, Eurocrypt）</strong>
+    <strong class="text-xl text-accent">签名 CSI-FiSh 和 SeaSign 的提出（2019年, 亚密; 2019 年, 欧密）</strong>
     <p>Ward Beullens、Thorsten Kleinjung 和 Frederik Vercauteren 提出了基于 CSIDH 的签名方案 CSI-FiSh，Luca De Feo 和 Steven D. Galbraith 提出了 SeaSign。二者的主要区别在于 CSI-FiSh 采用循环理想类群。</p>
     <p class="mt-2">
       <a href="CSI.pdf" class="text-primary hover:underline inline-flex items-center">
@@ -720,7 +755,7 @@
   `,
 
   'csidh4': `
-    <strong class="text-xl text-accent">加密 SiGamal 的提出（2020 年; Asiacrypt）</strong>
+    <strong class="text-xl text-accent">加密 SiGamal 的提出（2020 年, 亚密）</strong>
     <p>Tomoki Moriya、Hiroshi Onuki 和 Tsuyoshi Takagi 提出了基于 CSIDH 的加密方案 SiGamal。</p>
     <p class="mt-2">
       <a href="SiGamal.pdf" class="text-primary hover:underline inline-flex items-center">
@@ -731,7 +766,7 @@
   `,
 
   'csidh5': `
-    <strong class="text-xl text-accent">CSIDH 的 DDH 问题被攻击（2020 年, Crypto）</strong>
+    <strong class="text-xl text-accent">CSIDH 的 DDH 问题被攻击（2020 年, 美密）</strong>
     <p>Wouter Castryck、Jana Sotakova 和 Frederik Vercauteren 利用二次特征（genus 理论）攻击了\\(p\\equiv 1\\pmod 4\\)时 CSIDH 中的 Decisional Diffie–Hellman（DDH）问题。</p>
     <p class="mt-2">
       <a href="BreakingDDH.pdf" class="text-primary hover:underline inline-flex items-center">
@@ -742,7 +777,7 @@
   `,
 
   'csidh6': `
-    <strong class="text-xl text-accent">利用 SIDH 方法攻击 CSIDH（2023 年, Crypto）</strong>
+    <strong class="text-xl text-accent">利用 SIDH 方法攻击 CSIDH（2023 年, 美密）</strong>
     <p>Wouter Castryck、Marc Houben、Simon-Philipp Merz、Marzio Mula、Sam van Buuren 和 Frederik Vercauteren 通过 Frobenius 自同态的特征向量所生成群之间的对应关系，再借助配对方法计算出像点，使用类似 SIDH 的方法攻击 CSIDH，但由于 Tate 配对的局限性，此方法并未取得实质突破。</p>
     <p class="mt-2">
       <a href="Weak.pdf" class="text-primary hover:underline inline-flex items-center">
@@ -774,7 +809,18 @@
     </p>
   `,
 
-  'csidh9': `
+   'csidh9': `
+  <strong class="text-xl text-accent">PEGASIS: Practical Effective Class Group Action using 4-Dimensional Isogenies (2025, 美密)</strong>
+                    <p>Pierrick Dartois、 Jonathan Komada Eriksen、 Tako Boris Fouotsa、 Arthur Herlédan Le Merdy、 Riccardo Invernizzi、 Damien Robert、 Ryan Rueger、 Frederik Vercauteren和 Benjamin Wesolowski 提出了利用高维同源计算类群作用,并将其运用到了CSIDH类的协议中.</p>
+                    <p class="mt-2">
+                        <a href="pegasis.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                          PEGASIS: Practical Effective Class Group Action using 4-Dimensional Isogenies
+                        </a> 
+                    </p>
+          `,
+
+  'csidh10': `
   <strong class="text-xl text-accent">总结</strong>
     <p>CSIDH 与 OSIDH 所依赖的困难问题可以约化为 Hidden Shift Problem，该问题在量子计算机上可在亚指数时间内解决，因此这些方案在实际中并不安全。</p>
   `,
@@ -784,7 +830,7 @@
 
                 'sqi-title': 'SQIsign',
   'sqi1': `
-    <strong class="text-xl text-accent">GPSsign的提出（2017年, Asiacrypt）</strong>
+    <strong class="text-xl text-accent">GPSsign的提出（2017年, 亚密）</strong>
     <p>Steven D. Galbraith、Christophe Petit 和 Javier Silva 提出了基于四元数代数的 GPS 签名方案，但该方案需要进行多轮交互，因此签名长度较长。</p>
     <p class="mt-2">
       <a href="GPS.pdf" class="text-primary hover:underline inline-flex items-center">
@@ -795,7 +841,7 @@
   `,
 
   'sqi2': `
-    <strong class="text-xl text-accent">SQIsign的提出（2020年, Asiacrypt）</strong>
+    <strong class="text-xl text-accent">SQIsign的提出（2020年, 亚密）</strong>
     <p>Luca De Feo、David Kohel、Antonin Leroux、Christophe Petit 和 Benjamin Wesolowski 提出了基于四元数代数的 SQIsign 签名方案。其公钥和签名尺寸是 NIST 征集的所有候选签名中最短的，主要基于 Sigma 协议与 KLPT 算法来寻找等价理想。</p>
     <p class="mt-2">
       <a href="SQISign.pdf" class="text-primary hover:underline inline-flex items-center">
@@ -811,7 +857,7 @@
   `,
    'sqihd-title':'SQIsign的优化',
   'sqihd1': `
-    <strong class="text-xl text-accent">快速 SQIsign（2023 年, Eurocrypt）</strong>
+    <strong class="text-xl text-accent">快速 SQIsign（2023 年, 欧密）</strong>
     <p>Luca De Feo、Antonin Leroux、Patrick Longa 和 Benjamin Wesolowski 通过修改计算四元数代数中元素的方法，使得 SQIsign 中第一步的输出更加均匀。同时优化了理想到同源的转化过程。</p>
     <p class="mt-2">
       <a href="FastSQISign.pdf" class="text-primary hover:underline inline-flex items-center">
@@ -833,7 +879,7 @@
   `,
 
   'sqihd3': `
-    <strong class="text-xl text-accent">在扩张域上的 SQIsign（2024 年, Eurocrypt）</strong>
+    <strong class="text-xl text-accent">在扩张域上的 SQIsign（2024 年, 欧密）</strong>
     <p>Maria Corte-Real Santos、Jonathan Komada Eriksen、Michael Meyer 和 Krijn Reijnders 扩大了 SQIsign 中有理点的定义域，从而增加了可用点的数量，实现加速验证过程的目的。</p>
     <p class="mt-2">
       <a href="aps.pdf" class="text-primary hover:underline inline-flex items-center">
@@ -843,7 +889,7 @@
     </p>
   `,
   'sqihd4':`
-    <strong class="text-xl text-accent">利用高维同源加速SQIsign的理想转同源过程（2024 年, Asiacrypt）</strong>
+    <strong class="text-xl text-accent">利用高维同源加速SQIsign的理想转同源过程（2024 年, 亚密）</strong>
     <p> Hiroshi Onuki 和 Kohei Nakagawa 通过高维同源的计算加速了理想转同源的过程。</p>
     <p class="mt-2">
       <a href="idealto.pdf" class="text-primary hover:underline inline-flex items-center">
@@ -853,9 +899,9 @@
     </p>
   `,
 
-   'sqihdd-title':'SQIsign的变种',
+   'sqihdd-title':'SQIsign的变种:SQIsignHD, SQIsignPrime',
   'sqihdd1': `
-    <strong class="text-xl text-accent">SQIsignHD（2024年, Eurocrypt）</strong>
+    <strong class="text-xl text-accent">SQIsignHD（2024年, 欧密）</strong>
     <p>Pierrick Dartois、Antonin Leroux、Damien Robert 和 Benjamin Wesolowski 通过 SIDH 攻击的方法，取消了输出同源次数需要光滑的条件。只需计算输出同源的像点，并在验证中利用四维 SIDH 攻击进行恢复。由于不再要求光滑性，KLPT 算法也被修改为随机选取等价理想。</p>
     <p class="mt-2">
       <a href="HD.pdf" class="text-primary hover:underline inline-flex items-center">
@@ -866,7 +912,18 @@
   `,
 
   'sqihdd2': `
-    <strong class="text-xl text-accent">SQIsign2D-West（2024年, Asiacrypt）</strong>
+    <strong class="text-xl text-accent">SQIPrime（2024年, 亚密）</strong>
+    <p> Max Duparc 和 Tako Boris Fouotsa调整了挑战同源的次数使其为非光滑的。</p>
+    <p class="mt-2">
+      <a href="prime.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+       SQIPrime: A Dimension 2 Variant of SQISignHD with Non-smooth Challenge Isogenies
+      </a>
+    </p>
+  `, 
+ 'sqiw-title':'SQIsign的变种:SQIsign2DWest',
+  'sqiw1': `
+    <strong class="text-xl text-accent">SQIsign2D-West（2024年, 亚密）</strong>
     <p>Andrea Basso、Pierrick Dartois、Luca De Feo、Antonin Leroux、Luciano Maino、Giacomo Pope、Damien Robert 和 Benjamin Wesolowski 采用二维同源方法完成理想到同源的转化，构造辅助同源并完成验证。所有一维非光滑同源均通过二维同源进行计算。</p>
     <p class="mt-2">
       <a href="West.pdf" class="text-primary hover:underline inline-flex items-center">
@@ -874,10 +931,22 @@
         SQIsign2D–West: The Fast, the Small, and the Safer
       </a>
     </p>
-  `,
+  `, 
 
-  'sqihdd3': `
-    <strong class="text-xl text-accent">SQIsign2D-East（2024年, Asiacrypt）</strong>
+  'sqiw2': `
+  <strong class="text-xl text-accent">Qlapoti (2025年, 亚密)</strong>
+                    <p>Giacomo Borin、 Maria Corte-Real Santos、 Jonathan Komada Eriksen、 Riccardo Invernizzi、 Marzio Mula、 Sina Schaeffler和 Frederik Vercauteren 直接寻找等价理想\\(I_1, I_2\\)(其中\\(\\mathrm{Nrd}(I_1)=d_1, \\mathrm{Nrd}(I_2)= d_2\\))满足\\(d_1+d_2= 2^e\\)而非West中的寻找正整数\\(u,v\\)使得\\(ud_1+ vd_2=2^e\\).</p>
+                    <p class="mt-2">
+                        <a href="Qlapoti.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                           Qlapoti: Simple and Efficient Translation of Quaternion Ideals to Isogenies
+                        </a> 
+                    </p>
+   `,
+
+'sqie-title':'SQIsign的变种:SQIsign2DEast',
+  'sqie1': `
+    <strong class="text-xl text-accent">SQIsign2D-East（2024年, 亚密）</strong>
     <p>Kohei Nakagawa、Hiroshi Onuki、Wouter Castryck、Mingjie Chen、Riccardo Invernizzi、Gioella Lorenzon 和 Frederik Vercauteren 提出的 SQIsign2D-East 与 West 不同，它不采用理想转同源，而是利用 Eichler order 的性质，直接在公钥曲线上寻找辅助同源来完成验证。方法依然基于二维同源技术。</p>
     <p class="mt-2">
       <a href="East.pdf" class="text-primary hover:underline inline-flex items-center">
@@ -887,19 +956,10 @@
     </p>
   `,
 
-  'sqihdd4': `
-    <strong class="text-xl text-accent">SQIPrime（2024年, Asiacrypt）</strong>
-    <p> Max Duparc 和 Tako Boris Fouotsa调整了挑战同源的次数使其为非光滑的。</p>
-    <p class="mt-2">
-      <a href="prime.pdf" class="text-primary hover:underline inline-flex items-center">
-        <i class="fa fa-file-pdf-o mr-2"></i>
-       SQIPrime: A Dimension 2 Variant of SQISignHD with Non-smooth Challenge Isogenies
-      </a>
-    </p>
-  `,
+  
 
-  'sqihdd5': `
-    <strong class="text-xl text-accent">SQIsign2D\\(^2\\)（2025年, Preprint）</strong>
+  'sqie2': `
+    <strong class="text-xl text-accent">SQIsign2D\\(^2\\)（2025年, 亚密）</strong>
     <p>徐铮、林楷展、赵昌安 和 欧阳毅 相较于 East，提出利用一维同源技术来减少二维同源的计算，从而优化 SQIsign。</p>
     <p class="mt-2">
       <a href="2d.pdf" class="text-primary hover:underline inline-flex items-center">
@@ -909,7 +969,7 @@
     </p>
   `,
 
-  'sqihdd6': `
+  'sqie3': `
     <strong class="text-xl text-accent">SQIsign2DPush（2025年, Preprint）</strong>
     <p>Kohei Nakagawa 和 Hiroshi Onuki 相比 East 的方法，在初始曲线上寻找次数为 \\(d\\) 的同源，再将其“拉回”以形成辅助同源，从而完成验证。</p>
     <p class="mt-2">
@@ -920,7 +980,7 @@
     </p>
   `,
 
-  'sqihdd7': `
+  'sqie4': `
     <strong class="text-xl text-accent">总结</strong>
     <p>通过这些优化和变种，SQIsign 系列的效率得到了显著提升，使其在后量子签名领域更具竞争力。</p>
   `,
@@ -1175,7 +1235,18 @@
     </p>
   `,
 
-  'csidh9': `
+   'csidh9': `
+  <strong class="text-xl text-accent">PEGASIS: Practical Effective Class Group Action using 4-Dimensional Isogenies (2025, Crypto)</strong>
+                    <p>Pierrick Dartois, Jonathan Komada Eriksen, Tako Boris Fouotsa, Arthur Herlédan Le Merdy, Riccardo Invernizzi, Damien Robert, Ryan Rueger, Frederik Vercauteren, Benjamin Wesolowski propose to use high-dimensional isogeny computation for class group actions and apply it to CSIDH-type protocols.</p>
+                    <p class="mt-2">
+                        <a href="pegasis.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                          PEGASIS: Practical Effective Class Group Action using 4-Dimensional Isogenies
+                        </a> 
+                    </p>
+          `,
+
+  'csidh10': `
   <strong class="text-xl text-accent">Summary</strong>
     <p>The hardness problems in CSIDH and OSIDH reduce to the Hidden Shift Problem, which can be solved in subexponential time on quantum computers. Therefore, these schemes are not practical.</p>
   `,
@@ -1257,7 +1328,7 @@
     </p>
   `,
 
-'sqihdd-title':'Variants of SQIsign',
+'sqihdd-title':'Variants of SQIsign:SQIsignHD, SQIsignPrime',
   'sqihdd1': `
     <strong class="text-xl text-accent">SQIsignHD (2024, Eurocrypt)</strong>
     <p>Pierrick Dartois, Antonin Leroux, Damien Robert and Benjamin Wesolowski removed the requirement for smooth isogeny degrees using SIDH attack techniques. Instead, they compute image points of the output isogeny and recover them during verification using a 4-dimensional SIDH attack. The KLPT algorithm is modified to randomly select equivalent ideals since smoothness is no longer required.</p>
@@ -1268,30 +1339,7 @@
       </a>
     </p>
   `,
-
   'sqihdd2': `
-    <strong class="text-xl text-accent">SQIsign2D-West (2024, Asiacrypt)</strong>
-    <p>Andrea Basso, Pierrick Dartois, Luca De Feo, Antonin Leroux, Luciano Maino, Giacomo Pope, Damien Robert and Benjamin Wesolowski use 2-dimensional isogenies to translate ideals to isogenies, construct auxiliary isogenies, and complete verification. Non-smooth 1-dimensional isogenies are computed using 2-dimensional techniques.</p>
-    <p class="mt-2">
-      <a href="West.pdf" class="text-primary hover:underline inline-flex items-center">
-        <i class="fa fa-file-pdf-o mr-2"></i>
-        SQIsign2D–West: The Fast, the Small, and the Safer
-      </a>
-    </p>
-  `,
-
-  'sqihdd3': `
-    <strong class="text-xl text-accent">SQIsign2D-East (2024, Asiacrypt)</strong>
-    <p>Kohei Nakagawa, Hiroshi Onuki, Wouter Castryck, Mingjie Chen, Riccardo Invernizzi, Gioella Lorenzon and Frederik Vercauteren differ from West in that East does not translate ideals to isogenies. Instead, it uses properties of Eichler orders to directly find auxiliary isogenies on the public-key curve, still using 2-dimensional isogeny techniques.</p>
-    <p class="mt-2">
-      <a href="East.pdf" class="text-primary hover:underline inline-flex items-center">
-        <i class="fa fa-file-pdf-o mr-2"></i>
-        SQIsign2D-East: A New Signature Scheme Using 2-Dimensional Isogenies
-      </a>
-    </p>
-  `,
-   
-'sqihdd4': `
     <strong class="text-xl text-accent">SQIPrime（2024, Asiacrypt）</strong>
     <p> Max Duparc and Tako Boris Fouotsa adjusted the degree of the challenge isogeny to make it non-smooth.</p>
     <p class="mt-2">
@@ -1302,8 +1350,46 @@
     </p>
   `,
 
-  'sqihdd5': `
-    <strong class="text-xl text-accent">SQIsign2D\\(^2\\) (2025, Preprint)</strong>
+'sqiw-title':'Variants of SQIsign:SQIsign2DWest',
+  'sqiw1': `
+    <strong class="text-xl text-accent">SQIsign2D-West (2024, Asiacrypt)</strong>
+    <p>Andrea Basso, Pierrick Dartois, Luca De Feo, Antonin Leroux, Luciano Maino, Giacomo Pope, Damien Robert and Benjamin Wesolowski use 2-dimensional isogenies to translate ideals to isogenies, construct auxiliary isogenies, and complete verification. Non-smooth 1-dimensional isogenies are computed using 2-dimensional techniques.</p>
+    <p class="mt-2">
+      <a href="West.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        SQIsign2D–West: The Fast, the Small, and the Safer
+      </a>
+    </p>
+  `,
+  'sqiw2': `
+  <strong class="text-xl text-accent">Qlapoti (2025, Asiacrypt)</strong>
+                    <p>Giacomo Borin, Maria Corte-Real Santos, Jonathan Komada Eriksen, Riccardo Invernizzi, Marzio Mula, Sina Schaeffler, Frederik Vercauteren directly find equivalent ideals \\(I_1, I_2\\) (where \\(\\mathrm{Nrd}(I_1) = d_1\\), \\(\\mathrm{Nrd}(I_2) = d_2\\)) satisfying \\(d_1 + d_2 = 2^e\\), instead of finding positive integers \\(u, v\\) such that \\(u d_1 + v d_2 = 2^e\\) as in SQIsign2DWest.
+</p>
+                    <p class="mt-2">
+                        <a href="Qlapoti.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                           Qlapoti: Simple and Efficient Translation of Quaternion Ideals to Isogenies
+                        </a> 
+                    </p>
+   `,
+
+
+'sqie-title':'Variants of SQIsign:SQIsign2DEast',
+  'sqie1': `
+    <strong class="text-xl text-accent">SQIsign2D-East (2024, Asiacrypt)</strong>
+    <p>Kohei Nakagawa, Hiroshi Onuki, Wouter Castryck, Mingjie Chen, Riccardo Invernizzi, Gioella Lorenzon and Frederik Vercauteren differ from West in that East does not translate ideals to isogenies. Instead, it uses properties of Eichler orders to directly find auxiliary isogenies on the public-key curve, still using 2-dimensional isogeny techniques.</p>
+    <p class="mt-2">
+      <a href="East.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        SQIsign2D-East: A New Signature Scheme Using 2-Dimensional Isogenies
+      </a>
+    </p>
+  `,
+   
+
+
+  'sqie2': `
+    <strong class="text-xl text-accent">SQIsign2D\\(^2\\) (2025, Asiacrypt)</strong>
     <p>Zheng Xu, Kaizhan Lin, Chang-An Zhao and Yi Ouyang reduce 2-dimensional isogeny computations by leveraging 1-dimensional isogenies compared to East.</p>
     <p class="mt-2">
       <a href="2d.pdf" class="text-primary hover:underline inline-flex items-center">
@@ -1313,7 +1399,7 @@
     </p>
   `,
 
-  'sqihdd6': `
+  'sqie3': `
     <strong class="text-xl text-accent">SQIsign2DPush (2025, Preprint)</strong>
     <p>Kohei Nakagawa and Hiroshi Onuki differ from East in that SQIsign2DPush finds an isogeny of degree d on the initial curve and pushes it as the auxiliary isogeny.</p>
     <p class="mt-2">
@@ -1324,7 +1410,7 @@
     </p>
   `,
 
-  'sqihdd7': `
+  'sqie4': `
     <strong class="text-xl text-accent">Summary</strong>
     <p>Through these optimizations and variants, the efficiency of the SQIsign family has been significantly improved, making it competitive in post-quantum signatures.</p>
   `,
