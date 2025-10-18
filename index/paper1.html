@@ -254,12 +254,22 @@
   `,
 
  'csidh2': `
-    <strong class="text-xl text-accent"> CSIDH 的亚指数时间攻击 (2014, J. Math. Cryptol)</strong>
-    <p> Andrew Childs, David Jao 和 Vladimir Soukharev 给出了亚指数时间攻击Hidden Shift Problem的方法, 从而攻击了CSIDH。</p>
+    <strong class="text-xl text-accent"> CSIDH 的亚指数时间攻击 (2014年, J. Math. Cryptol; 2020年, 欧密; 2019年, 欧密)</strong>
+    <p> Andrew Childs, David Jao 和 Vladimir Soukharev 给出了亚指数时间攻击Hidden Shift Problem的方法, 从而攻击了CSIDH。 而Xavier Bonnetain 和 André Schrottenloher给出了量子计算下CSIDH安全性分析。Daniel J. Bernstein, Tanja Lange, Chloe Martindale 和Lorenz Panny 给出了CSIDH在具体量子线路上的攻击及优化。</p>
     <p class="mt-2">
       <a href="subexponential.pdf" class="text-primary hover:underline inline-flex items-center">
         <i class="fa fa-file-pdf-o mr-2"></i>
         Constructing Elliptic Curve Isogenies in Quantum Subexponential Time
+      </a>
+    </p>
+    <a href="qucsidh.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+       Quantum Security Analysis of CSIDH
+      </a>
+    </p>
+     <a href="QuantumCircuits.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+       Quantum Circuits for the CSIDH: Optimizing Quantum Evaluation of Isogenies
       </a>
     </p>
   `,
@@ -390,15 +400,27 @@
   `,
 
 'csidh2': `
-    <strong class="text-xl text-accent">Subexponential Time Attack on CSIDH (2014, J. Math. Cryptol)</strong>
-    <p> Andrew Childs, David Jao, and Vladimir Soukharev proposed a subexponential time approach to attack the Hidden Shift Problem, thus attacked CSIDH. </p>
+    <strong class="text-xl text-accent">Subexponential Time Attack on CSIDH (2014, J. Math. Cryptol; 2020, Eurocrypt; 2019, Eurocrypt)</strong>
+    <p> Andrew Childs, David Jao, and Vladimir Soukharev proposed a subexponential time approach to attack the Hidden Shift Problem, thus attacked CSIDH. Xavier Bonnetain and André Schrottenloher provided an analysis of the security of CSIDH under quantum computing. Daniel J. Bernstein, Tanja Lange, Chloe Martindale and Lorenz Panny presented attacks and optimizations on CSIDH in specific quantum circuits.</p>
     <p class="mt-2">
       <a href="subexponential.pdf" class="text-primary hover:underline inline-flex items-center">
         <i class="fa fa-file-pdf-o mr-2"></i>
         Constructing Elliptic Curve Isogenies in Quantum Subexponential Time
       </a>
     </p>
-  `,
+     <a href="qucsidh.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+       Quantum Security Analysis of CSIDH
+      </a>
+    </p>
+     <a href="QuantumCircuits.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+       Quantum Circuits for the CSIDH: Optimizing Quantum Evaluation of Isogenies
+      </a>
+    </p>
+  `, 
+
+
   'csidh3': `
     <strong class="text-xl text-accent">Signature Schemes CSI-FiSh and SeaSign (2019, Asiacrypt; 2019, Eurocrypt)</strong>
     <p>Ward Beullens, Thorsten Kleinjung and Frederik Vercauteren proposed CSI-FiSh, a signature scheme based on CSIDH. Luca De Feo and Steven D. Galbraith proposed SeaSign. The main difference is that CSI-FiSh uses a cyclic ideal class group.</p>
