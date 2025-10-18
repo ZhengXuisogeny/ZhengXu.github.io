@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <title>Introduction to Isogeny-Based Cryptography</title>
+    
+    <!-- Tailwind 配置 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                        secondary: '#36CFC9',
+                        accent: '#722ED1',
+                        dark: '#1D2129',
+                        light: '#F2F3F5'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-balance {
+                text-wrap: balance;
+            }
+            .transition-lang {
+                transition: opacity 0.3s ease, transform 0.3s ease;
+            }
+            .card-hover {
+                transition: all 0.3s ease;
+            }
+            .card-hover:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-light font-sans text-dark">
+    <!-- 语言切换按钮 -->
+    <button id="langButton" class="fixed top-6 right-6 bg-primary text-white px-4 py-2 rounded-lg shadow-lg hover:bg-primary/90 transition-all z-50 flex items-center">
+        <i class="fa fa-language mr-2"></i>
+        <span id="langText">中文</span>
+    </button>
+
+    <header class="bg-gradient-to-r from-primary to-accent text-white text-center py-12 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-20">
+            <div class="absolute top-0 left-0 w-full h-full bg-[url('https://picsum.photos/id/180/1200/400')] bg-cover bg-center"></div>
+        </div>
+        <div class="container mx-auto relative z-10">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 transition-lang" data-lang="title">SQIsign</h1>
+           
+        </div>
+    </header>
+    
+    <main class="container mx-auto p-6 md:p-10">
+        <!-- 概述部分 -->
+        <section class="mb-12 bg-white rounded-xl shadow-lg p-8 card-hover">
+            <h2 class="text-3xl font-bold text-primary mb-6 transition-lang" data-lang="intro-title">SQIsign(Short Quaternion Isogeny Signature)</h2>
+            <p class="text-gray-700 leading-relaxed text-balance transition-lang" data-lang="intro-content">
+        Isogeny-based cryptography is a type of cryptographic technique that relies on elliptic curve isogenies and offers the advantage of short sizes.
+            </p> 
+        </section>
+        
+        <!-- SQI部分 -->
+        <section class="mb-12 bg-white rounded-xl shadow-lg p-8 card-hover">
+            <h2 class="text-3xl font-bold text-primary mb-6 transition-lang" data-lang="sqi-title">SQIsign</h2>
+            <ol class="list-decimal list-inside text-gray-700 leading-relaxed space-y-6">
+                <li class="mb-2 transition-lang" data-lang="sqi1"> 
+                    <strong class="text-xl text-accent"> GPSsign (2017) </strong>
+                    <p>Steven D. Galbraith, Christophe Petit, and Javier Silva proposed GPSsign, a signature scheme based on quaternion algebras. However, it requires multiple rounds, resulting in relatively long signatures.</p>
+                    <p class="mt-2">
+                        <a href="GPS.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                            Identiﬁcation Protocols and Signature Schemes Based on Supersingular Isogeny Problems
+                        </a>
+                    </p>
+                </li>
+                
+                <li class="mb-2 transition-lang" data-lang="sqi2">
+                    <strong class="text-xl text-accent">SQIsign (2020)</strong>
+                    <p>Luca De Feo, David Kohel, Antonin Leroux, Christophe Petit, and Benjamin Wesolowski proposed SQIsign, a signature scheme based on quaternion algebras. It has the shortest public key and signature sizes among NIST's post-quantum signature candidates. It primarily uses the Sigma protocol and the KLPT algorithm for finding equivalent ideals.</p>
+                    <p class="mt-2">
+                        <a href="SQISign.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                           SQISign: Compact Post-quantum Signatures from Quaternions and Isogenies
+                        </a> 
+                    </p>
+                </li>    
+                
+                <li class="mb-2 transition-lang" data-lang="sqi3">
+                    <strong class="text-xl text-accent">Summary</strong>
+                    <p>As a second-round candidate in NIST's post-quantum signature competition, SQIsign has the smallest public key and signature sizes. It does not leak image points and is not vulnerable to Kuperberg's quantum attack due to its quaternion algebra operations. However, its low efficiency is a drawback.</p>
+                </li> 
+            </ol>
+        </section>
+          
+         <!-- SQIHD部分 -->
+        <section class="mb-12 bg-white rounded-xl shadow-lg p-8 card-hover">
+            <h2 class="text-3xl font-bold text-primary mb-6 transition-lang" data-lang="sqihd-title">Optimizations of SQIsign</h2>
+            <ol class="list-decimal list-inside text-gray-700 leading-relaxed space-y-6">
+                <li class="mb-2 transition-lang" data-lang="sqihd1"> 
+                    <strong class="text-xl text-accent"> Fast SQIsign (2023) </strong>
+                    <p>Luca De Feo, Antonin Leroux, Patrick Longa, and Benjamin Wesolowski modified the method for computing elements in quaternion algebras to ensure uniform output in the first step of SQIsign. They also optimized the ideal-to-isogeny translation process.</p>
+                    <p class="mt-2">
+                        <a href="FastSQISign.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                            New Algorithms for the Deuring Correspondence: Towards Practical and Secure SQISign Signatures
+                        </a>
+                    </p>
+                </li>
+                
+                <li class="mb-2 transition-lang" data-lang="sqihd2">
+                    <strong class="text-xl text-accent">Accelerating SQIsign (2024)</strong>
+                    <p>Kaizhan Lin, Weize Wang, Zheng Xu, and Changan Zhao further optimized the ideal-to-isogeny translation process in SQIsign using norm-trace relations and pairings.</p>
+                    <p class="mt-2">
+                        <a href="Xu.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                           A Faster Software Implementation of SQIsign
+                        </a> 
+                    </p>
+                </li>    
+                
+                <li class="mb-2 transition-lang" data-lang="sqihd3">
+                    <strong class="text-xl text-accent">SQIsign over Extension Fields (2024)</strong>
+                    <p>Maria Corte-Real Santos, Jonathan Komada Eriksen, Michael Meyer, and Krijn Reijnders extended the base field of rational points in SQIsign to increase the number of available points, thereby accelerating the protocol.</p>
+                    <p class="mt-2">
+                        <a href="aps.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                          ApresSQI: Extra Fast Verification for SQIsign Using Extension-Field Signing
+                        </a> 
+                    </p>
+                </li>  
+
+                <li class="mb-2 transition-lang" data-lang="sqihd4">
+                    <strong class="text-xl text-accent">Accelerating the Ideal-to-Isogeny Translation in SQIsign Using High-Dimensional Isogenies (2024, Asiacrypt)</strong>
+    <p> Hiroshi Onuki and Kohei Nakagawa accelerated the Ideal-to-Isogeny translation in SQIsign by high-dimensional isogenies.</p>
+    <p class="mt-2">
+      <a href="idealto.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+       Ideal-to-Isogeny Algorithm Using 2-Dimensional Isogenies and Its Application to SQIsign
+      </a>
+    </p>
+                </li>  
+            </ol>
+        </section>
+         <!-- SQIHDD部分 -->
+        <section class="mb-12 bg-white rounded-xl shadow-lg p-8 card-hover">
+            <h2 class="text-3xl font-bold text-primary mb-6 transition-lang" data-lang="sqihdd-title">Variants of SQIsign:SQIsignHD, SQIsignPrime</h2>
+            <ol class="list-decimal list-inside text-gray-700 leading-relaxed space-y-6">
+                <li class="mb-2 transition-lang" data-lang="sqihdd1"> 
+                    <strong class="text-xl text-accent"> SQIsignHD (2024) </strong>
+                    <p>Pierrick Dartois, Antonin Leroux, Damien Robert, and Benjamin Wesolowski removed the requirement for smooth isogeny degrees using SIDH attack techniques. Instead, they compute image points of the output isogeny and recover them during verification using a 4-dimensional SIDH attack. The KLPT algorithm is modified to randomly select equivalent ideals since smoothness is no longer required.</p>
+                    <p class="mt-2">
+                        <a href="HD.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                            SQIsignHD: New Dimensions in Cryptography
+                        </a>
+                    </p>
+                </li>
+                
+                <li class="mb-2 transition-lang" data-lang="sqihdd2">
+    <strong class="text-xl text-accent">SQIPrime（2024年, Asiacrypt）</strong>
+    <p> Max Duparc and Tako Boris Fouotsa adjusted the degree of the challenge isogeny to make it non-smooth.</p>
+    <p class="mt-2">
+      <a href="prime.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+       SQIPrime: A dimension 2 variant of SQISignHD with non-smooth challenge isogenies
+      </a>
+    </p>
+  </li>
+            </ol>
+        </section>
+           <!-- SQIW部分 -->
+  <section class="mb-12 bg-white rounded-xl shadow-lg p-8 card-hover">
+            <h2 class="text-3xl font-bold text-primary mb-6 transition-lang" data-lang="sqiw-title">Variants of SQIsign:SQIsign2DWest</h2>
+            <ol class="list-decimal list-inside text-gray-700 leading-relaxed space-y-6">
+                <li class="mb-2 transition-lang" data-lang="sqiw1">
+                    <strong class="text-xl text-accent">SQIsign2D-West (2024)</strong>
+                    <p>Andrea Basso, Pierrick Dartois, Luca De Feo, Antonin Leroux, Luciano Maino, Giacomo Pope, Damien Robert, and Benjamin Wesolowski use 2-dimensional isogenies to translate ideals to isogenies, construct auxiliary isogenies, and complete verification. Non-smooth 1-dimensional isogenies are computed using 2-dimensional techniques.</p>
+                    <p class="mt-2">
+                        <a href="West.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                           SQIsign2D–West: The Fast, the Small, and the Safer
+                        </a> 
+                    </p> 
+                </li>   
+                <li class="mb-2 transition-lang" data-lang="sqiw2">
+                    <strong class="text-xl text-accent">Qlapoti (2024)</strong>
+                    <p>Giacomo Borin, Maria Corte-Real Santos, Jonathan Komada Eriksen, Riccardo Invernizzi, Marzio Mula, Sina Schaeffler, Frederik Vercauteren use 2-dimensional isogenies to translate ideals to isogenies, construct auxiliary isogenies, and complete verification. Non-smooth 1-dimensional isogenies are computed using 2-dimensional techniques.</p>
+                    <p class="mt-2">
+                        <a href="Qlapoti.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                           Qlapoti: Simple and Efficient Translation of Quaternion Ideals to Isogenies
+                        </a> 
+                    </p>
+                </li>  
+                            </ol>
+        </section> 
+
+           <!-- SQIE部分 -->
+                <section class="mb-12 bg-white rounded-xl shadow-lg p-8 card-hover">
+            <h2 class="text-3xl font-bold text-primary mb-6 transition-lang" data-lang="sqie-title">Variants of SQIsign:SQIsign2DEast</h2>
+            <ol class="list-decimal list-inside text-gray-700 leading-relaxed space-y-6">
+                <li class="mb-2 transition-lang" data-lang="sqie1">
+                    <strong class="text-xl text-accent">SQIsign2D-East (2024)</strong>
+                    <p>Kohei Nakagawa, Hiroshi Onuki, Wouter Castryck, Mingjie Chen, Riccardo Invernizzi, Gioella Lorenzon, and Frederik Vercauteren differ from West in that East does not translate ideals to isogenies. Instead, it uses properties of Eichler orders to directly find auxiliary isogenies on the public-key curve, still using 2-dimensional isogeny techniques.</p>
+                    <p class="mt-2">
+                        <a href="East.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                          SQIsign2D-East: A New Signature Scheme Using 2-Dimensional Isogenies
+                        </a> 
+                    </p>
+                </li>  
+
+
+
+                <li class="mb-2 transition-lang" data-lang="sqie2">
+                    <strong class="text-xl text-accent">SQIsign2D\\(^2\\)(2025)</strong>
+                    <p>Zheng Xu, Kaizhan Lin, Chang-An Zhao, and Yi Ouyang reduce 2-dimensional isogeny computations by leveraging 1-dimensional isogenies compared to East.</p>
+                    <p class="mt-2">
+                        <a href="2d.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                          SQIsign2D\\(^2\\): New SQIsign2D Variant by Leveraging Power Smooth Isogenies in Dimension One
+                        </a> 
+                    </p>
+                </li>  
+                 <li class="mb-2 transition-lang" data-lang="sqie3">
+                    <strong class="text-xl text-accent">SQIsign2DPush (2025)</strong>
+                    <p>Kohei Nakagawa and Hiroshi Onuki differ from East in that SQIsign2DPush finds an isogeny of degree d on the initial curve and pulls it back to form the auxiliary isogeny.</p>
+                    <p class="mt-2">
+                        <a href="push.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                         SQIsign2DPush: Faster Signature Scheme Using 2-Dimensional Isogenies
+                        </a> 
+                    </p>
+                </li> 
+                 <li class="mb-2 transition-lang" data-lang="sqie4">
+                    <strong class="text-xl text-accent">Summary</strong>
+                    <p>Through these optimizations and variants, the efficiency of the SQIsign family has been significantly improved, making it competitive in post-quantum signatures.</p>
+                </li> 
+            </ol>
+        </section>
+    </main>
+    
+    <footer class="bg-dark text-white py-12">
+        <div class="container mx-auto px-6 md:px-10">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <h3 class="text-xl font-bold mb-4 transition-lang" data-lang="footer-title">Introduction to Isogeny Hard Problems</h3>
+                    <p class="text-gray-400 max-w-md transition-lang" data-lang="footer-desc">
+                        This page introduces the core hard problems, attack methods, and research progress in supersingular elliptic curve isogeny cryptography, aiming to provide references for researchers in related fields.
+                    </p>
+                </div>
+                
+               
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500 transition-lang" data-lang="copyright">
+                Copyright &copy; 2025 Introduction to Hard Problems Development
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 翻译数据（中英文对照）
+        const translations = {
+            'zh-CN': {
+                'title': 'SQIsign (短四元数代数签名)',
+                
+                'intro-title': 'SQIsign (短四元数代数签名)',
+                'intro-content': 'SQIsign是新出现的具有最紧凑尺寸的一类签名。',
+                
+ 
+
+
+                'sqi-title': 'SQIsign',
+  'sqi1': `
+    <strong class="text-xl text-accent">GPSsign的提出（2017年, 亚密）</strong>
+    <p>Steven D. Galbraith、Christophe Petit 和 Javier Silva 提出了基于四元数代数的 GPS 签名方案，但该方案需要进行多轮交互，因此签名长度较长。</p>
+    <p class="mt-2">
+      <a href="GPS.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        Identification Protocols and Signature Schemes Based on Supersingular Isogeny Problems
+      </a>
+    </p>
+  `,
+
+  'sqi2': `
+    <strong class="text-xl text-accent">SQIsign的提出（2020年, 亚密）</strong>
+    <p>Luca De Feo、David Kohel、Antonin Leroux、Christophe Petit 和 Benjamin Wesolowski 提出了基于四元数代数的 SQIsign 签名方案。其公钥和签名尺寸是 NIST 征集的所有候选签名中最短的，主要基于 Sigma 协议与 KLPT 算法来寻找等价理想。</p>
+    <p class="mt-2">
+      <a href="SQISign.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        SQISign: Compact Post-quantum Signatures from Quaternions and Isogenies
+      </a>
+    </p>
+  `,
+
+  'sqi3': `
+    <strong class="text-xl text-accent">总结</strong>
+    <p>作为入选 NIST 征集的后量子签名第二轮候选方案，SQIsign 拥有最小的公钥与签名长度，且不会泄露像点。由于其基于四元数代数运算，因此不易受到 Kuperberg 的量子攻击。然而，SQIsign 的计算效率较低，是其主要缺点之一。</p>
+  `,
+   'sqihd-title':'SQIsign的优化',
+  'sqihd1': `
+    <strong class="text-xl text-accent">快速 SQIsign（2023 年, 欧密）</strong>
+    <p>Luca De Feo、Antonin Leroux、Patrick Longa 和 Benjamin Wesolowski 通过修改计算四元数代数中元素的方法，使得 SQIsign 中第一步的输出更加均匀。同时优化了理想到同源的转化过程。</p>
+    <p class="mt-2">
+      <a href="FastSQISign.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        New Algorithms for the Deuring Correspondence: Towards Practical and Secure SQISign Signatures
+      </a>
+    </p>
+  `,
+
+  'sqihd2': `
+    <strong class="text-xl text-accent">加速 SQIsign（2024 年, TIT）</strong>
+    <p>林楷展、王维泽、徐铮 和 赵昌安 基于范数与迹的关系及配对运算，进一步优化了 SQIsign 中的理想转化为同源的计算过程。</p>
+    <p class="mt-2">
+      <a href="Xu.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        A Faster Software Implementation of SQIsign
+      </a>
+    </p>
+  `,
+
+  'sqihd3': `
+    <strong class="text-xl text-accent">在扩张域上的 SQIsign（2024 年, 欧密）</strong>
+    <p>Maria Corte-Real Santos、Jonathan Komada Eriksen、Michael Meyer 和 Krijn Reijnders 扩大了 SQIsign 中有理点的定义域，从而增加了可用点的数量，实现加速验证过程的目的。</p>
+    <p class="mt-2">
+      <a href="aps.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        ApresSQI: Extra Fast Verification for SQIsign Using Extension-Field Signing
+      </a>
+    </p>
+  `,
+  'sqihd4':`
+    <strong class="text-xl text-accent">利用高维同源加速SQIsign的理想转同源过程（2024 年, 亚密）</strong>
+    <p> Hiroshi Onuki 和 Kohei Nakagawa 通过高维同源的计算加速了理想转同源的过程。</p>
+    <p class="mt-2">
+      <a href="idealto.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+       Ideal-to-Isogeny Algorithm Using 2-Dimensional Isogenies and Its Application to SQIsign
+      </a>
+    </p>
+  `,
+
+   'sqihdd-title':'SQIsign的变种:SQIsignHD, SQIsignPrime',
+  'sqihdd1': `
+    <strong class="text-xl text-accent">SQIsignHD（2024年, 欧密）</strong>
+    <p>Pierrick Dartois、Antonin Leroux、Damien Robert 和 Benjamin Wesolowski 通过 SIDH 攻击的方法，取消了输出同源次数需要光滑的条件。只需计算输出同源的像点，并在验证中利用四维 SIDH 攻击进行恢复。由于不再要求光滑性，KLPT 算法也被修改为随机选取等价理想。</p>
+    <p class="mt-2">
+      <a href="HD.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        SQIsignHD: New Dimensions in Cryptography
+      </a>
+    </p>
+  `,
+
+  'sqihdd2': `
+    <strong class="text-xl text-accent">SQIPrime（2024年, 亚密）</strong>
+    <p> Max Duparc 和 Tako Boris Fouotsa调整了挑战同源的次数使其为非光滑的。</p>
+    <p class="mt-2">
+      <a href="prime.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+       SQIPrime: A Dimension 2 Variant of SQISignHD with Non-smooth Challenge Isogenies
+      </a>
+    </p>
+  `, 
+ 'sqiw-title':'SQIsign的变种:SQIsign2DWest',
+  'sqiw1': `
+    <strong class="text-xl text-accent">SQIsign2D-West（2024年, 亚密）</strong>
+    <p>Andrea Basso、Pierrick Dartois、Luca De Feo、Antonin Leroux、Luciano Maino、Giacomo Pope、Damien Robert 和 Benjamin Wesolowski 采用二维同源方法完成理想到同源的转化，构造辅助同源并完成验证。所有一维非光滑同源均通过二维同源进行计算。</p>
+    <p class="mt-2">
+      <a href="West.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        SQIsign2D–West: The Fast, the Small, and the Safer
+      </a>
+    </p>
+  `, 
+
+  'sqiw2': `
+  <strong class="text-xl text-accent">Qlapoti (2025年, 亚密)</strong>
+                    <p>Giacomo Borin、 Maria Corte-Real Santos、 Jonathan Komada Eriksen、 Riccardo Invernizzi、 Marzio Mula、 Sina Schaeffler和 Frederik Vercauteren 直接寻找等价理想\\(I_1, I_2\\)(其中\\(\\mathrm{Nrd}(I_1)=d_1, \\mathrm{Nrd}(I_2)= d_2\\))满足\\(d_1+d_2= 2^e\\)而非West中的寻找正整数\\(u,v\\)使得\\(ud_1+ vd_2=2^e\\).</p>
+                    <p class="mt-2">
+                        <a href="Qlapoti.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                           Qlapoti: Simple and Efficient Translation of Quaternion Ideals to Isogenies
+                        </a> 
+                    </p>
+   `,
+
+'sqie-title':'SQIsign的变种:SQIsign2DEast',
+  'sqie1': `
+    <strong class="text-xl text-accent">SQIsign2D-East（2024年, 亚密）</strong>
+    <p>Kohei Nakagawa、Hiroshi Onuki、Wouter Castryck、Mingjie Chen、Riccardo Invernizzi、Gioella Lorenzon 和 Frederik Vercauteren 提出的 SQIsign2D-East 与 West 不同，它不采用理想转同源，而是利用 Eichler order 的性质，直接在公钥曲线上寻找辅助同源来完成验证。方法依然基于二维同源技术。</p>
+    <p class="mt-2">
+      <a href="East.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        SQIsign2D-East: A New Signature Scheme Using 2-Dimensional Isogenies
+      </a>
+    </p>
+  `,
+
+  
+
+  'sqie2': `
+    <strong class="text-xl text-accent">SQIsign2D\\(^2\\)（2025年, 亚密）</strong>
+    <p>徐铮、林楷展、赵昌安 和 欧阳毅 相较于 East，提出利用一维同源技术来减少二维同源的计算，从而优化 SQIsign。</p>
+    <p class="mt-2">
+      <a href="2d.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        SQIsign2D\\(^2\\): New SQIsign2D Variant by Leveraging Power Smooth Isogenies in Dimension One
+      </a>
+    </p>
+  `,
+
+  'sqie3': `
+    <strong class="text-xl text-accent">SQIsign2DPush（2025年, Preprint）</strong>
+    <p>Kohei Nakagawa 和 Hiroshi Onuki 相比 East 的方法，在初始曲线上寻找次数为 \\(d\\) 的同源，再将其“拉回”以形成辅助同源，从而完成验证。</p>
+    <p class="mt-2">
+      <a href="push.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        SQIsign2DPush: Faster Signature Scheme Using 2-Dimensional Isogenies
+      </a>
+    </p>
+  `,
+
+  'sqie4': `
+    <strong class="text-xl text-accent">总结</strong>
+    <p>通过这些优化和变种，SQIsign 系列的效率得到了显著提升，使其在后量子签名领域更具竞争力。</p>
+  `,
+
+
+
+
+                'footer-title': 'SQIsign (Short Quaternion Isogeny Signature)',
+                'footer-desc': '本页面介绍了超奇异椭圆曲线同源在密码学中设计:SQIsign，旨在为相关领域的研究人员提供参考。',
+                'copyright': '版权所有 &copy; 2025 SQIsign'
+            },
+            'en': {
+                'title': 'SQIsign (Short Quaternion Isogeny Signature)',
+                
+                'intro-title': 'SQIsign (Short Quaternion Isogeny Signature)',
+                'intro-content': '<div class="mb-6"> SQIsign is a class of signature with the most compact size.</div>', 
+                
+                'sqi-title': 'SQIsign',
+
+  'sqi1': `
+    <strong class="text-xl text-accent">GPSsign (2017, Asiacrypt)</strong>
+    <p>Steven D. Galbraith, Christophe Petit and Javier Silva proposed GPSsign, a signature scheme based on quaternion algebras. However, it requires multiple rounds, resulting in relatively long signatures.</p>
+    <p class="mt-2">
+      <a href="GPS.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        Identification Protocols and Signature Schemes Based on Supersingular Isogeny Problems
+      </a>
+    </p>
+  `,
+
+  'sqi2': `
+    <strong class="text-xl text-accent">SQIsign (2020, Asiacrypt)</strong>
+    <p>Luca De Feo, David Kohel, Antonin Leroux, Christophe Petit and Benjamin Wesolowski proposed SQIsign, a signature scheme based on quaternion algebras. It has the shortest public key and signature sizes among NIST's post-quantum signature candidates. It primarily uses the Sigma protocol and the KLPT algorithm for finding equivalent ideals.</p>
+    <p class="mt-2">
+      <a href="SQISign.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        SQISign: Compact Post-quantum Signatures from Quaternions and Isogenies
+      </a>
+    </p>
+  `,
+
+  'sqi3': `
+    <strong class="text-xl text-accent">Summary</strong>
+    <p>As a second-round candidate in NIST's post-quantum signature competition, SQIsign has the smallest public key and signature sizes. It does not leak image points and is not vulnerable to Kuperberg's quantum attack due to its quaternion algebra operations. However, its low efficiency is a drawback.</p>
+  `,
+   
+   'sqihd-title':'Optimizations of SQIsign',
+  'sqihd1': `
+    <strong class="text-xl text-accent">Fast SQIsign (2023, Eurocrypt)</strong>
+    <p>Luca De Feo, Antonin Leroux, Patrick Longa and Benjamin Wesolowski modified the method for computing elements in quaternion algebras to ensure uniform output in the first step of SQIsign. They also optimized the ideal-to-isogeny translation process.</p>
+    <p class="mt-2">
+      <a href="FastSQISign.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        New Algorithms for the Deuring Correspondence: Towards Practical and Secure SQISign Signatures
+      </a>
+    </p>
+  `,
+
+  'sqihd2': `
+    <strong class="text-xl text-accent">Accelerating SQIsign (2024, TIT)</strong>
+    <p>Kaizhan Lin, Weize Wang, Zheng Xu and Changan Zhao further optimized the ideal-to-isogeny translation process in SQIsign using norm-trace relations and pairings.</p>
+    <p class="mt-2">
+      <a href="Xu.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        A Faster Software Implementation of SQIsign
+      </a>
+    </p>
+  `,
+
+  'sqihd3': `
+    <strong class="text-xl text-accent">SQIsign over Extension Fields (2024, Eurocrypt)</strong>
+    <p>Maria Corte-Real Santos, Jonathan Komada Eriksen, Michael Meyer and Krijn Reijnders extended the base field of rational points in SQIsign to increase the number of available points, thereby accelerating the protocol.</p>
+    <p class="mt-2">
+      <a href="aps.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        ApresSQI: Extra Fast Verification for SQIsign Using Extension-Field Signing
+      </a>
+    </p>
+  `,
+
+'sqihd4':`
+    <strong class="text-xl text-accent">Accelerating the Ideal-to-Isogeny Translation in SQIsign Using High-Dimensional Isogenies (2024, Asiacrypt)</strong>
+    <p> Hiroshi Onuki and Kohei Nakagawa accelerated the Ideal-to-Isogeny translation in SQIsign by high-dimensional isogenies.</p>
+    <p class="mt-2">
+      <a href="idealto.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+       Ideal-to-Isogeny Algorithm Using 2-Dimensional Isogenies and Its Application to SQIsign
+      </a>
+    </p>
+  `,
+
+'sqihdd-title':'Variants of SQIsign:SQIsignHD, SQIsignPrime',
+  'sqihdd1': `
+    <strong class="text-xl text-accent">SQIsignHD (2024, Eurocrypt)</strong>
+    <p>Pierrick Dartois, Antonin Leroux, Damien Robert and Benjamin Wesolowski removed the requirement for smooth isogeny degrees using SIDH attack techniques. Instead, they compute image points of the output isogeny and recover them during verification using a 4-dimensional SIDH attack. The KLPT algorithm is modified to randomly select equivalent ideals since smoothness is no longer required.</p>
+    <p class="mt-2">
+      <a href="HD.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        SQIsignHD: New Dimensions in Cryptography
+      </a>
+    </p>
+  `,
+  'sqihdd2': `
+    <strong class="text-xl text-accent">SQIPrime（2024, Asiacrypt）</strong>
+    <p> Max Duparc and Tako Boris Fouotsa adjusted the degree of the challenge isogeny to make it non-smooth.</p>
+    <p class="mt-2">
+      <a href="prime.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+       SQIPrime: A Dimension 2 Variant of SQISignHD with Non-smooth Challenge Isogenies
+      </a>
+    </p>
+  `,
+
+'sqiw-title':'Variants of SQIsign:SQIsign2DWest',
+  'sqiw1': `
+    <strong class="text-xl text-accent">SQIsign2D-West (2024, Asiacrypt)</strong>
+    <p>Andrea Basso, Pierrick Dartois, Luca De Feo, Antonin Leroux, Luciano Maino, Giacomo Pope, Damien Robert and Benjamin Wesolowski use 2-dimensional isogenies to translate ideals to isogenies, construct auxiliary isogenies, and complete verification. Non-smooth 1-dimensional isogenies are computed using 2-dimensional techniques.</p>
+    <p class="mt-2">
+      <a href="West.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        SQIsign2D–West: The Fast, the Small, and the Safer
+      </a>
+    </p>
+  `,
+  'sqiw2': `
+  <strong class="text-xl text-accent">Qlapoti (2025, Asiacrypt)</strong>
+                    <p>Giacomo Borin, Maria Corte-Real Santos, Jonathan Komada Eriksen, Riccardo Invernizzi, Marzio Mula, Sina Schaeffler, Frederik Vercauteren directly find equivalent ideals \\(I_1, I_2\\) (where \\(\\mathrm{Nrd}(I_1) = d_1\\), \\(\\mathrm{Nrd}(I_2) = d_2\\)) satisfying \\(d_1 + d_2 = 2^e\\), instead of finding positive integers \\(u, v\\) such that \\(u d_1 + v d_2 = 2^e\\) as in SQIsign2DWest.
+</p>
+                    <p class="mt-2">
+                        <a href="Qlapoti.pdf" class="text-primary hover:underline inline-flex items-center">
+                            <i class="fa fa-file-pdf-o mr-2"></i>
+                           Qlapoti: Simple and Efficient Translation of Quaternion Ideals to Isogenies
+                        </a> 
+                    </p>
+   `,
+
+
+'sqie-title':'Variants of SQIsign:SQIsign2DEast',
+  'sqie1': `
+    <strong class="text-xl text-accent">SQIsign2D-East (2024, Asiacrypt)</strong>
+    <p>Kohei Nakagawa, Hiroshi Onuki, Wouter Castryck, Mingjie Chen, Riccardo Invernizzi, Gioella Lorenzon and Frederik Vercauteren differ from West in that East does not translate ideals to isogenies. Instead, it uses properties of Eichler orders to directly find auxiliary isogenies on the public-key curve, still using 2-dimensional isogeny techniques.</p>
+    <p class="mt-2">
+      <a href="East.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        SQIsign2D-East: A New Signature Scheme Using 2-Dimensional Isogenies
+      </a>
+    </p>
+  `,
+   
+
+
+  'sqie2': `
+    <strong class="text-xl text-accent">SQIsign2D\\(^2\\) (2025, Asiacrypt)</strong>
+    <p>Zheng Xu, Kaizhan Lin, Chang-An Zhao and Yi Ouyang reduce 2-dimensional isogeny computations by leveraging 1-dimensional isogenies compared to East.</p>
+    <p class="mt-2">
+      <a href="2d.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        SQIsign2D\\(^2\\): New SQIsign2D Variant by Leveraging Power Smooth Isogenies in Dimension One
+      </a>
+    </p>
+  `,
+
+  'sqie3': `
+    <strong class="text-xl text-accent">SQIsign2DPush (2025, Preprint)</strong>
+    <p>Kohei Nakagawa and Hiroshi Onuki differ from East in that SQIsign2DPush finds an isogeny of degree d on the initial curve and pushes it as the auxiliary isogeny.</p>
+    <p class="mt-2">
+      <a href="push.pdf" class="text-primary hover:underline inline-flex items-center">
+        <i class="fa fa-file-pdf-o mr-2"></i>
+        SQIsign2DPush: Faster Signature Scheme Using 2-Dimensional Isogenies
+      </a>
+    </p>
+  `,
+
+  'sqie4': `
+    <strong class="text-xl text-accent">Summary</strong>
+    <p>Through these optimizations and variants, the efficiency of the SQIsign family has been significantly improved, making it competitive in post-quantum signatures.</p>
+  `,
+
+
+
+                'footer-title': 'SQIsign (Short Quaternion Isogeny Signature)',
+                'footer-desc': 'This page introduces the application of supersingular elliptic curve isogenies in cryptography:SQIsign, aiming to provide references for researchers in related fields.',
+                'copyright': 'Copyright &copy; SQIsign'
+            }
+        };
+
+        // 语言切换逻辑
+        document.addEventListener('DOMContentLoaded', function() {
+            const langButton = document.getElementById('langButton');
+            const langText = document.getElementById('langText');
+            let currentLang = 'en'; // 默认显示英文
+            
+            // 初始应用英文翻译
+            applyTranslation('en');
+            
+            langButton.addEventListener('click', function() {
+                // 切换语言
+                currentLang = currentLang === 'en' ? 'zh-CN' : 'en';
+                
+                // 更新按钮文本
+                langText.textContent = currentLang === 'en' ? '中文' : 'English';
+                
+                // 应用翻译
+                applyTranslation(currentLang);
+                
+                // 更新HTML语言属性
+                document.documentElement.lang = currentLang;
+            });
+            
+            function applyTranslation(lang) {
+                // 获取所有需要翻译的元素
+                const elements = document.querySelectorAll('[data-lang]');
+                
+                // 应用淡入淡出效果
+                elements.forEach(element => {
+                    element.style.opacity = '0';
+                    element.style.transform = 'translateY(10px)';
+                });
+                
+                // 延迟应用翻译，等待动画效果
+                setTimeout(() => {
+                    elements.forEach(element => {
+                        const key = element.getAttribute('data-lang');
+                        if (translations[lang] && translations[lang][key]) {
+                            // 处理HTML内容
+                            element.innerHTML = translations[lang][key];
+                        }
+                        // 重新渲染MathJax公式
+                        MathJax.typesetPromise([element]).catch(err => console.error('MathJax error:', err));
+                    });
+                    
+                    // 恢复元素可见性
+                    elements.forEach(element => {
+                        element.style.opacity = '1';
+                        element.style.transform = 'translateY(0)';
+                    });
+                }, 300);
+            }
+        });
+    </script>
+</body>
+
+</html>
